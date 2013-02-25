@@ -1,0 +1,206 @@
+/* 
+    Document   : eedata
+    Created on : Feb 18, 2008, 1:12:45 PM
+    Author     : corinna
+    Description: for Ecology Explorers' Data Center.
+*/
+
+BODY {
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: Verdana, Arial, Helvetica;
+    BACKGROUND-COLOR: #f0ffcc; 
+    position: relative;
+    height: auto;
+}
+
+h1,H1 {
+   font-size: 24pt;
+    text-align: center;
+}
+
+h2, H2{
+    font-size: 18pt;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: green;
+}
+
+a:visited {   
+    color: blue;
+}
+
+a:active {
+    color: firebrick;
+}
+
+a:hover {
+    color: firebrick;
+    text-decoration: underline;
+}
+
+.errorMsg {
+    color : Red;	
+    font-size: 12pt;
+}
+
+.footer {
+    position: relative;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 80%;
+    text-align: center;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: silver;
+    width: auto;
+    height: auto;
+    padding-top: 10px;
+}
+
+.header {
+    position: relative;
+    top: 0%;
+    width: auto;
+    left: 0%;
+    height: auto;
+    vertical-align: baseline;
+}
+
+.highlight{
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    background-color: #ADD8E6;
+    position: relative;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-top-color: black;
+    border-bottom-color: black;
+    border-left-color: black;
+    border-right-color: black;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    left: 10%;
+    width: 70%;
+    height: auto;
+    text-align: center;
+}
+
+.indexmain, .navpath, .main {
+    position: relative;
+    left: 10%;
+}
+
+.indexmain, .main {
+    width: 80%;
+    height: auto;
+    padding-top: 10px;
+}
+
+.navpath {
+    font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size : 10pt;
+    color : Green;
+    width: 80%;
+    height: auto;
+}
+
+.text {
+    color: black;
+    font-size: 11pt;
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    width: 70%;
+    text-align: left;
+    height: auto;
+}
+
+
+root { 
+    display: block;
+    position: relative;
+    height: auto;
+}
+
+.message {
+	clear: both;
+	color: #f00;
+	font-size: 120%;
+	font-weight: bold;
+	margin: 0 0 1em 0;
+	padding: 5px;
+}
+
+/** Tables **/
+table {
+	border-right:0;
+	clear: both;
+	color: #333;
+	margin-bottom: 10px;
+	width: 100%;
+}
+th {
+	border:0;
+	border-bottom:2px solid #555;
+	text-align: left;
+	padding:4px;
+}
+th a {
+	display: block;
+	padding: 2px 4px;
+	text-decoration: none;
+}
+th a.asc:after {
+	content: ' ⇣';
+}
+th a.desc:after {
+	content: ' ⇡';
+}
+table tr td {
+	padding: 6px;
+	text-align: left;
+	vertical-align: top;
+}
+
+td.actions {
+	text-align: center;
+	white-space: nowrap;
+}
+table td.actions a {
+	margin: 0px 6px;
+	padding:2px 5px;
+}
+/** containers **/
+div.form,
+div.index,
+div.view {
+	float:right;
+	width:76%;
+	border-left:1px solid #666;
+	padding:10px 2%;
+}
+div.actions {
+	float:left;
+	width:16%;
+	padding:10px 1.5%;
+}
+div.actions h3 {
+	padding-top:0;
+	color:#777;
+}
+
