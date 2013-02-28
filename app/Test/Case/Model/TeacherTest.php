@@ -48,7 +48,7 @@ class TeachersTest extends CakeTestCase  {
 						'id' => '1',
 						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
-						'active' => 'Y',
+						'type' => 'A',
 						'name' => 'Rohit Srikanta',
 						'school' => 'ASU'
 				)
@@ -57,19 +57,20 @@ class TeachersTest extends CakeTestCase  {
 
 		//Case 2 : Negative
 		$result = $this->Teacher->validateLogin('rohit','rohit2');
+
 		$expected = array(
 				'Teacher' => array(
 						'password' => 'rohit',
 						'id' => '1',
 						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
-						'active' => 'Y',
+						'type' => 'A',
 						'name' => 'Rohit Srikanta',
 						'school' => 'ASU'
 				)
 		);
 		$this->assertNotEqual($result, $expected,'Incorrect Login');
-		
+
 		//Case 3 : Negative
 		$result = $this->Teacher->validateLogin('rohit','');
 		$expected = array(
@@ -78,13 +79,13 @@ class TeachersTest extends CakeTestCase  {
 						'id' => '1',
 						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
-						'active' => 'Y',
+						'type' => 'A',
 						'name' => 'Rohit Srikanta',
 						'school' => 'ASU'
 				)
 		);
 		$this->assertNotEqual($result, $expected,'Incorrect Login');
-		
+
 		//Case 4 : Negative
 		$result = $this->Teacher->validateLogin('','rohit2999');
 		$expected = array(
@@ -93,13 +94,13 @@ class TeachersTest extends CakeTestCase  {
 						'id' => '1',
 						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
-						'active' => 'Y',
+						'type' => 'A',
 						'name' => 'Rohit Srikanta',
 						'school' => 'ASU'
 				)
 		);
 		$this->assertNotEqual($result, $expected,'Incorrect Login');
-		
+
 		//Case 5 : Negative
 		$result = $this->Teacher->validateLogin('','');
 		$expected = array(
@@ -108,7 +109,7 @@ class TeachersTest extends CakeTestCase  {
 						'id' => '1',
 						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
-						'active' => 'Y',
+						'type' => 'A',
 						'name' => 'Rohit Srikanta',
 						'school' => 'ASU'
 				)
@@ -129,7 +130,7 @@ class TeachersTest extends CakeTestCase  {
 			
 		$result = $this->Teacher->createUser($data);
 		$this->assertEquals($result,false);
-		
+
 		//Case 2 : Negative
 		$data = array(
 				'Teacher' => array(
@@ -138,7 +139,7 @@ class TeachersTest extends CakeTestCase  {
 						'email_address' => 'asdsad@asu.edu',
 						'name' => 'Rohit',
 						'school' => 'ASU'));
-		
+
 		$result = $this->Teacher->createUser($data);
 		$this->assertEquals($result,false);
 
@@ -177,7 +178,7 @@ class TeachersTest extends CakeTestCase  {
 			
 		$result = $this->Teacher->createUser($data);
 		$this->assertEquals($result,false);
-		
+
 		//Case 6 : Positive
 		$data = array(
 				'Teacher' => array(
@@ -189,5 +190,21 @@ class TeachersTest extends CakeTestCase  {
 			
 		$result = $this->Teacher->createUser($data);
 		$this->assertEquals($result,true);
+	}
+
+	public function testGetUsers()
+	{
+		$result = $this->Teacher->getUsers();
+
+		$conditions = array("Teacher.type" => "-");
+		$expected = $this->Teacher->find('all', array('conditions' => $conditions));
+
+		$this->assertEquals($result,$expected);
+	}
+
+	public function testApproveUser()
+	{
+		$result = $this->Teacher->approveUser('1','T');
+		$this->assertEquals($result,null);
 	}
 }

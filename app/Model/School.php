@@ -4,7 +4,6 @@ App::uses('AppModel', 'Model');
  * School Model
  *
  * @property School $School
- * @property School $School
 */
 class School extends AppModel {
 
@@ -14,11 +13,11 @@ class School extends AppModel {
 	 * @var array
 	 */
 	public $validate = array(
-			'school_id' => array(
-					'notempty' => array(
-							'rule' => array('notempty'),
-					),
-			),
+			'school_Id' => array(
+					'rule' => array('between', 3, 3),
+					'message' => 'School ID must be of 3 characters'),
+			'school_name'  => array(
+					'rule' => 'notEmpty'),
 	);
 
 	/**
@@ -48,8 +47,35 @@ class School extends AppModel {
 				'fields' => array(
 						'School.school_Id',
 						'School.school_Name')));
-		
+
 		return $school;
+	}
+
+	public function createSchool($fields)
+	{
+		$this->create();
+		$fields['School']['school_id'] = strtoupper($fields['School']['school_Id']);
+		$fields['School']['date_entered'] = date('Y-m-d H:i:s');
+		
+		if($this->save($fields))
+		{	
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public function checkSchoolIdPresent($fields = null)
+	{
+		if($this->findBySchoolId($fields) != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	
 	}
 
 }

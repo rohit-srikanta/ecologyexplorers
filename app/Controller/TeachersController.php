@@ -6,34 +6,40 @@ App::uses('AppController', 'Controller');
  * @property Teacher $Teacher
 */
 class TeachersController extends AppController {
-
+	public $helpers = array('Html', 'Form');
 	/**
 	 * index method
 	 *
 	 * @return void
-	 */
-	public function index() {
+	*/
+	public function index()
+	{
 		$this->Teacher->recursive = 0;
 		$this->set('teachers', $this->paginate());
 	}
 
 
 	//Method to validate the user credentials before login.
-	public function login($fields = null) {
-			
+	public function login($fields = null)
+	{
+		if($this->Session->check('User'))
+		{
+			$this->Session->setFlash('You have already logged in. Please logout.');
+			$this->redirect(array(
+					'action' => 'index'));
+				
+		}
+
 		if ($this->request->is('post'))
 		{
+	
 			$user = $this->Teacher->validateLogin($this->request->data['Teacher']['username'],$this->request->data['Teacher']['password']);
 			if ($user)
 			{
-				//Logout previous user, if any.
-				if($this->Session->check('User'))
-				{
-					$this->Session->destroy();
-				}
-				//Writing the user information into the session variable and redirecting to the home page. 
+				//Writing the user information into the session variable and redirecting to the home page.
 				$this->Session->setFlash('Login Successful');
 				$this->Session->write('User', $user);
+				$this->Session->write('UserType',$user['Teacher']['type']);
 				$this->redirect(array(
 						'action' => 'index'));
 			}
@@ -45,8 +51,8 @@ class TeachersController extends AppController {
 	}
 
 	//Method to logout the user.
-	public function logout() {
-
+	public function logout()
+	{
 		if($this->Session->check('User'))
 		{
 			$this->Session->destroy();
@@ -54,11 +60,6 @@ class TeachersController extends AppController {
 			$this->redirect(array(
 					'action' => 'index'));
 			exit();
-		}
-		else
-		{
-			$this->Session->setFlash('You have not logged in.');
-			$this->redirect(array('action' => 'index'));
 		}
 	}
 
@@ -75,11 +76,11 @@ class TeachersController extends AppController {
 		$this->loadModel('School');
 		$school = $this->School->loadSchools();
 		$this->set('schools', $school);
-		
+
 		if ($this->request->is('post'))
 		{
-			$this->Teacher->create();
-			
+			//$this->Teacher->create();
+
 			//Check to see if the username already exists in the database.
 			if($this->Teacher->checkUsernameExists($this->request->data['Teacher']['username']))
 			{
@@ -90,13 +91,8 @@ class TeachersController extends AppController {
 				//If the above validation, along with the model validation is satisfied, create the user profile.
 				if ($this->Teacher->createUser($this->request->data))
 				{
-					$this->Session->setFlash('New user profile created!. Please login to access the data');
-
-					//If user already logged in, destroy the session variable
-					if($this->Session->check('User'))
-					{
-						$this->Session->destroy();
-					}
+					$this->Session->setFlash(__('You can enter your data once your profile is approved. Until then check our existing data.'));
+					
 					//After registering, the user is redirected to the main page.
 					$this->redirect(array(
 							'action' => 'index'));
@@ -104,10 +100,28 @@ class TeachersController extends AppController {
 				else
 				{
 					//Errors that has to be fixed before creating user profile.
-					$this->Session->setFlash('Unable to create profile. Please try again after correcting the errors shown below.');
+					$this->Session->setFlash(__('Unable to create profile. Please try again after correcting the errors shown below.'));
 				}
 			}
+		}
+	}
 
+	public function approveUser()
+	{
+		$query = $this->Teacher->getUsers();
+		$this->set('teachersYetToBeApproved', $query);
+		
+		if ($this->request->is('post'))
+		{
+			$temp['value'] = $this->request->data['Approve'];
+
+			for($i=0; $i<count($query); $i++)
+			{
+				if(1 == $temp['value'][$query[$i]['Teacher']['id']])
+					$this->Teacher->approveUser($query[$i]['Teacher']['id'], 'T');
+			}
+			
+			$this->set('teachersYetToBeApproved', $this->Teacher->getUsers());
 		}
 	}
 }

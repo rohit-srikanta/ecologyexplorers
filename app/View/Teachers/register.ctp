@@ -1,6 +1,9 @@
 <html>
 
 <br>
+<br>&nbsp;&nbsp;
+<?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
+<br>
 <br>
     <table >
         <?php echo $this->Form->create('Teacher');?>    
@@ -48,6 +51,5 @@
         </tr>
     </table>
 
-<?php echo $this->Html->link('Back',array('controller' => 'teachers', 'action' => 'back')); ?>
     
 </html>

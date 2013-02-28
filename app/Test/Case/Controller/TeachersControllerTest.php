@@ -32,23 +32,15 @@ class TeachersControllerTest extends ControllerTestCase {
 
 		$data = array(
 				'Teacher' => array(
-						'username' => 'rohit266',
-						'password' => 'rohit',));
-
-		$result = $this->testAction('/teachers/login',array('data' => $data, 'method' => 'post','return'=>'view'));
-		$this->assertContains('id="TeacherLoginForm"',$result);
-		
-		$data = array(
-				'Teacher' => array(
 						'username' => 'rohit',
 						'password' => 'rohit',));
-		
+
 		$result = $this->testAction('/teachers/login',array('data' => $data, 'method' => 'post','return'=>'view'));
 		$this->assertNull($result);
 	}
 
 	public function testRegister() {
-		
+
 		$data = array(
 				'Teacher' => array(
 						'username' => 'rohit29',
@@ -59,7 +51,7 @@ class TeachersControllerTest extends ControllerTestCase {
 
 		$result = $this->testAction('/teachers/register',array('data' => $data, 'method' => 'post','return'=>'view'));
 		$this->assertNull($result);
-		
+
 		$data = array(
 				'Teacher' => array(
 						'username' => 'rohit',
@@ -67,7 +59,7 @@ class TeachersControllerTest extends ControllerTestCase {
 						'email_address' => 'asdsad@asu.edu',
 						'name' => 'Rohit',
 						'school' => 'ASU'));
-		
+
 		$result = $this->testAction('/teachers/register',array('data' => $data, 'method' => 'post','return'=>'view'));
 		$this->assertContains('id="TeacherRegisterForm"',$result);
 	}

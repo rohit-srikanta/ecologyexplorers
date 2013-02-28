@@ -1,4 +1,8 @@
 <html>
+<br>
+    <?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
+<br>
+<br>
     <table width="80%" cellpadding="0" cellspacing="0" border="0">
         <?php echo $this->Form->create('Teacher');?>    
         <tr>
@@ -20,5 +24,4 @@
             <td width="30%"> &nbsp;</td>
         </tr>
     </table>
-    <?php echo $this->Html->link('Back',array('controller' => 'teachers', 'action' => 'back')); ?>
 </html>

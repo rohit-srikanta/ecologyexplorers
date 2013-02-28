@@ -28,7 +28,7 @@ class Teacher extends AppModel {
 			'name' => array(
 					'rule' => 'notEmpty'),
 			'school' => array(
-			'rule' => 'notEmpty')
+					'rule' => 'notEmpty')
 	);
 	
 	//Method to check if the given username and password exists in the database.
@@ -54,9 +54,23 @@ class Teacher extends AppModel {
 	//Method to insert new profiles into the database
 	public function createUser($fields)
 	{
+		$this->create();
 		if($this->save($fields))
 			return true;
 		else 
 			return false;
+	}
+	
+	public function approveUser($id,$value)
+	{
+		$this->id = $id;
+		$this->saveField('type', $value);
+	}
+	
+	public function getUsers()
+	{
+		$conditions = array("Teacher.type" => "-");
+		$query = $this->find('all', array('conditions' => $conditions));
+		return $query;
 	}
 }
