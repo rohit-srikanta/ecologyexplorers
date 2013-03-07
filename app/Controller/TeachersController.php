@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('Utitlity','Security');
+
 /**
  * Teachers Controller
  *
@@ -33,7 +35,7 @@ class TeachersController extends AppController {
 		if ($this->request->is('post'))
 		{
 	
-			$user = $this->Teacher->validateLogin($this->request->data['Teacher']['username'],$this->request->data['Teacher']['password']);
+			$user = $this->Teacher->validateLogin($this->request->data['Teacher']['email_address'],$this->request->data['Teacher']['password']);
 			if ($user)
 			{
 				//Writing the user information into the session variable and redirecting to the home page.
@@ -45,7 +47,7 @@ class TeachersController extends AppController {
 			}
 			else
 			{
-				$this->Session->setFlash('Unable to login. Please check your username and password');
+				$this->Session->setFlash('Unable to login. Please check your email address and password that was entered');
 			}
 		}
 	}
@@ -81,14 +83,15 @@ class TeachersController extends AppController {
 		{
 			//$this->Teacher->create();
 
-			//Check to see if the username already exists in the database.
-			if($this->Teacher->checkUsernameExists($this->request->data['Teacher']['username']))
+			//Check to see if the email address already exists in the database.
+			if($this->Teacher->checkEmailAddressExists($this->request->data['Teacher']['email_address']))
 			{
-				$this->Session->setFlash('Username already exists. Please try with a different username.');
+				$this->Session->setFlash('Email Address already exists. Please try a different one.');
 			}
 			else
 			{
 				//If the above validation, along with the model validation is satisfied, create the user profile.
+				
 				if ($this->Teacher->createUser($this->request->data))
 				{
 					$this->Session->setFlash(__('You can enter your data once your profile is approved. Until then check our existing data.'));
@@ -108,20 +111,27 @@ class TeachersController extends AppController {
 
 	public function approveUser()
 	{
-		$query = $this->Teacher->getUsers();
-		$this->set('teachersYetToBeApproved', $query);
-		
-		if ($this->request->is('post'))
+		if('A' != $this->Session->read('UserType'))
 		{
-			$temp['value'] = $this->request->data['Approve'];
-
-			for($i=0; $i<count($query); $i++)
-			{
-				if(1 == $temp['value'][$query[$i]['Teacher']['id']])
-					$this->Teacher->approveUser($query[$i]['Teacher']['id'], 'T');
-			}
+			$this->Session->setFlash(__('You do not have permissions to access this page !'));
+		}
+		else 
+		{
+			$query = $this->Teacher->getUsers();
+			$this->set('teachersYetToBeApproved', $query);
 			
-			$this->set('teachersYetToBeApproved', $this->Teacher->getUsers());
+			if ($this->request->is('post'))
+			{
+				$temp['value'] = $this->request->data['Approve'];
+	
+				for($i=0; $i<count($query); $i++)
+				{
+					if(1 == $temp['value'][$query[$i]['Teacher']['id']])
+						$this->Teacher->approveUser($query[$i]['Teacher']['id'], 'T');
+				}
+				
+				$this->set('teachersYetToBeApproved', $this->Teacher->getUsers());
+			}
 		}
 	}
 }

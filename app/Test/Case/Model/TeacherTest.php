@@ -27,46 +27,44 @@ class TeachersTest extends CakeTestCase  {
 		parent::tearDown();
 	}
 
-	public function testCheckUsernameExists()
+	public function testCheckEmailAddressExists()
 	{
 		//Case 1 : Positive
-		$result = $this->Teacher->checkUsernameExists('rohit');
+		$result = $this->Teacher->checkEmailAddressExists('rohit@asu.edu');
 		$this->assertEquals($result,true);
 
 		//Case 2 : Negative
-		$result = $this->Teacher->checkUsernameExists('notUserName');
+		$result = $this->Teacher->checkEmailAddressExists('notUserName');
 		$this->assertEquals($result,false );
 	}
 
 	public function testValidateLogin()
 	{
 		//Case 1 : Positive
-		$result = $this->Teacher->validateLogin('rohit','rohit');
+		$result = $this->Teacher->validateLogin('rohit@asu.edu','rohit');
 		$expected = array(
 				'Teacher' => array(
-						'password' => 'rohit',
+						'password' => Security::hash('rohit'),
 						'id' => '1',
-						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
 						'type' => 'A',
 						'name' => 'Rohit Srikanta',
-						'school' => 'ASU'
+						'school' => '1'
 				)
 		);
 		$this->assertEquals($result, $expected);
 
 		//Case 2 : Negative
-		$result = $this->Teacher->validateLogin('rohit','rohit2');
+		$result = $this->Teacher->validateLogin('rohit@asu.edu','rohit2');
 
 		$expected = array(
 				'Teacher' => array(
-						'password' => 'rohit',
+						'password' => Security::hash('rohit'),
 						'id' => '1',
-						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
 						'type' => 'A',
 						'name' => 'Rohit Srikanta',
-						'school' => 'ASU'
+						'school' => '1'
 				)
 		);
 		$this->assertNotEqual($result, $expected,'Incorrect Login');
@@ -75,13 +73,12 @@ class TeachersTest extends CakeTestCase  {
 		$result = $this->Teacher->validateLogin('rohit','');
 		$expected = array(
 				'Teacher' => array(
-						'password' => 'rohit',
+						'password' => Security::hash('rohit'),
 						'id' => '1',
-						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
 						'type' => 'A',
 						'name' => 'Rohit Srikanta',
-						'school' => 'ASU'
+						'school' => '1'
 				)
 		);
 		$this->assertNotEqual($result, $expected,'Incorrect Login');
@@ -90,13 +87,12 @@ class TeachersTest extends CakeTestCase  {
 		$result = $this->Teacher->validateLogin('','rohit2999');
 		$expected = array(
 				'Teacher' => array(
-						'password' => 'rohit',
+						'password' => Security::hash('rohit'),
 						'id' => '1',
-						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
 						'type' => 'A',
 						'name' => 'Rohit Srikanta',
-						'school' => 'ASU'
+						'school' => '1'
 				)
 		);
 		$this->assertNotEqual($result, $expected,'Incorrect Login');
@@ -105,13 +101,12 @@ class TeachersTest extends CakeTestCase  {
 		$result = $this->Teacher->validateLogin('','');
 		$expected = array(
 				'Teacher' => array(
-						'password' => 'rohit',
+						'password' => Security::hash('rohit'),
 						'id' => '1',
-						'username' => 'rohit',
 						'email_address' => 'rohit@asu.edu',
 						'type' => 'A',
 						'name' => 'Rohit Srikanta',
-						'school' => 'ASU'
+						'school' => '1'
 				)
 		);
 		$this->assertNotEqual($result, $expected,'Incorrect Login');
@@ -122,35 +117,10 @@ class TeachersTest extends CakeTestCase  {
 		//Case 1 : Negative
 		$data = array(
 				'Teacher' => array(
-						'username' => 'rohit',
-						'password' => 'rohit',
+						'password' => Security::hash('rohit'),
 						'email_address' => 'asdsad',
 						'name' => 'Rohit',
-						'school' => 'ASU'));
-			
-		$result = $this->Teacher->createUser($data);
-		$this->assertEquals($result,false);
-
-		//Case 2 : Negative
-		$data = array(
-				'Teacher' => array(
-						'username' => '',
-						'password' => 'rohit',
-						'email_address' => 'asdsad@asu.edu',
-						'name' => 'Rohit',
-						'school' => 'ASU'));
-
-		$result = $this->Teacher->createUser($data);
-		$this->assertEquals($result,false);
-
-		//Case 3 : Negative
-		$data = array(
-				'Teacher' => array(
-						'username' => 'rohit',
-						'password' => '',
-						'email_address' => 'asdsad@asu.edu',
-						'name' => 'Rohit',
-						'school' => 'ASU'));
+						'school' => '1'));
 			
 		$result = $this->Teacher->createUser($data);
 		$this->assertEquals($result,false);
@@ -158,11 +128,10 @@ class TeachersTest extends CakeTestCase  {
 		//Case 4 : Negative
 		$data = array(
 				'Teacher' => array(
-						'username' => 'rohit',
-						'password' => 'rohit',
+						'password' => Security::hash('rohit'),
 						'email_address' => 'asdsad@asu.edu',
 						'name' => '',
-						'school' => 'ASU'));
+						'school' => '1'));
 			
 		$result = $this->Teacher->createUser($data);
 		$this->assertEquals($result,false);
@@ -170,8 +139,7 @@ class TeachersTest extends CakeTestCase  {
 		//Case 5 : Negative
 		$data = array(
 				'Teacher' => array(
-						'username' => 'rohit',
-						'password' => 'rohit',
+						'password' => Security::hash('rohit'),
 						'email_address' => 'asdsad@asu.edu',
 						'name' => 'Rohit',
 						'school' => ''));
@@ -182,11 +150,10 @@ class TeachersTest extends CakeTestCase  {
 		//Case 6 : Positive
 		$data = array(
 				'Teacher' => array(
-						'username' => 'testing',
-						'password' => 'testing',
-						'email_address' => 'asdsad@asu.edu',
-						'name' => 'Test',
-						'school' => 'USC'));
+						'password' => Security::hash('ASUrite'),
+						'email_address' => 'asu@asu.edu',
+						'name' => 'ASUrite',
+						'school' => '3'));
 			
 		$result = $this->Teacher->createUser($data);
 		$this->assertEquals($result,true);
@@ -196,7 +163,7 @@ class TeachersTest extends CakeTestCase  {
 	{
 		$result = $this->Teacher->getUsers();
 
-		$conditions = array("Teacher.type" => "-");
+		$conditions = array("Teacher.type" => "P");
 		$expected = $this->Teacher->find('all', array('conditions' => $conditions));
 
 		$this->assertEquals($result,$expected);

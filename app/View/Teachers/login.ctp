@@ -6,7 +6,7 @@
     <table width="80%" cellpadding="0" cellspacing="0" border="0">
         <?php echo $this->Form->create('Teacher');?>    
         <tr>
-            <td width="20%"> <?php echo $this->Form->input('username'); ?> </td>
+            <td width="20%"> <?php echo $this->Form->input('email_address'); ?> </td>
             <td width="30%"> &nbsp;</td>
             <td width="30%"> &nbsp;</td>
             <td width="30%"> &nbsp;</td>

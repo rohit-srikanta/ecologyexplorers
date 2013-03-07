@@ -41,16 +41,18 @@ class School extends AppModel {
 			)
 	);
 
+	//This method is called from the teachers controller to load the schools during user registration.
 	public function loadSchools()
 	{
 		$school = $this->find('list', array(
 				'fields' => array(
-						'School.school_Id',
+						'School.Id',
 						'School.school_Name')));
 
 		return $school;
 	}
 
+	//This method is called from the School Controller to create new schools
 	public function createSchool($fields)
 	{
 		$this->create();
@@ -65,6 +67,7 @@ class School extends AppModel {
 			return false;
 	}
 	
+	//This method is used to validate if the school id given already exists
 	public function checkSchoolIdPresent($fields = null)
 	{
 		if($this->findBySchoolId($fields) != null)
