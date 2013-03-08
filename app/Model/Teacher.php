@@ -27,6 +27,17 @@ class Teacher extends AppModel {
 					'rule' => 'notEmpty')
 	);
 
+
+	public $hasOne = array(
+			'School' => array(
+					'className'    => 'School',
+					'conditions'   => array('School.id = Teacher.school'),
+					'fields'       => 'School.school_name',
+					//'dependent'    => true,
+					'foreignKey'   => 'id'
+			)
+	);
+
 	//Method to check if the given email address and password exists in the database.
 	public function validateLogin($emailAddress = null,$password = null)
 	{
@@ -39,7 +50,7 @@ class Teacher extends AppModel {
 				return $user;
 			}
 			else
-				return false;
+				return "pending";
 		}
 
 	}
@@ -62,8 +73,9 @@ class Teacher extends AppModel {
 	public function createUser($fields)
 	{
 		$this->create();
-		pr(Security::hash($fields['Teacher']['password']));
+
 		$fields['Teacher']['password'] = Security::hash($fields['Teacher']['password']);
+
 		if($this->save($fields))
 			return true;
 		else
@@ -80,6 +92,50 @@ class Teacher extends AppModel {
 	{
 		$conditions = array("Teacher.type" => "P");
 		$query = $this->find('all', array('conditions' => $conditions));
-		return $query;
+
+		return($this->associateSchoolNames($query));
+	}
+
+	public function userList($user)
+	{
+		$query = $this->find('all',array('conditions' => array('NOT' => array('Teacher.id' => $user['Teacher']['id']))));
+
+		return($this->associateSchoolNames($query));
+	}
+
+	public function associateSchoolNames($Userlist)
+	{
+		$justschoolNames = $this->School->find('list', array(
+				'fields' => array('School.school_Name')));
+
+		for($i=0; $i<count($Userlist); $i++)
+		{
+			$Userlist[$i]['Teacher']['school'] = $justschoolNames[$Userlist[$i]['Teacher']['school']];
+		}
+
+		return $Userlist;
+	}
+
+	public function getUserDetails($id)
+	{
+		$query = $this->find('all',array('conditions' => array('Teacher.id' => $id)));
+		return($query[0]);
+	}
+
+	public function saveModification($fields)
+	{
+		$fields['Teacher']['password'] = Security::hash($fields['Teacher']['password']);
+
+		if($this->save($fields))
+			return true;
+		else
+			return false;
+	}
+	
+	public function userResetPassword($id)
+	{
+		$this->id = $id;
+		$this->saveField('password', Security::hash("CAPLTER"));
+		return true;
 	}
 }

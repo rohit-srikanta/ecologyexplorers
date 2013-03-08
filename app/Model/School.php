@@ -25,6 +25,7 @@ class School extends AppModel {
 	 *
 	 * @var array
 	*/
+
 	public $hasMany = array(
 			'School' => array(
 					'className' => 'School',

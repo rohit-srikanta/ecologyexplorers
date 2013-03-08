@@ -20,7 +20,11 @@
 			echo $this->Html->link('Approve Users', array('action' => 'approveUser'));?>
 			<br>
 			<br>
-			<?php echo $this->Html->link('Create Schools', array('controller' => 'schools', 'action' => 'createSchool'));
+			<?php echo $this->Html->link('Create Schools', array('controller' => 'schools', 'action' => 'createSchool'));?>
+			<br>
+			<br>
+			<?php echo $this->Html->link('Modify Users', array('action' => 'modifyUser'));
+			
 		}
 ?>
 <br>
