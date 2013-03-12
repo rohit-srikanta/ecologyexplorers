@@ -154,7 +154,6 @@ class SchoolTest extends CakeTestCase  {
 				'fields' => array(
 						'School.school_Id',
 						'School.school_Name')));
-		debug($expected);
 		$this->assertEquals($result,false);
 
 	}

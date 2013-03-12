@@ -29,6 +29,19 @@
 ?>
 <br>
 <br>
+<?php if($this->Session->read('User'))
+    	{
+echo $this->Html->link('Edit Profile', array('action' => 'editProfile'));
+?>
+<br>
+<br>
+<?php echo $this->Html->link('Create Class',  array('controller' => 'teachersclass', 'action' => 'createClass')); ?>
+<br>
+<br>
+<?php echo $this->Html->link('Create Site',  array('controller' => 'sites', 'action' => 'createSite')); 
+}?>
+<br>
+<br>
 <?php if($this->Session->check('User'))
 		{
 			echo $this->Form->postLink('Logout', array('action' => 'logout'));

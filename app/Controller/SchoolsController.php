@@ -18,7 +18,7 @@ class SchoolsController extends AppController {
 	}
 
 	/*This method is used to create new schools in the database.
-	*We first check if the user has the necessary admin privileges to create a school
+	 *We first check if the user has the necessary admin privileges to create a school
 	*Validation to check if the school id given already exists and later if all
 	*the data is acceptable, the school is created */
 	public function createSchool()

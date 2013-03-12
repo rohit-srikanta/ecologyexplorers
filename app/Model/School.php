@@ -17,7 +17,7 @@ class School extends AppModel {
 					'rule' => array('between', 3, 3),
 					'message' => 'School ID must be of 3 characters'),
 			'school_name'  => array(
-					'rule' => 'notEmpty'),
+					'rule' => 'notEmpty')
 	);
 
 	/**
@@ -25,6 +25,8 @@ class School extends AppModel {
 	 *
 	 * @var array
 	*/
+
+	public $recursive = -1;
 
 	public $hasMany = array(
 			'School' => array(
@@ -53,21 +55,51 @@ class School extends AppModel {
 		return $school;
 	}
 
+	public function schoolOptions()
+	{
+		$schools = $this->loadSchools();
+	
+		$i = 0;
+		foreach ($schools as $k)
+		{
+			$schooloptions[$i]['name'] = ($k);
+			$schooloptions[$i]['value'] = array_search($k,$schools);
+			$i++;
+		}
+		return $schooloptions;
+	}
+
+	public function schoolWithID($schoolID)
+	{
+		$schools = $this->loadSchools();
+		$i = 0;
+		foreach ($schools as $k)
+		{
+			if($schoolID == array_search($k,$schools))
+			{
+				$schooloptions[$i]['name'] = ($k);
+				$schooloptions[$i]['value'] = array_search($k,$schools);
+			}
+			$i++;
+		}
+		return $schooloptions;
+	}
+
 	//This method is called from the School Controller to create new schools
 	public function createSchool($fields)
 	{
 		$this->create();
 		$fields['School']['school_id'] = strtoupper($fields['School']['school_Id']);
 		$fields['School']['date_entered'] = date('Y-m-d H:i:s');
-		
+
 		if($this->save($fields))
-		{	
+		{
 			return true;
 		}
 		else
 			return false;
 	}
-	
+
 	//This method is used to validate if the school id given already exists
 	public function checkSchoolIdPresent($fields = null)
 	{
@@ -79,7 +111,7 @@ class School extends AppModel {
 		{
 			return false;
 		}
-	
+
 	}
 
 }

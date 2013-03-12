@@ -13,7 +13,7 @@ class SiteFixture extends CakeTestFixture {
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
 		'site_id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 50, 'key' => 'unique', 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
-		'school' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 3, 'key' => 'index', 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'school' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
 		'sitename' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 40, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'address' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'description' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
@@ -38,13 +38,13 @@ class SiteFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'site_id' => 'Lorem ipsum dolor sit amet',
-			'school' => 'L',
+			'school' => 1,
 			'sitename' => 'Lorem ipsum dolor sit amet',
 			'address' => 'Lorem ipsum dolor sit amet',
 			'description' => 'Lorem ipsum dolor sit amet',
 			'city' => 'Lorem ipsum dolor sit amet',
 			'zipcode' => 'Lorem ip',
-			'date_entered' => '2013-03-06 23:02:26',
+			'date_entered' => '2013-03-11 19:38:34',
 			'location' => 'Lorem ipsum dolor sit amet'
 		),
 	);

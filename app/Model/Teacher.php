@@ -37,12 +37,14 @@ class Teacher extends AppModel {
 					'foreignKey'   => 'id'
 			)
 	);
+	
+	public $recursive = -1;
 
 	//Method to check if the given email address and password exists in the database.
 	public function validateLogin($emailAddress = null,$password = null)
 	{
-		$password = Security::hash($password);
-		$user = $this->findByemailAddressAndPassword($emailAddress,$password);
+		$password1 = Security::hash($password);
+		$user = $this->findByemailAddressAndPassword($emailAddress,$password1);
 		if($user)
 		{
 			if('P' != $user['Teacher']['type'])
@@ -75,6 +77,7 @@ class Teacher extends AppModel {
 		$this->create();
 
 		$fields['Teacher']['password'] = Security::hash($fields['Teacher']['password']);
+		pr($fields);
 
 		if($this->save($fields))
 			return true;

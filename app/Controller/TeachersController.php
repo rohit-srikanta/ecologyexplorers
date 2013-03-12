@@ -68,7 +68,7 @@ class TeachersController extends AppController {
 			$this->Session->setFlash('You have been logged out!');
 			$this->redirect(array(
 					'action' => 'index'));
-			exit();
+			//exit();
 		}
 	}
 
@@ -88,7 +88,6 @@ class TeachersController extends AppController {
 
 		if ($this->request->is('post'))
 		{
-			//$this->Teacher->create();
 
 			//Check to see if the email address already exists in the database.
 			if($this->Teacher->checkEmailAddressExists($this->request->data['Teacher']['email_address']))
@@ -158,7 +157,7 @@ class TeachersController extends AppController {
 		}
 	}
 
-	public function edit($id = null) {
+	public function editUser($id = null) {
 		if (!$id) {
 			throw new NotFoundException(__('Invalid Teacher'));
 		}
@@ -170,18 +169,11 @@ class TeachersController extends AppController {
 		}
 
 		$this->loadModel('School');
-		$school = $this->School->loadSchools();
-
-		for($i = 1; $i <= count($school); $i++)
-		{
-			$schooloptions[$i]['name'] = $school[$i];
-			$schooloptions[$i]['value'] = $i;
-		}
-
+		$this->set('schooloptions', $this->School->schoolOptions());
+		
 		$userTypeOptions = array(array('name' => 'Teacher','value' => 'T'),array('name' => 'Admin','value' => 'A'),array('name' => 'Pending','value' => 'P'),);
-
-		$this->set('schooloptions', $schooloptions);
 		$this->set('userTypeOptions', $userTypeOptions);
+
 
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
@@ -196,7 +188,7 @@ class TeachersController extends AppController {
 				}
 				else
 				{
-					$this->Session->setFlash('Unable to update your teachers detail.');
+					$this->Session->setFlash('Unable to update teachers detail.');
 				}
 			}
 		}
@@ -224,24 +216,55 @@ class TeachersController extends AppController {
 			}
 		}
 	}
-	
+
 	public function userResetPassword($id,$name)
 	{
-		
+
 		if($this->authorizedUser())
 		{
-			
+
 			if ($this->request->is('get'))
 			{
 				throw new MethodNotAllowedException();
 			}
-			
+
 			if ($this->Teacher->userResetPassword($id))
 			{
 				$this->Session->setFlash($name .'\'s password has been reset to "CAPLTER".');
 				$this->redirect(array('action' => 'modifyUser'));
 			}
 		}
+
+	}
+
+	public function editProfile()
+	{
+		$this->loadModel('School');
+		$this->set('schooloptions', $this->School->schoolOptions());
 		
+		$user = $this->Session->read('User');
+
+		if ($this->request->is('post') || $this->request->is('put'))
+		{
+			$this->Teacher->id = $user['Teacher']['id'];
+			
+			if ($this->Teacher->saveModification($this->request->data))
+			{
+				$user = $this->Teacher->getUserDetails($user['Teacher']['id']);
+				$this->Session->write('User', $user);
+				
+				$this->Session->setFlash('Your Profile has been updated.');
+				$this->redirect(array('action' => 'index'));
+			}
+			else
+			{
+				$this->Session->setFlash('Unable to update your profile.');
+			}
+		}
+
+		if (!$this->request->data)
+		{
+			$this->request->data = $user;
+		}
 	}
 }

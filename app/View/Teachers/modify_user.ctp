@@ -28,7 +28,7 @@
 	        <td><?php echo $teacher['Teacher']['name']; ?></td>
 			<td><?php echo $teacher['Teacher']['email_address']; ?></td>
 	        <td><?php echo $teacher['Teacher']['school']; ?></td>
-	        <td><?php echo $this->Html->link('Edit', array('action' => 'edit', $teacher['Teacher']['id']));
+	        <td><?php echo $this->Html->link('Edit', array('action' => 'editUser', $teacher['Teacher']['id']));
 	        ?>
 	       </td><td>
             <?php  echo $this->Form->postLink(
