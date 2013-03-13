@@ -33,7 +33,7 @@ class Site extends AppModel {
 	
 	public function checkSiteIDExists($fields = null)
 	{
-		if($this->findBysiteId($fields) != null)
+		if($this->findBySiteId($fields) != null)
 		{
 			return true;
 		}

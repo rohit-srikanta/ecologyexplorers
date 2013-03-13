@@ -3,10 +3,10 @@
  * SiteFixture
  *
  */
-class SiteFixture extends CakeTestFixture {
+class TeachersClassFixture extends CakeTestFixture {
 
 public $import = array(
-			'table' => 'sites', 
+			'table' => 'teachers_classes', 
 			'connection' => 'default',
 			'records' => true);
 }
