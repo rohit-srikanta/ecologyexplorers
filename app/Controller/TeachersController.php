@@ -83,8 +83,8 @@ class TeachersController extends AppController {
 	{
 		//Loading the school model so that the school dropdown can be populated.
 		$this->loadModel('School');
-		$school = $this->School->loadSchools();
-		$this->set('schools', $school);
+		$schooloptions = $this->School->loadSchools();
+		$this->set('schooloptions', $schooloptions);
 
 		if ($this->request->is('post'))
 		{

@@ -75,9 +75,7 @@ class Teacher extends AppModel {
 	public function createUser($fields)
 	{
 		$this->create();
-
 		$fields['Teacher']['password'] = Security::hash($fields['Teacher']['password']);
-		pr($fields);
 
 		if($this->save($fields))
 			return true;

@@ -7,52 +7,14 @@
 <br>
 <?php if('A' == $this->Session->read('UserType'))
 	{ ?>
-    <table >
-        <?php echo $this->Form->create('School');?>    
-        <tr>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> <?php echo $this->Form->input('school_Id'); ?> </td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-        </tr>
-        <tr>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> <?php echo $this->Form->input('school_name'); ?> </td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-        </tr>
-        <tr>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> <?php echo $this->Form->input('address'); ?> </td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-        </tr>
-        <tr>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> <?php echo $this->Form->input('zipcode'); ?> </td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-        </tr>   
-        <tr>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> <?php echo $this->Form->input('city'); ?> </td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-        </tr>    
-        <tr>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"><?php echo $this->Form->end('Create School'); ?></td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-            <td width="20%"> &nbsp;</td>
-        </tr>
-    </table>
 
+        	<?php echo $this->Form->create('School', array('class'=>'form'));      
+             echo $this->Form->input('school_Id',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
+             echo $this->Form->input('school_name',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
+             echo $this->Form->input('address',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
+             echo $this->Form->input('zipcode',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
+             echo $this->Form->input('city',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
+             echo $this->Form->end('Create School'); ?>
  <?php }
 ?>  
 </html>

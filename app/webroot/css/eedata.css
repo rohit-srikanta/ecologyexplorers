@@ -3,6 +3,9 @@
     Created on : Feb 18, 2008, 1:12:45 PM
     Author     : corinna
     Description: for Ecology Explorers' Data Center.
+    
+    Modified on : Mar 14, 2013
+    Author     : rohit srikanta
 */
 
 BODY {
@@ -202,5 +205,107 @@ div.actions {
 div.actions h3 {
 	padding-top:0;
 	color:#777;
+}
+
+.form{
+    font-family: Verdana;    
+    font-size:1em;
+    margin:1em;
+    padding:1em;    
+}
+ 
+.form p.formtitle{
+    font-size:10pt;
+    width:70em;
+    text-align:justify;
+}
+ 
+.form fieldset{
+    width:40em;
+    border:1px solid #FFE545;   
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+ 
+.form fieldset legend{
+    color: #026475;
+}
+ 
+.formfield{
+    width:80em;
+    padding:5px;
+}
+
+.formfield_school{
+    width:80em;
+    padding:5px;
+}
+ 
+.formfield label{
+    display:block;
+    float:left;
+    width:12em;
+    padding:1px;
+    text-align:right;
+}
+ 
+.formfield input{
+    padding:0.15em;
+    width:14em;
+    border:1px solid #ddd;
+    background:#ffffff;
+     
+    font-family: Verdana;    
+    font-size:1em;
+     
+    -moz-border-radius:0.4em;
+    -khtml-border-radius:0.4em;
+}
+ 
+ .formfield  select{
+ padding:0.15em;
+    width:9em;
+    border:1px solid #ddd;
+    background:#ffffff;
+     
+    font-family: Verdana;    
+    font-size:1em;
+     
+    -moz-border-radius:0.4em;
+    -khtml-border-radius:0.4em;
+ }
+ 
+ .formfield_school select{
+    padding:0.15em;
+    width:15em;
+    border:1px solid #ddd;
+    background:#ffffff;
+     
+    font-family: Verdana;    
+    font-size:1em;
+     
+    -moz-border-radius:0.4em;
+    -khtml-border-radius:0.4em;
+ }
+ 
+.formfield input:hover, input:focus {
+    border-color:#5555c5;
+    background:#f6f6f6;
+} 
+ 
+.required input {
+    border:1px solid #DD0000;
+}
+ 
+.form .submit input{
+    font-family: Verdana;    
+    font-size:1em;
+    margin-top: 0.3em;
+}
+ 
+.formerror{
+    position:relative;
+    left:12.1em;
+    color:#FBB829;
 }
 

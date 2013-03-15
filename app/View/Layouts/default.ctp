@@ -25,6 +25,8 @@ $cakeDescription = __d('cake_dev', 'Ecology Explorers Data');
 	<title>
 		<?php echo $cakeDescription ?>:
 		<?php echo $title_for_layout; ?>
+		<?php echo $scripts_for_layout; ?>
+ 
 	</title>
 	<div class="header">
 		<?php echo $this->element('header'); ?>
@@ -32,6 +34,7 @@ $cakeDescription = __d('cake_dev', 'Ecology Explorers Data');
 	<?php
 		echo $this->Html->meta('icon');
 		echo $this->Html->css('eedata');
+		echo $this->Html->script('jquery-1.9.1.min');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
@@ -49,9 +52,9 @@ $cakeDescription = __d('cake_dev', 'Ecology Explorers Data');
 			<?php echo $this->fetch('content'); ?>
 		</div>
 	</div>
-	
+</body>	
 	<div class="footer">
 		<?php echo $this->element('footer'); ?>
 	</div>
-</body>
+
 </html>

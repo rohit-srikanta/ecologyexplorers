@@ -17,7 +17,14 @@ class School extends AppModel {
 					'rule' => array('between', 3, 3),
 					'message' => 'School ID must be of 3 characters'),
 			'school_name'  => array(
-					'rule' => 'notEmpty')
+					'rule' => 'notEmpty'),
+			'address'  => array(
+					'rule' => 'notEmpty'),
+			'city'  => array(
+					'rule' => 'notEmpty'),
+			'zipcode' => array(
+					'rule' => array('postal', null, 'us'),
+					'message' => 'Please enter a valid zipcode')
 	);
 
 	/**

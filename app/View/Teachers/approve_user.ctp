@@ -10,7 +10,7 @@
  ?>
 	<b><h2>New user profiles</h2></b><br><br>
 	<table>
-	<?php echo $this->Form->create('Approve');?>  
+	<?php echo $this->Form->create('Approve',array('class'=>'form'));?>  
 	    <tr>
 	        <th>Select</th>
 	        <th>Name</th>

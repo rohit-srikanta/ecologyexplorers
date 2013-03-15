@@ -7,7 +7,7 @@
 	{
 
  ?>
-	<b><h2>User profiles</h2></b><br><br>
+	<h2><b>User profiles</b></h2><br><br>
 	<table>
 	<?php echo $this->Form->create('ModifyUser');?>  
 	    <tr>
@@ -48,7 +48,7 @@
 	    <?php endforeach; ?>
 	</table>
 	<br>
-	<?php echo $this->Form->end(); ?></td>
+	<?php echo $this->Form->end(); ?>
 	<?php }
 ?>
 
