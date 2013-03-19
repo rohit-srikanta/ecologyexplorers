@@ -9,6 +9,7 @@ App::uses('Utitlity','Security');
 */
 class TeachersController extends AppController {
 	public $helpers = array('Html', 'Form');
+	//var $uses = array('Site', 'TeachersClass','School');
 	/**
 	 * index method
 	 *
@@ -170,7 +171,7 @@ class TeachersController extends AppController {
 
 		$this->loadModel('School');
 		$this->set('schooloptions', $this->School->schoolOptions());
-		
+
 		$userTypeOptions = array(array('name' => 'Teacher','value' => 'T'),array('name' => 'Admin','value' => 'A'),array('name' => 'Pending','value' => 'P'),);
 		$this->set('userTypeOptions', $userTypeOptions);
 
@@ -241,18 +242,18 @@ class TeachersController extends AppController {
 	{
 		$this->loadModel('School');
 		$this->set('schooloptions', $this->School->schoolOptions());
-		
+
 		$user = $this->Session->read('User');
 
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
 			$this->Teacher->id = $user['Teacher']['id'];
-			
+				
 			if ($this->Teacher->saveModification($this->request->data))
 			{
 				$user = $this->Teacher->getUserDetails($user['Teacher']['id']);
 				$this->Session->write('User', $user);
-				
+
 				$this->Session->setFlash('Your Profile has been updated.');
 				$this->redirect(array('action' => 'index'));
 			}
@@ -267,4 +268,20 @@ class TeachersController extends AppController {
 			$this->request->data = $user;
 		}
 	}
+
+	public function submitData()
+	{
+		$user = $this->Session->read('User');
+
+		$habitatTypeOptions = array(array('name' => 'Arthropods','value' => 'AR'),array('name' => 'Birds','value' => 'BI'),array('name' => 'Bruchids','value' => 'BR'),array('name' => 'Vegetation','value' => 'VE'));
+		$this->set('habitatTypeOptions', $habitatTypeOptions);
+		$this->set('siteIDOptions', $this->Teacher->getSiteIDs($user));
+		$this->set('classIDOptions', $this->Teacher->getClassIDs($user));
+
+		if ($this->request->is('post'))
+		{
+			$this->redirect(array('controller' => 'habitats','action' => 'habitatCheck',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
+		}
+	}
+
 }

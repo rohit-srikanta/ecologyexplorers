@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 15, 2013 at 12:39 AM
+-- Generation Time: Mar 19, 2013 at 12:27 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -19,6 +19,67 @@ SET time_zone = "+00:00";
 --
 -- Database: `rohitdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `arthro_samples`
+--
+
+CREATE TABLE IF NOT EXISTS `arthro_samples` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `site_id` int(11) DEFAULT NULL,
+  `habitat_id` int(11) DEFAULT NULL,
+  `collection_date` date DEFAULT NULL,
+  `comments` varchar(250) DEFAULT NULL,
+  `date_entered` datetime DEFAULT NULL,
+  `observer` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `site_id` (`site_id`),
+  KEY `habitat_id` (`habitat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `arthro_specimens`
+--
+
+CREATE TABLE IF NOT EXISTS `arthro_specimens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trap_id` varchar(20) NOT NULL,
+  `taxon` int(11) DEFAULT NULL,
+  `frequency` int(10) NOT NULL,
+  `sample_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `trap_id` (`trap_id`),
+  KEY `taxon` (`taxon`),
+  KEY `sample_id` (`sample_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `arthro_taxon`
+--
+
+CREATE TABLE IF NOT EXISTS `arthro_taxon` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `taxon` varchar(6) NOT NULL,
+  `taxon_name` varchar(50) DEFAULT NULL,
+  `date_entered` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `taxon` (`taxon`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `arthro_taxon`
+--
+
+INSERT INTO `arthro_taxon` (`id`, `taxon`, `taxon_name`, `date_entered`) VALUES
+(1, 'ACARI', 'Acari', '2013-03-18 14:29:36'),
+(2, 'AERID', 'Aerididae', '2013-03-18 14:29:36'),
+(3, 'THOMI', 'Thomisidae', '2013-03-18 14:29:36');
 
 -- --------------------------------------------------------
 
@@ -48,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `habitats` (
   PRIMARY KEY (`id`),
   KEY `school_id` (`school_id`),
   KEY `site_id` (`site_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `habitats`
@@ -79,8 +140,10 @@ INSERT INTO `habitats` (`id`, `type`, `recording_date`, `area`, `shrubcover`, `t
 (24, 'AR', '2013-02-06', 100, NULL, 40, 30, 20, 10, 20, 20, 40, 'Line', NULL, NULL, '2013-03-15 00:27:36', 37, 1),
 (25, 'AR', '2013-02-06', 100, NULL, 40, 30, 20, 10, 20, 20, 40, 'Line', NULL, NULL, '2013-03-15 00:30:36', 38, 1),
 (26, 'BI', '2013-04-15', NULL, NULL, 20, 10, 20, 10, 30, 10, NULL, NULL, 40, 20, '2013-03-15 00:32:42', 39, 1),
-(27, 'AR', '2013-04-15', 489, NULL, 20, 10, 20, 10, 30, 10, 0, 'Line', NULL, NULL, '2013-03-15 00:32:59', 40, 1),
-(28, 'VE', '2013-04-15', 777, NULL, 30, 20, 10, 10, 30, 10, NULL, NULL, NULL, NULL, '2013-03-15 00:33:20', 41, 1);
+(27, 'AR', '2013-02-15', 489, NULL, 20, 10, 20, 10, 30, 10, 20, 'Line', NULL, NULL, '2013-03-19 00:02:00', 40, 1),
+(28, 'VE', '2013-04-15', 111, NULL, 30, 20, 10, 10, 30, 10, NULL, NULL, NULL, NULL, '2013-03-18 22:58:57', 41, 1),
+(29, 'BI', '2013-03-04', NULL, NULL, 0, 10, 10, 20, 10, 10, NULL, NULL, 10, 10, '2013-03-18 22:57:54', 42, 1),
+(31, 'BR', '2013-01-18', NULL, NULL, 60, 10, 10, 0, 20, 0, NULL, NULL, NULL, NULL, '2013-03-18 23:35:28', 43, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `sites` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `site_id` (`site_id`),
   KEY `school` (`school`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `sites`
@@ -144,34 +207,29 @@ INSERT INTO `sites` (`id`, `site_id`, `school`, `site_name`, `address`, `descrip
 (8, '2', 1, 'sad', 'asd', 'asd', 'asd', '85281', '2013-03-12 00:21:31', 'asd'),
 (9, '3', 1, 'as', 'a56', 'gbngbn', 'sfdgdsg', '85774', '2013-03-12 00:21:44', '456'),
 (10, '5', 1, 'sdf', 'sdf', '789', 'vbnfgvb', '85281', '2013-03-12 00:22:15', 'vb798'),
-(14, 'asdad', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:10:14', 'sdfs'),
-(15, 'asdad111', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:11:06', 'sdfs'),
-(16, '123', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:11:43', 'sdfs'),
-(17, '1234', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:12:14', 'sdfs'),
-(18, '12345', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:14:35', 'sdfs'),
-(19, '123456', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:15:18', 'sdfs'),
-(20, '12347', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:15:34', 'sdfs'),
-(21, '12348', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:16:06', 'sdfs'),
-(22, '12349', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:18:38', 'sdfs'),
-(23, '123490', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:19:53', 'sdfs'),
-(24, '123499', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:20:14', 'sdfs'),
-(25, '123472', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:20:25', 'sdfs'),
-(26, '123474', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:20:32', 'sdfs'),
-(27, '123475', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:20:39', 'sdfs'),
-(28, '12771', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:23:38', 'sdfs'),
-(29, '12772', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:24:55', 'sdfs'),
-(30, '127723', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:25:02', 'sdfs'),
-(31, '127724', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:25:10', 'sdfs'),
-(32, '127725', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:25:18', 'sdfs'),
+(14, 'asdad', 1, 'asdsad234', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:10:14', 'sdfs'),
+(15, 'asdad111', 1, 'zxc', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:11:06', 'sdfs'),
+(23, '123490', 1, 'asdsadvbvbn', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:19:53', 'sdfs'),
+(24, '123499', 1, '24324', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:20:14', 'sdfs'),
+(25, '123472', 1, 'asdsad45', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:20:25', 'sdfs'),
+(26, '123474', 1, 'asdsadvv', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:20:32', 'sdfs'),
+(27, '123475', 1, 'asdsad77', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:20:39', 'sdfs'),
+(28, '12771', 1, 'asdsadcvb', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:23:38', 'sdfs'),
+(29, '12772', 1, 'asdsad78', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:24:55', 'sdfs'),
+(30, '127723', 1, 'asdsadokj', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:25:02', 'sdfs'),
+(31, '127724', 1, 'asdsad7789', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:25:10', 'sdfs'),
+(32, '127725', 1, 'asdsadqa', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:25:18', 'sdfs'),
 (33, '127727', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:25:54', 'sdfs'),
-(34, '127728', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:26:24', 'sdfs'),
+(34, '127728', 1, 'asdsadn65un', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:26:24', 'sdfs'),
 (35, '127729', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:26:36', 'sdfs'),
-(36, '1277211', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:26:52', 'sdfs'),
-(37, '1277212', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:27:36', 'sdfs'),
+(36, '1277211', 1, 'asdsadfh', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:26:52', 'sdfs'),
+(37, '1277212', 1, 'asdsadnvbn', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:27:36', 'sdfs'),
 (38, '12999', 1, 'asdsad', 'sdfdsf', 'dfsf', 'fghfgh', '85281', '2013-03-15 00:30:36', 'sdfs'),
 (39, '22132', 1, '24', '24', '234', '234', '85281', '2013-03-15 00:32:42', '234'),
-(40, '22133', 1, '24', '24', '234', '234', '85281', '2013-03-15 00:32:59', '234'),
-(41, '22134', 1, '24', '24', '234', '234', '85281', '2013-03-15 00:33:20', '234');
+(40, '22133', 1, '248bdfg ', '24', '234', '234', '85281', '2013-03-15 00:32:59', '234'),
+(41, '22134', 1, '24234', '24', '234', '234', '85281', '2013-03-15 00:33:20', '234'),
+(42, 'dsadsad dsf', 1, '123', '123', '13123', '123', '85281', '2013-03-18 21:46:30', '123'),
+(43, '12345678', 1, 'br', 'sd', 'asd', 'sdf', '85281', '2013-03-18 23:00:20', 'asd');
 
 -- --------------------------------------------------------
 
@@ -190,14 +248,15 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   UNIQUE KEY `email_address` (`email_address`),
   KEY `email_address_2` (`email_address`,`password`),
   KEY `school` (`school`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `teachers`
 --
 
 INSERT INTO `teachers` (`id`, `email_address`, `password`, `type`, `name`, `school`) VALUES
-(4, 'rohit@asu.edu', '83d5e1e49bd5f0ebbf6c9ba40416057fac1b5d76', 'A', 'Rohit Srikanta', 1);
+(4, 'rohit@asu.edu', '83d5e1e49bd5f0ebbf6c9ba40416057fac1b5d76', 'A', 'Rohit Srikanta', 1),
+(5, 'temp@asu.edu', '83d5e1e49bd5f0ebbf6c9ba40416057fac1b5d76', 'T', 'temp', 2);
 
 -- --------------------------------------------------------
 
@@ -215,11 +274,34 @@ CREATE TABLE IF NOT EXISTS `teachers_classes` (
   PRIMARY KEY (`id`),
   KEY `school` (`school`),
   KEY `teacher` (`teacher`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `teachers_classes`
+--
+
+INSERT INTO `teachers_classes` (`id`, `class_name`, `grade`, `date_entered`, `teacher`, `school`) VALUES
+(1, 'grade 12', '12', '2013-03-18 19:25:50', 4, 1),
+(3, 'Grade 10', '10', '2013-03-18 19:26:17', 5, 2),
+(4, 'Grade 11', '11', '2013-03-18 19:37:10', 4, 1);
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `arthro_samples`
+--
+ALTER TABLE `arthro_samples`
+  ADD CONSTRAINT `arthro_samples_ibfk_1` FOREIGN KEY (`site_id`) REFERENCES `sites` (`id`),
+  ADD CONSTRAINT `arthro_samples_ibfk_2` FOREIGN KEY (`habitat_id`) REFERENCES `habitats` (`id`);
+
+--
+-- Constraints for table `arthro_specimens`
+--
+ALTER TABLE `arthro_specimens`
+  ADD CONSTRAINT `arthro_specimens_ibfk_1` FOREIGN KEY (`taxon`) REFERENCES `arthro_taxon` (`id`),
+  ADD CONSTRAINT `arthro_specimens_ibfk_2` FOREIGN KEY (`sample_id`) REFERENCES `arthro_samples` (`id`);
 
 --
 -- Constraints for table `habitats`

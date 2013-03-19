@@ -28,5 +28,19 @@ class TeachersClass extends AppModel {
 		else
 			return false;
 	}
+	
+	public function getClassIDs($schoolId,$teacherId)
+	{
+		$conditions = array("TeachersClass.school" => $schoolId,"TeachersClass.teacher" => $teacherId);
+		$class = $this->find('list', array('conditions' => $conditions,'fields' => array('TeachersClass.Id','TeachersClass.class_name')));
+		return $class;
+	}
+	
+	public function getClassName($classId)
+	{
+		$conditions = array("TeachersClass.id" => $classId);
+		$class = $this->find('list', array('conditions' => $conditions,'fields' => array('TeachersClass.Id','TeachersClass.class_name')));
+		return $class;
+	}
 
 }

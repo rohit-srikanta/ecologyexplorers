@@ -14,8 +14,12 @@ BODY {
     BACKGROUND-COLOR: #f0ffcc; 
     position: relative;
     height: auto;
+	
 }
-
+p {
+	padding-left: 60px;
+	vertical-align: baseline;
+}
 h1,H1 {
    font-size: 24pt;
     text-align: center;
@@ -203,8 +207,12 @@ div.actions {
 	padding:10px 1.5%;
 }
 div.actions h3 {
-	padding-top:0;
+	float:left;
 	color:#777;
+}
+
+div.logout {
+	padding-left: 60px;
 }
 
 .form{

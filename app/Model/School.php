@@ -78,6 +78,8 @@ class School extends AppModel {
 
 	public function schoolWithID($schoolID)
 	{
+		if($schoolID == null)
+			return false;
 		$schools = $this->loadSchools();
 		$i = 0;
 		foreach ($schools as $k)

@@ -1,6 +1,8 @@
 <?php
 App::uses('AppModel', 'Model');
 App::uses('Security','Utitlity');
+App::import('model','Site');
+App::import('model','TeachersClass');
 /**
  * Teacher Model
  *
@@ -138,5 +140,19 @@ class Teacher extends AppModel {
 		$this->id = $id;
 		$this->saveField('password', Security::hash("CAPLTER"));
 		return true;
+	}
+	
+	public function getSiteIDs($user)
+	{
+		$site = new Site();
+		$site = $site->getTeachersSites($user['Teacher']['school']);
+		return $site;
+	}
+	
+	public function getClassIDs($user)
+	{
+		$class = new TeachersClass();
+		$class = $class->getClassIDs($user['Teacher']['school'],$user['Teacher']['id']);
+		return $class;
 	}
 }

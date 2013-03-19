@@ -65,5 +65,19 @@ class Site extends AppModel {
 		}
 	
 	}
+	
+	public function getTeachersSites($schoolId)
+	{
+		$conditions = array("Site.school" => $schoolId);
+		$site = $this->find('list', array('conditions' => $conditions,'fields' => array('Site.Id','Site.site_name')));
+		return $site;
+	}
+	
+	public function getSiteName($siteID)
+	{
+		$conditions = array("Site.id" => $siteID);
+		$site = $this->find('list', array('conditions' => $conditions,'fields' => array('Site.Id','Site.site_name')));
+		return $site;
+	}
 
 }

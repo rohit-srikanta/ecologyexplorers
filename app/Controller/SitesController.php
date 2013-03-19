@@ -42,7 +42,7 @@ class SitesController extends AppController {
 				{
 					$this->Session->setFlash('Your site was created successfully.');
 					pr($this->request->data);
-					//$this->redirect(array('controller' => 'teachers', 'action' => 'index'));
+					$this->redirect(array('controller' => 'teachers', 'action' => 'index'));
 				}
 				else
 				{

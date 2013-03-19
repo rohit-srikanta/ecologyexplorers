@@ -1,11 +1,11 @@
 <html>
-<body>
+
 <h2>Welcome to the Ecology Explorers Data Center!</h2>
 <br>
-<br>
-<p class="text">Registered participants can enter data from an Ecology Explorers research project</p>
+<br><body>
+<p class="text" >Registered participants can enter data from an Ecology Explorers research project</p>
 <p class="text">Everybody may download data from all Ecology Explorers research projects</p>
-<br>  
+<br> <p> 
 <?php if(!($this->Session->read('UserType')))
     	{
 			echo "To Participate and enter data ".$this->Html->link('Login',array('controller' => 'teachers', 'action' => 'login'));?>
@@ -37,16 +37,20 @@ echo $this->Html->link('Edit Profile', array('action' => 'editProfile'));
 <?php echo $this->Html->link('Create Class',  array('controller' => 'teachersclass', 'action' => 'createClass')); ?>
 <br>
 <br>
-<?php echo $this->Html->link('Create Site',  array('controller' => 'sites', 'action' => 'createSite')); 
+<?php echo $this->Html->link('Create Site',  array('controller' => 'sites', 'action' => 'createSite')); ?>
+<br>
+<br>
+<?php echo $this->Html->link('Submit Data',  array('controller' => 'teachers', 'action' => 'submitData')); 
 }?>
 <br>
-<br>
+<br></p>
+<div class="logout">
 <?php if($this->Session->check('User'))
 		{
 			echo $this->Form->postLink('Logout', array('action' => 'logout'));
 		}
 ?>
-<br>
+</div><br>
 <br>
 <br>
 </body>

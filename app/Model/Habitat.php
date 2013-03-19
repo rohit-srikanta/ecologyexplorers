@@ -46,4 +46,11 @@ class Habitat extends AppModel {
 		else
 			return false;
 	}
+	
+	public function getHabitatDetails($siteId,$type)
+	{
+		$conditions = array("Habitat.site_id" => $siteId,"Habitat.type" => $type);
+		$habitat = $this->find('first', array('conditions' => $conditions));
+		return $habitat;
+	}
 }

@@ -22,7 +22,6 @@
 
 	    </tr>
 	
-	    <!-- Here is where we loop through our $posts array, printing out post info -->
 	    <?php foreach ($userList as $teacher):?>
 	    <tr>
 	        <td><?php echo $teacher['Teacher']['name']; ?></td>
