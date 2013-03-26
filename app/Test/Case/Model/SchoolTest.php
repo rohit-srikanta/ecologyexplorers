@@ -50,30 +50,17 @@ class SchoolTest extends CakeTestCase  {
 		//Case 1 : Positive
 		$data = array(
 				'School' => array(
-						'school_Id' => 'ASU',
-						'school_name' => 'Arizona State University',
+						'school_Id' => 'NCU',
+						'school_name' => 'North Carolina',
 						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
-						'zipcode' => '85287',
+						'zipcode' => '78965',
 						'city' => 'Tempe',)
 		);
 
 		$result = $this->School->createSchool($data);
 		$this->assertEquals($result,true);
 
-		//Case 2 : Positive
-		$data = array(
-				'School' => array(
-						'school_Id' => 'asu',
-						'school_name' => 'Arizona State University',
-						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
-						'zipcode' => '85287',
-						'city' => 'Tempe',)
-		);
-
-		$result = $this->School->createSchool($data);
-		$this->assertEquals($result,true);
-
-		//Case 3 : Positive
+		//Case 3 : Negative
 		$data = array(
 				'School' => array(
 						'school_Id' => 'ASU',
@@ -84,7 +71,7 @@ class SchoolTest extends CakeTestCase  {
 		);
 
 		$result = $this->School->createSchool($data);
-		$this->assertEquals($result,true);
+		$this->assertEquals($result,false);
 
 		//Case 4 : Negative
 		$data = array(
@@ -147,15 +134,39 @@ class SchoolTest extends CakeTestCase  {
 						'zipcode' => '85287',
 						'city' => 'Tempe',)
 		);
+		$result = $this->School->createSchool($data);
+		$this->assertEquals($result,false);
+		
+		//Case 8 : Negative
+		$data = array(
+				'School' => array(
+						'school_Id' => 'ASU',
+						'school_name' => 'Arizona State University',
+						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
+						'zipcode' => '1',
+						'city' => 'Tempe',)
+		);
 
 		$result = $this->School->createSchool($data);
-		
-		$expected =  $this->School->find('list', array(
-				'fields' => array(
-						'School.school_Id',
-						'School.school_Name')));
 		$this->assertEquals($result,false);
-
+	}
+	
+	public function testSchoolWithID()
+	{
+		$result = $this->School->schoolWithID(1);
+		$expected = array(
+				'0' => array(
+						'value' => '1',
+						'name' => 'Arizona State University')
+		);
+		
+		$this->assertEquals($result,$expected);
+		
+		$result = $this->School->schoolWithID(null);
+		$this->assertEquals($result,false);
+		
+		$result = $this->School->schoolWithID(599900000);		
+		$this->assertEquals($result,false);
 	}
 }
 ?>

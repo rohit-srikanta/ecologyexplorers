@@ -3,15 +3,17 @@ App::uses('AppModel', 'Model');
 /**
  * Habitat Model
  *
- */
+*/
 class Habitat extends AppModel {
 
-	
 	public function createHabitat($fields,$siteId)
 	{
+		if($siteId == null || $fields == null)
+			return false;
+		
 		$fields['date_entered'] = date('Y-m-d H:i:s');
 		$fields['site_id'] = $siteId;
-		
+
 		if($fields['type'] == 'AR')
 		{
 			$fields['percent_observed']= NULL;
@@ -22,7 +24,7 @@ class Habitat extends AppModel {
 			$fields['num_traps']= NULL;
 			$fields['trap_arrange']= NULL;
 			$fields['area']= NULL;
-		} 
+		}
 		else if($fields['type'] == 'BR')
 		{
 			$fields['percent_observed']= NULL;
@@ -38,7 +40,7 @@ class Habitat extends AppModel {
 			$fields['num_traps']= NULL;
 			$fields['trap_arrange']= NULL;
 		}
-		
+
 		if( $this->save($fields))
 		{
 			return true;
@@ -46,9 +48,12 @@ class Habitat extends AppModel {
 		else
 			return false;
 	}
-	
+
 	public function getHabitatDetails($siteId,$type)
 	{
+		if($siteId == null || $type == null)
+			return false;
+
 		$conditions = array("Habitat.site_id" => $siteId,"Habitat.type" => $type);
 		$habitat = $this->find('first', array('conditions' => $conditions));
 		return $habitat;

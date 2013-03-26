@@ -9,8 +9,8 @@
 <?php echo $this->Form->create('Habitat',array('class'=>'form'));   ?>
 <legend class="formfield">
 	<b>Habitat Details</b>
+	<p> Please verify the Habitat details. Update the details if necessary	</p>
 </legend>
-<br>
 <div class="formfield">
 	<?php echo $this->Form->input('school',array('div'=>'formfield_school','options' => $schooloptions,'disabled' => 'disabled'));
  echo $this->Form->input('Habitat.type',array('disabled' => 'disabled','div'=>'formfield','empty' => 'Select','label' => 'Habitat Type','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
@@ -70,5 +70,4 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
 </div>
 
 <?php echo $this->Form->end('Update Habitat',array('div'=>'submit')); ?>
-
 </html>

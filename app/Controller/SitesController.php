@@ -35,18 +35,21 @@ class SitesController extends AppController {
 			{
 				$this->Session->setFlash('Habitat Vegetation and Non-Vegetation within 0 m - 0.15 m cannot be more than 100 %.');
 			}
+			else if($this->request->data['Habitat']['type'] == '')
+			{
+				$this->Session->setFlash('Please select the habitat type');
+			}
 			else
 			{
 			
 				if ($this->Site->createNewSite($this->request->data))
 				{
 					$this->Session->setFlash('Your site was created successfully.');
-					pr($this->request->data);
 					$this->redirect(array('controller' => 'teachers', 'action' => 'index'));
 				}
 				else
 				{
-					$this->Session->setFlash('Unable to create a new site.');
+					$this->Session->setFlash('Unable to create a new site. Please correct the errors shown below.');
 				}
 			}
 		}

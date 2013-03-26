@@ -13,4 +13,12 @@ class ArthroTaxon extends AppModel {
  */
 	public $useTable = 'arthro_taxon';
 
+	public function getOrderList()
+	{
+		$taxon = $this->find('list', array(
+				'fields' => array(
+						'ArthroTaxon.id',
+						'ArthroTaxon.taxon_name')));
+		return $taxon;
+	}
 }

@@ -6,7 +6,7 @@
 <?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
 <br>
 
-<?php echo $this->Form->create('ArthroSamples',array('class'=>'form'));   ?>
+<?php echo $this->Form->create('ArthroSample',array('class'=>'form'));   ?>
 
 <legend class="formfield">
 	<b>Protocol : Arthropods</b>
@@ -34,30 +34,32 @@
 	echo $this->Form->input('class_name',array('disabled' => 'disabled','div'=>'formfield','options' => $classOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('collection_date',array('div'=>'formfield'));
 	echo $this->Form->input('observer',array('label' =>'Name of person identifying the sample', 'div'=>'formfield'));
-echo $this->Form->input('comments',array('div'=>'formfield'));  ?>
-
+	echo $this->Form->input('comments',array('div'=>'formfield'));  ?>
 	<p>
-		<b><u>Survey Data :</u> </b>
+		<b>Survey Data : </b>
 	</p>
-
+	<p><b>Please make sure that you enter all 3 values. </b></p>
 	<table>
 		<tr>
-			<th>Trap ID</th>
+			<th>Trap No</th>
 			<th>Arthropod Order</th>
 			<th>Tally Number</th>
 		</tr>
 
-		<?php for($i=0;$i<5;$i++) {?>
+		<?php for($i=0;$i<10;$i++) {?>
 
 		<tr>
-			<td><?php echo $this->Form->input('ArthroSamples.trap_id',array('label' => ''))?></td>
-			<td><?php echo $this->Form->input('ArthroSamples.taxon',array('label' => ''))?></td>
-			<td><?php echo $this->Form->input('ArthroSamples.frequency',array('label' => ''))?></td>
+			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'trap_no',array('label' => ''))?>
+			</td>
+			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $orderOptions))?>
+			</td>
+			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'frequency',array('label' => ''))?>
+			</td>
 		</tr>
-	
-	<?php }?>
-</table>
-	</div>
+
+		<?php }?>
+	</table>
+</div>
 
 <br>
 <?php echo $this->Form->end('Submit Arthropod Data',array('div'=>'submit')); ?>

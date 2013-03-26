@@ -9,7 +9,6 @@ App::uses('Utitlity','Security');
 */
 class TeachersController extends AppController {
 	public $helpers = array('Html', 'Form');
-	//var $uses = array('Site', 'TeachersClass','School');
 	/**
 	 * index method
 	 *
@@ -41,7 +40,7 @@ class TeachersController extends AppController {
 			{
 				if("pending" == $user)
 				{
-					$this->Session->setFlash('Your account is not yet approved. You will receive a mail once its approved.');
+					$this->Session->setFlash('Your account is not yet approved. You will receive an e-mail once its approved.');
 				}
 				else
 				{
@@ -200,9 +199,8 @@ class TeachersController extends AppController {
 		}
 	}
 
-	public function delete($id,$name)
+	public function deleteUser($id,$name)
 	{
-
 		if($this->authorizedUser())
 		{
 			if ($this->request->is('get'))
@@ -210,10 +208,14 @@ class TeachersController extends AppController {
 				throw new MethodNotAllowedException();
 			}
 
-			if ($this->Teacher->delete($id))
+			if($this->Teacher->deleteTeacher($id))
 			{
 				$this->Session->setFlash($name .' has been deleted.');
 				$this->redirect(array('action' => 'modifyUser'));
+			}
+			else
+			{
+				$this->Session->setFlash('Unable to delete the user.');
 			}
 		}
 	}
@@ -244,22 +246,36 @@ class TeachersController extends AppController {
 		$this->set('schooloptions', $this->School->schoolOptions());
 
 		$user = $this->Session->read('User');
+		$oldEmail = $user['Teacher']['email_address'];
 
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
-			$this->Teacher->id = $user['Teacher']['id'];
-				
-			if ($this->Teacher->saveModification($this->request->data))
+			if($this->request->data['Teacher']['password'] != $this->request->data['Teacher']['password1'])
 			{
-				$user = $this->Teacher->getUserDetails($user['Teacher']['id']);
-				$this->Session->write('User', $user);
-
-				$this->Session->setFlash('Your Profile has been updated.');
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash('The passwords you have entered do not match. Please verify the passwords again.');
+			}
+			if($oldEmail != $this->request->data['Teacher']['email_address'])
+			{
+				if($this->Teacher->checkEmailAddressExists($this->request->data['Teacher']['email_address']))
+				{
+					$this->Session->setFlash('Email Address already exists. Please try a different one.');
+				}
 			}
 			else
 			{
-				$this->Session->setFlash('Unable to update your profile.');
+				pr($this->request->data);
+				if ($this->Teacher->saveModification($this->request->data))
+				{
+					$user = $this->Teacher->getUserDetails($user['Teacher']['id']);
+					$this->Session->write('User', $user);
+
+					$this->Session->setFlash('Your Profile has been updated.');
+					$this->redirect(array('action' => 'index'));
+				}
+				else
+				{
+					$this->Session->setFlash('Unable to update your profile.');
+				}
 			}
 		}
 

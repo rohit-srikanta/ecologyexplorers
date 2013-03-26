@@ -1,8 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 App::uses('Security','Utitlity');
-App::import('model','Site');
-App::import('model','TeachersClass');
+
 /**
  * Teacher Model
  *
@@ -39,14 +38,24 @@ class Teacher extends AppModel {
 					'foreignKey'   => 'id'
 			)
 	);
-	
+
+	public $hasMany = array(
+			'TeachersClass' => array(
+					'className' => 'TeachersClass',
+					'foreignKey' => 'id',
+					'dependent'=> true
+			)
+	);
+
 	public $recursive = -1;
+
+
 
 	//Method to check if the given email address and password exists in the database.
 	public function validateLogin($emailAddress = null,$password = null)
 	{
 		$password1 = Security::hash($password);
-		$user = $this->findByemailAddressAndPassword($emailAddress,$password1);
+		$user = $this->findByEmailAddressAndPassword($emailAddress,$password1);
 		if($user)
 		{
 			if('P' != $user['Teacher']['type'])
@@ -56,13 +65,18 @@ class Teacher extends AppModel {
 			else
 				return "pending";
 		}
+		else
+			return false;
 
 	}
 
 	//Method to check if the email address already exists in the database.
 	public function checkEmailAddressExists($fields = null)
 	{
-		if($this->findByemailAddress($fields) != null)
+		if($fields == null)
+			return false;
+
+		if($this->findByEmailAddress($fields) != null)
 		{
 			return true;
 		}
@@ -76,6 +90,8 @@ class Teacher extends AppModel {
 	//Method to insert new profiles into the database
 	public function createUser($fields)
 	{
+		if($fields == null)
+			return false;
 		$this->create();
 		$fields['Teacher']['password'] = Security::hash($fields['Teacher']['password']);
 
@@ -87,8 +103,17 @@ class Teacher extends AppModel {
 
 	public function approveUser($id,$value)
 	{
-		$this->id = $id;
-		$this->saveField('type', $value);
+
+		if($id == null || $value == null)
+			return false;
+		$temp['id'] = $id;
+		if($this->hasAny($temp))
+		{
+			$this->id = $id;
+			$this->saveField('type', 'T');
+			return true;
+		}
+		return false;
 	}
 
 	public function getUsers()
@@ -101,13 +126,17 @@ class Teacher extends AppModel {
 
 	public function userList($user)
 	{
+		if($user == null)
+			return null;
 		$query = $this->find('all',array('conditions' => array('NOT' => array('Teacher.id' => $user['Teacher']['id']))));
-
 		return($this->associateSchoolNames($query));
 	}
 
 	public function associateSchoolNames($Userlist)
 	{
+		if($Userlist ==null)
+			return false;
+
 		$justschoolNames = $this->School->find('list', array(
 				'fields' => array('School.school_Name')));
 
@@ -127,32 +156,73 @@ class Teacher extends AppModel {
 
 	public function saveModification($fields)
 	{
+		if($fields == null)
+			return false;
 		$fields['Teacher']['password'] = Security::hash($fields['Teacher']['password']);
 
 		if($this->save($fields))
 			return true;
+	}
+
+	public function userResetPassword($id)
+	{
+		if($id ==null)
+			return false;
+		$temp['id'] = $id;
+		if($this->hasAny($temp))
+		{
+			$this->id = $id;
+			if($this->saveField('password', Security::hash("CAPLTER")))
+				return true;
+		}
 		else
 			return false;
 	}
-	
-	public function userResetPassword($id)
-	{
-		$this->id = $id;
-		$this->saveField('password', Security::hash("CAPLTER"));
-		return true;
-	}
-	
+
 	public function getSiteIDs($user)
 	{
-		$site = new Site();
-		$site = $site->getTeachersSites($user['Teacher']['school']);
+		if($user == null)
+			return false;
+
+		$site = ClassRegistry::init('Site')->getTeachersSites($user['Teacher']['school']);
 		return $site;
 	}
-	
+
 	public function getClassIDs($user)
 	{
-		$class = new TeachersClass();
-		$class = $class->getClassIDs($user['Teacher']['school'],$user['Teacher']['id']);
+		if($user == null)
+			return false;
+
+		$class =  ClassRegistry::init('TeachersClass')->getClassIDs($user['Teacher']['school'],$user['Teacher']['id']);
 		return $class;
+	}
+
+	public function deleteTeacher($id)
+	{
+		if($id ==null)
+			return false;
+
+		$temp['id'] = $id;
+
+		if($this->hasAny($temp))
+		{
+			$query = ClassRegistry::init('TeachersClass')->find('all',array('conditions' => array('TeachersClass.teacher_id' => $id)));
+			if($query != null)
+			{
+				foreach($query as $class)
+				{
+					$status = ClassRegistry::init('TeachersClass')->delete($class['TeachersClass']['id']);
+					pr($status);
+					if($status != true)
+						return false;
+				}
+				if($this->delete($id))
+					return true;
+			}
+			if($this->delete($id))
+				return true;
+		}
+		else
+			return false;
 	}
 }

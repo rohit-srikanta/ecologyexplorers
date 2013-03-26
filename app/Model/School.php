@@ -65,7 +65,7 @@ class School extends AppModel {
 	public function schoolOptions()
 	{
 		$schools = $this->loadSchools();
-	
+
 		$i = 0;
 		foreach ($schools as $k)
 		{
@@ -80,18 +80,20 @@ class School extends AppModel {
 	{
 		if($schoolID == null)
 			return false;
-		$schools = $this->loadSchools();
-		$i = 0;
-		foreach ($schools as $k)
+
+		$temp['id'] = $schoolID;
+		if($this->hasAny($temp))
 		{
-			if($schoolID == array_search($k,$schools))
-			{
-				$schooloptions[$i]['name'] = ($k);
-				$schooloptions[$i]['value'] = array_search($k,$schools);
-			}
-			$i++;
+			$conditions = array('School.id' => $schoolID);
+			$temp = $this->find('first', array('conditions' => $conditions,'fields' => array(
+					'School.id',
+					'School.school_name')));
+
+			$schooloptions[0]['value'] = $temp['School']['id'];
+			$schooloptions[0]['name'] = $temp['School']['school_name'];
+			return $schooloptions;
 		}
-		return $schooloptions;
+		return false;
 	}
 
 	//This method is called from the School Controller to create new schools

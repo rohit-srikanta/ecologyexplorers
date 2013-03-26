@@ -1,6 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
-App::import('model','Habitat');
+
 /**
  * Site Model
  *
@@ -31,13 +31,10 @@ class Site extends AppModel {
 		$this->create();
 		$siteDetails['Site']['date_entered'] = date('Y-m-d H:i:s');
 		$siteDetails['Site']['site_id'] = $siteDetails['Site']['site_Id'];
-		$siteDetails['Habitat']['recording_date'] = $siteDetails['Habitat']['recording_date']['year'].'-'.$siteDetails['Habitat']['recording_date']['month'].'-'.$siteDetails['Habitat']['recording_date']['day'];
 		$siteDetails['Habitat']['school_id'] = $siteDetails['Site']['school'];
-
-		$hab = new Habitat();
-		
-		if($this->save($siteDetails['Site']) && $hab->createHabitat($siteDetails['Habitat'],$this->getInsertID()))
+		if($this->save($siteDetails['Site']) && ClassRegistry::init('Habitat')->createHabitat($siteDetails['Habitat'],$this->getInsertID()))
 		{
+			
 			return true;
 		}
 		else
@@ -68,6 +65,8 @@ class Site extends AppModel {
 	
 	public function getTeachersSites($schoolId)
 	{
+		if($schoolId ==null)
+			return false;
 		$conditions = array("Site.school" => $schoolId);
 		$site = $this->find('list', array('conditions' => $conditions,'fields' => array('Site.Id','Site.site_name')));
 		return $site;
@@ -75,6 +74,8 @@ class Site extends AppModel {
 	
 	public function getSiteName($siteID)
 	{
+		if($siteID ==null)
+			return false;
 		$conditions = array("Site.id" => $siteID);
 		$site = $this->find('list', array('conditions' => $conditions,'fields' => array('Site.Id','Site.site_name')));
 		return $site;
