@@ -2,10 +2,9 @@
 <head>
 </head>
 
-<br>
-<?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
-<br>
-
+<div>
+		<?php echo $this->element('links'); ?>
+</div>
 <?php echo $this->Form->create('ArthroSample',array('class'=>'form'));   ?>
 
 <legend class="formfield">
@@ -34,7 +33,7 @@
 	echo $this->Form->input('class_name',array('disabled' => 'disabled','div'=>'formfield','options' => $classOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('collection_date',array('div'=>'formfield'));
 	echo $this->Form->input('observer',array('label' =>'Name of person identifying the sample', 'div'=>'formfield'));
-	echo $this->Form->input('comments',array('div'=>'formfield'));  ?>
+	echo $this->Form->input('comments',array('div'=>'formfield','type'=>'textarea','rows' => 3, 'cols' => 35));  ?>
 	<p>
 		<b>Survey Data : </b>
 	</p>
@@ -53,7 +52,7 @@
 			</td>
 			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $orderOptions))?>
 			</td>
-			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'frequency',array('label' => ''))?>
+			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'frequency',array('type' =>'number','label' => ''))?>
 			</td>
 		</tr>
 
@@ -63,5 +62,4 @@
 
 <br>
 <?php echo $this->Form->end('Submit Arthropod Data',array('div'=>'submit')); ?>
-
 </html>

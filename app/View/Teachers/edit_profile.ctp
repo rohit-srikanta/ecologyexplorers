@@ -1,8 +1,8 @@
 <html>
 
-<br>
-    <?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
-    <br>
+<div>
+		<?php echo $this->element('links'); ?>
+</div>
 <br>
 <br>
         <?php echo $this->Form->create('Teacher', array('class'=>'form'));    

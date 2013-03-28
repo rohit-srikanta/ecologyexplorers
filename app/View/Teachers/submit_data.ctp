@@ -4,15 +4,21 @@
 <br>
 <br>
 <body>
-	<br>
-	<?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
-
-	<br>
-	<br>
+<div>
+		<?php echo $this->element('links'); ?>
+</div>
 	<?php echo $this->Form->create('SubmitData', array('class'=>'form'));    
 	echo $this->Form->input('protocol',array('div'=>'formfield','options' => $habitatTypeOptions));
 	echo $this->Form->input('site',array('div'=>'formfield','options' => $siteIDOptions));
 	echo $this->Form->input('class',array('div'=>'formfield','options' => $classIDOptions));
     echo $this->Form->end('Submit'); ?>
+
+	<br>
+	<?php echo $this->Html->link('Create Site',  array('controller' => 'sites', 'action' => 'createSite')); ?>
+	<br>
+
+	<br>
+	<?php echo $this->Html->link('Create Class',  array('controller' => 'teachersclass', 'action' => 'createClass')); ?>
+	<br>
 </body>
 </html>

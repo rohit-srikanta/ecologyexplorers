@@ -2,10 +2,9 @@
 <head>
 </head>
 
-<br>
-<?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
-<br>
-
+<div>
+		<?php echo $this->element('links'); ?>
+</div>
 <?php echo $this->Form->create('Habitat',array('class'=>'form'));   ?>
 <legend class="formfield">
 	<b>Habitat Details</b>

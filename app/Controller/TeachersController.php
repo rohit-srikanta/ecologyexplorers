@@ -47,6 +47,7 @@ class TeachersController extends AppController {
 					//Writing the user information into the session variable and redirecting to the home page.
 					$this->Session->setFlash('Login Successful');
 					$this->Session->write('User', $user);
+					$this->Session->write('Username', $user['Teacher']['name']);
 					$this->Session->write('UserType',$user['Teacher']['type']);
 					$this->redirect(array(
 							'action' => 'index'));
@@ -73,7 +74,7 @@ class TeachersController extends AppController {
 	}
 
 	//Method that redirects to the home page of the techer model.
-	public function back()
+	public function home()
 	{
 		$this->redirect(array('action' => 'index'));
 	}

@@ -1,5 +1,4 @@
 <html>
-
 <h2>Welcome to the Ecology Explorers Data Center!</h2>
 <br>
 <br><body>

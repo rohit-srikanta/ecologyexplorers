@@ -193,7 +193,7 @@ table td.actions a {
 	padding:2px 5px;
 }
 /** containers **/
-div.form,
+div.form
 div.index,
 div.view {
 	float:right;
@@ -215,6 +215,25 @@ div.logout {
 	padding-left: 60px;
 }
 
+div.topright{
+    display:block;
+
+    /*set the div in the top right corner*/
+    position:absolute;
+    top:200;
+    right:0;
+    width:150px;
+    
+ }
+ 
+ div.topleft{
+    display:block;
+    position:absolute;
+    top:200;
+    left:0;
+    width:150px;
+    
+ }
 .form{
     font-family: Verdana;    
     font-size:1em;
@@ -240,26 +259,20 @@ div.logout {
 }
  
 .formfield{
-    width:80em;
+    width:60em;
     padding:5px;
 }
 
-.formfield_school{
-    width:80em;
-    padding:5px;
-}
- 
 .formfield label{
     display:block;
     float:left;
-    width:12em;
-    padding:1px;
+    width:15em;
+    padding:2px;
     text-align:right;
 }
  
 .formfield input{
     padding:0.15em;
-    width:14em;
     border:1px solid #ddd;
     background:#ffffff;
      
@@ -271,8 +284,7 @@ div.logout {
 }
  
  .formfield  select{
- padding:0.15em;
-    width:9em;
+ 	padding:0.2em;
     border:1px solid #ddd;
     background:#ffffff;
      
@@ -283,19 +295,7 @@ div.logout {
     -khtml-border-radius:0.4em;
  }
  
- .formfield_school select{
-    padding:0.15em;
-    width:15em;
-    border:1px solid #ddd;
-    background:#ffffff;
-     
-    font-family: Verdana;    
-    font-size:1em;
-     
-    -moz-border-radius:0.4em;
-    -khtml-border-radius:0.4em;
- }
- 
+
 .formfield input:hover, input:focus {
     border-color:#5555c5;
     background:#f6f6f6;

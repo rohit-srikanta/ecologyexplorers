@@ -52,7 +52,14 @@
 </head>
 
 <br>
-<?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
+<div class="topright">
+	<?php echo $this->Html->link($this->Session->read('Username'),array('controller' => 'teachers', 'action' => 'home')); ?>
+</div>
+<div class="topleft">
+	<?php 
+	echo $this->Html->link('<< Back','javascript:history.back(1);');?>
+	</div>
+<br>
 <br>
 <?php echo $this->Form->create('Site',array('class'=>'form','id' => 'createSite'));   ?>
 

@@ -60,7 +60,7 @@ class HabitatsController extends AppController {
 			$this->request->data['Habitat']['id'] = $habitat['Habitat']['id'];
 			$this->request->data['Habitat']['type'] = $habitat['Habitat']['type'];
 			$this->request->data['Habitat']['school_id'] = $habitat['Habitat']['school_id'];
-			$habitatId = $habitat['Habitat']['id'];;
+			$habitatId = $habitat['Habitat']['id'];
 
 			if ($this->Habitat->createHabitat($this->request->data['Habitat'],$param[1]))
 			{

@@ -8,6 +8,7 @@ App::uses('Security','Utitlity');
 */
 class Teacher extends AppModel {
 
+	
 	/**
 	 * Validation rules
 	 *
@@ -60,6 +61,8 @@ class Teacher extends AppModel {
 		{
 			if('P' != $user['Teacher']['type'])
 			{
+				$this->id = $user['Teacher']['id'];
+				$this->saveField('last_login', date('Y-m-d H:i:s'));
 				return $user;
 			}
 			else
@@ -94,6 +97,8 @@ class Teacher extends AppModel {
 			return false;
 		$this->create();
 		$fields['Teacher']['password'] = Security::hash($fields['Teacher']['password']);
+		$fields['Teacher']['date_created'] = date('Y-m-d H:i:s');
+
 
 		if($this->save($fields))
 			return true;
@@ -120,7 +125,6 @@ class Teacher extends AppModel {
 	{
 		$conditions = array("Teacher.type" => "P");
 		$query = $this->find('all', array('conditions' => $conditions));
-
 		return($this->associateSchoolNames($query));
 	}
 
@@ -134,8 +138,11 @@ class Teacher extends AppModel {
 
 	public function associateSchoolNames($Userlist)
 	{
-		if($Userlist ==null)
+
+		if($Userlist == null)
+		{
 			return false;
+		}
 
 		$justschoolNames = $this->School->find('list', array(
 				'fields' => array('School.school_Name')));

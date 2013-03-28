@@ -1,9 +1,8 @@
 <html>
 
-<br>
-<br>
-<?php echo $this->Html->link('Home',array('controller' => 'teachers', 'action' => 'back')); ?>
-<br>
+<div>
+		<?php echo $this->element('links'); ?>
+</div>
 <br>
 <?php if('A' == $this->Session->read('UserType'))
 	{ ?>
