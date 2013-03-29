@@ -65,7 +65,11 @@ class HabitatsController extends AppController {
 			if ($this->Habitat->createHabitat($this->request->data['Habitat'],$param[1]))
 			{
 				$this->Session->setFlash('Habitat Details updated.');
-				$this->redirect(array('controller'=>'arthroSamples','action' => 'arthropodData',$param[1],$param[2],$habitatId));
+				
+				if($habitat['Habitat']['type'] == 'AR')
+					$this->redirect(array('controller'=>'arthroSamples','action' => 'arthropodData',$param[1],$param[2],$habitatId));
+				else if($habitat['Habitat']['type'] == 'BI')
+					$this->redirect(array('controller'=>'birdSamples','action' => 'birdData',$param[1],$param[2],$habitatId));
 			}
 			else
 			{

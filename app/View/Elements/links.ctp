@@ -1,7 +1,11 @@
 <br>
 <div class="topright">
 	<?php echo $this->Html->link($this->Session->read('Username'),array('controller' => 'teachers', 'action' => 'home')); ?>
-	<?php echo $this->Html->link('Logout',array('controller' => 'teachers', 'action' => 'logout')); ?>
+	<?php if($this->Session->check('User'))
+		{
+			echo $this->Form->postLink('Logout', array('controller' => 'teachers','action' => 'logout'));
+		}
+?>
 </div>
 <div class="topleft">
 	<?php 

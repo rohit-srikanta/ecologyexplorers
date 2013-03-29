@@ -259,8 +259,14 @@ div.topright{
 }
  
 .formfield{
-    width:60em;
+    width:50em;
     padding:5px;
+}
+
+.formfield legend{
+    color: #026475;
+    font-family: Verdana;    
+    font-size:1.2em;
 }
 
 .formfield label{
@@ -269,6 +275,7 @@ div.topright{
     width:15em;
     padding:2px;
     text-align:right;
+    font-family: Verdana;   
 }
  
 .formfield input{
@@ -287,7 +294,7 @@ div.topright{
  	padding:0.2em;
     border:1px solid #ddd;
     background:#ffffff;
-     
+    
     font-family: Verdana;    
     font-size:1em;
      
@@ -295,6 +302,15 @@ div.topright{
     -khtml-border-radius:0.4em;
  }
  
+.formfield table{
+    font-family: Verdana;    
+    font-size:1em;
+}
+
+.formfield td{
+    font-family: Verdana;    
+    font-size:1em;
+}
 
 .formfield input:hover, input:focus {
     border-color:#5555c5;
