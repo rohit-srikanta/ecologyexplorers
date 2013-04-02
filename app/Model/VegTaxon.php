@@ -1,24 +1,24 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * BirdTaxon Model
+ * VegTaxon Model
  *
  */
-class BirdTaxon extends AppModel {
+class VegTaxon extends AppModel {
 
 /**
  * Use table
  *
  * @var mixed False or table name
  */
-	public $useTable = 'bird_taxon';
+	public $useTable = 'veg_taxon';
 	
-	public function getBirdList()
+	public function getOrderList()
 	{
 		$taxon = $this->find('list', array(
 				'fields' => array(
-						'BirdTaxon.id',
-						'BirdTaxon.common_name')));
+						'VegTaxon.id',
+						'VegTaxon.common_name')));
 		return $taxon;
 	}
 

@@ -148,7 +148,7 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
 </legend>
 
 <div class="formfield">
-	<?php echo $this->Form->input('Habitat.scrub_cover',array('label' => '% Shrub Cover','options' => $percentOptions,'div'=>'formfield')); ?>
+	<?php echo $this->Form->input('Habitat.shrubcover',array('label' => '% Shrub Cover','options' => $percentOptions,'div'=>'formfield')); ?>
 </div>
 
 <legend class="formfield">

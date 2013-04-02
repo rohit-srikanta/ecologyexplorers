@@ -11,8 +11,7 @@ class TeachersClassController extends AppController {
 		$user = $this->Session->read('User');
 		$userDetails['Teachersclass']['school'] = $user['Teacher']['school'];
 
-		$this->loadModel('School');
-		$this->set('schooloptions', $this->School->schoolWithID($user['Teacher']['school']));
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school']));
 
 		if ($this->request->is('post') || $this->request->is('put'))
 		{

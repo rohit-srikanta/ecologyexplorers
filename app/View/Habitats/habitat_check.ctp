@@ -53,7 +53,7 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
 </legend>
 
 <div class="formfield">
-	<?php echo $this->Form->input('Habitat.scrub_cover',array('label' => '% Shrub Cover','options' => $percentOptions,'div'=>'formfield')); ?>
+	<?php echo $this->Form->input('Habitat.shrubcover',array('label' => '% Shrub Cover','options' => $percentOptions,'div'=>'formfield')); ?>
 </div>
 
 <legend class="formfield">
@@ -68,5 +68,5 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
  echo $this->Form->input('Habitat.water',array('label'=> '% Water','options' => $percentOptions,'div'=>'formfield'));  ?>
 </div>
 
-<?php echo $this->Form->end('Update Habitat',array('div'=>'submit')); ?>
+<?php echo $this->Form->end('Update Habitat/Continue Entering data',array('div'=>'submit')); ?>
 </html>

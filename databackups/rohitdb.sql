@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 28, 2013 at 12:14 AM
+-- Generation Time: Apr 02, 2013 at 12:38 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `arthro_samples` (
   PRIMARY KEY (`id`),
   KEY `site_id` (`site_id`),
   KEY `habitat_id` (`habitat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
 
 --
 -- Dumping data for table `arthro_samples`
@@ -46,7 +46,8 @@ CREATE TABLE IF NOT EXISTS `arthro_samples` (
 INSERT INTO `arthro_samples` (`id`, `site_id`, `habitat_id`, `collection_date`, `comments`, `date_entered`, `observer`) VALUES
 (54, 50, 40, '2013-03-26', 'Recording from site Arthro', '2013-03-26 22:02:31', 'Rohit'),
 (55, 50, 40, '2013-03-26', 'asd', '2013-03-26 22:40:06', 'Ryan'),
-(56, 50, 40, '2013-03-28', 'qwe', '2013-03-28 00:08:29', 'ryan');
+(56, 50, 40, '2013-03-28', 'qwe', '2013-03-28 00:08:29', 'ryan'),
+(57, 50, 40, '2013-03-31', '', '2013-04-01 20:39:17', 'test');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `arthro_specimens` (
   PRIMARY KEY (`id`),
   KEY `taxon` (`taxon`),
   KEY `sample_id` (`sample_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `arthro_specimens`
@@ -74,7 +75,9 @@ INSERT INTO `arthro_specimens` (`id`, `trap_no`, `taxon`, `frequency`, `sample_i
 (2, '13', 2, 3, 54),
 (3, '1', 2, 3, 55),
 (4, '2', 3, 4, 55),
-(5, '1', 1, 123, 56);
+(5, '1', 1, 123, 56),
+(6, '1', 2, 10, 57),
+(7, '2', 1, 10, 57);
 
 -- --------------------------------------------------------
 
@@ -115,14 +118,22 @@ CREATE TABLE IF NOT EXISTS `bird_samples` (
   `time_start` time DEFAULT NULL,
   `time_end` time DEFAULT NULL,
   `air_temp` int(4) DEFAULT NULL,
-  `temp_units` varchar(1) DEFAULT NULL,
-  `cloud_cover` int(1) DEFAULT NULL,
+  `cloud_cover` int(11) NOT NULL,
   `comments` varchar(250) DEFAULT NULL,
   `date_entered` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `site_id` (`site_id`),
-  KEY `habitat_id` (`habitat_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `habitat_id` (`habitat_id`),
+  KEY `cloud_cover` (`cloud_cover`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `bird_samples`
+--
+
+INSERT INTO `bird_samples` (`id`, `site_id`, `habitat_id`, `observer`, `collection_date`, `time_start`, `time_end`, `air_temp`, `cloud_cover`, `comments`, `date_entered`) VALUES
+(1, 51, 41, 'Rohit', '2013-03-31', '05:04:00', '10:04:00', 45, 1, 'sd', '2013-04-01 20:04:53'),
+(2, 51, 41, '321', '2013-03-31', '03:39:00', '13:39:00', 89, 2, '55', '2013-04-01 20:41:00');
 
 -- --------------------------------------------------------
 
@@ -133,12 +144,22 @@ CREATE TABLE IF NOT EXISTS `bird_samples` (
 CREATE TABLE IF NOT EXISTS `bird_specimens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sample_id` int(11) NOT NULL,
-  `species_id` int(11) DEFAULT NULL,
+  `species_id` int(11) NOT NULL,
   `frequency` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `species_id` (`species_id`),
   KEY `sample_id` (`sample_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `bird_specimens`
+--
+
+INSERT INTO `bird_specimens` (`id`, `sample_id`, `species_id`, `frequency`) VALUES
+(1, 1, 3, 32),
+(2, 1, 6, 6),
+(3, 2, 2, 10),
+(4, 2, 1, 213);
 
 -- --------------------------------------------------------
 
@@ -151,6 +172,7 @@ CREATE TABLE IF NOT EXISTS `bird_taxon` (
   `species_id` varchar(4) NOT NULL,
   `tsn` int(10) DEFAULT NULL,
   `common_name` varchar(100) DEFAULT NULL,
+  `date_entered` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `species_id` (`species_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
@@ -159,13 +181,13 @@ CREATE TABLE IF NOT EXISTS `bird_taxon` (
 -- Dumping data for table `bird_taxon`
 --
 
-INSERT INTO `bird_taxon` (`id`, `species_id`, `tsn`, `common_name`) VALUES
-(1, 'ABTO', NULL, 'Abert''s Towhee'),
-(2, 'BNST', NULL, 'Black-necked Stilt'),
-(3, 'HAGS', NULL, 'Harris'' Antelope Ground Squirrel'),
-(4, 'NOFL', NULL, 'Northern Flicker'),
-(5, 'UNWO', NULL, 'Unidentified Woodpecker'),
-(6, 'YWAR', NULL, 'Yellow Warbler');
+INSERT INTO `bird_taxon` (`id`, `species_id`, `tsn`, `common_name`, `date_entered`) VALUES
+(1, 'ABTO', NULL, 'Abert''s Towhee', NULL),
+(2, 'BNST', NULL, 'Black-necked Stilt', NULL),
+(3, 'HAGS', NULL, 'Harris'' Antelope Ground Squirrel', NULL),
+(4, 'NOFL', NULL, 'Northern Flicker', NULL),
+(5, 'UNWO', NULL, 'Unidentified Woodpecker', NULL),
+(6, 'YWAR', NULL, 'Yellow Warbler', NULL);
 
 -- --------------------------------------------------------
 
@@ -177,7 +199,16 @@ CREATE TABLE IF NOT EXISTS `cloud_cover` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_cover_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `cloud_cover`
+--
+
+INSERT INTO `cloud_cover` (`id`, `cloud_cover_name`) VALUES
+(1, 'No Cloud Cover'),
+(2, 'Scattered Clouds'),
+(3, 'Overcast Sky');
 
 -- --------------------------------------------------------
 
@@ -202,21 +233,23 @@ CREATE TABLE IF NOT EXISTS `habitats` (
   `percent_observed` tinyint(4) DEFAULT NULL,
   `radius` smallint(6) DEFAULT NULL,
   `date_entered` datetime DEFAULT NULL,
-  `site_id` int(11) DEFAULT NULL,
-  `school_id` int(11) DEFAULT NULL,
+  `site_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `school_id` (`school_id`),
   KEY `site_id` (`site_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `habitats`
 --
 
 INSERT INTO `habitats` (`id`, `type`, `recording_date`, `area`, `shrubcover`, `tree_canopy`, `lawn`, `other`, `paved_building`, `gravel_soil`, `water`, `num_traps`, `trap_arrange`, `percent_observed`, `radius`, `date_entered`, `site_id`, `school_id`) VALUES
-(40, 'AR', '2013-02-26', 200, NULL, 10, 10, 30, 10, 10, 10, 10, 'Line', NULL, NULL, '2013-03-28 00:07:52', 50, 1),
-(41, 'BI', '2013-02-26', NULL, NULL, 20, 30, 10, 10, 10, 0, NULL, NULL, 10, 10, '2013-03-26 22:17:27', 51, 1),
-(42, 'AR', '2013-02-26', 199, NULL, 20, 10, 10, 10, 50, 0, 10, 'Line', NULL, NULL, '2013-03-26 22:19:27', 52, 2);
+(40, 'AR', '2013-02-26', 200, 0, 10, 10, 30, 10, 0, 10, 10, 'Line', NULL, NULL, '2013-04-01 21:45:14', 50, 1),
+(41, 'BI', '2013-02-26', NULL, 0, 20, 30, 10, 10, 10, 0, NULL, NULL, 10, 10, '2013-04-01 20:39:50', 51, 1),
+(42, 'AR', '2013-02-26', 199, NULL, 20, 10, 10, 10, 50, 0, 10, 'Line', NULL, NULL, '2013-03-26 22:19:27', 52, 2),
+(43, 'BI', '2013-03-28', NULL, NULL, 20, 10, 20, 10, 10, 10, NULL, NULL, 20, 10, '2013-03-29 00:21:04', 53, 1),
+(44, 'VE', '2013-04-01', 200, 0, 20, 30, 10, 10, 10, 20, NULL, NULL, NULL, NULL, '2013-04-01 20:36:54', 54, 1);
 
 -- --------------------------------------------------------
 
@@ -257,7 +290,7 @@ INSERT INTO `schools` (`id`, `school_id`, `school_name`, `address`, `zipcode`, `
 CREATE TABLE IF NOT EXISTS `sites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `site_id` varchar(50) NOT NULL,
-  `school` int(11) DEFAULT NULL,
+  `school` int(11) NOT NULL,
   `site_name` varchar(40) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
@@ -268,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `sites` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `site_id` (`site_id`),
   KEY `school` (`school`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
 
 --
 -- Dumping data for table `sites`
@@ -277,7 +310,9 @@ CREATE TABLE IF NOT EXISTS `sites` (
 INSERT INTO `sites` (`id`, `site_id`, `school`, `site_name`, `address`, `description`, `city`, `zipcode`, `date_entered`, `location`) VALUES
 (50, 'Artho Site', 1, 'Arthropod Site at ASU', 'ASu', 'Near MU', 'Tempe', '85281', '2013-03-26 22:01:36', 'Tempe'),
 (51, 'Bird Site', 1, 'Bird Site at ASU', 'ASu', 'ASu', 'Tempe', '85281', '2013-03-26 22:17:27', 'ASU'),
-(52, 'Arthro', 2, 'Arthropod Site at USC', 'USC', 'USC', 'LA', '84785', '2013-03-26 22:18:58', 'USC');
+(52, 'Arthro', 2, 'Arthropod Site at USC', 'USC', 'USC', 'LA', '84785', '2013-03-26 22:18:58', 'USC'),
+(53, 'Birds', 1, 'Birds Site', 'asd', 'asd', 'tempe', '85281', '2013-03-28 22:50:42', 'asd'),
+(54, 'Veg Site', 1, 'Vegetation Site at ASU', 'asd', 'asd', 'tempe', '85281', '2013-04-01 20:36:32', 'asd');
 
 -- --------------------------------------------------------
 
@@ -305,9 +340,10 @@ CREATE TABLE IF NOT EXISTS `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `email_address`, `password`, `type`, `name`, `school`, `date_created`, `last_login`) VALUES
-(4, 'rohit@asu.edu', '83d5e1e49bd5f0ebbf6c9ba40416057fac1b5d76', 'A', 'Rohit Srikanta', 1, '2013-03-06 10:18:36', '2013-03-28 00:09:10'),
+(4, 'rohit@asu.edu', '83d5e1e49bd5f0ebbf6c9ba40416057fac1b5d76', 'A', 'Rohit Srikanta', 1, '2013-03-06 10:18:36', '2013-04-01 23:33:33'),
 (15, 'temp@asu.edu', '5ef3f435d713ec7e69ee08f93f42a322ce180627', 'T', 'temp', 1, '2013-03-11 10:17:48', '2013-03-27 03:23:20'),
-(17, 'ryan@asu.edu', 'ea3cd978650417470535f3a4725b6b5042a6ab59', 'T', 'Ryan', 1, '2013-03-17 06:17:14', '2013-03-28 00:07:19');
+(17, 'ryan@asu.edu', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'T', 'Ryan1', 1, '2013-03-17 06:17:14', '2013-03-28 22:04:26'),
+(18, 'tempeee@asu.edu', 'd969831eb8a99cff8c02e681f43289e5d3d69664', 'T', 'tempeee', 1, '2013-03-29 00:08:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -320,12 +356,12 @@ CREATE TABLE IF NOT EXISTS `teachers_classes` (
   `class_name` varchar(50) DEFAULT NULL,
   `grade` varchar(10) DEFAULT NULL,
   `date_entered` datetime DEFAULT NULL,
-  `teacher_id` int(11) DEFAULT NULL,
-  `school` int(11) DEFAULT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `school` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `school` (`school`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `teachers_classes`
@@ -336,7 +372,91 @@ INSERT INTO `teachers_classes` (`id`, `class_name`, `grade`, `date_entered`, `te
 (3, 'grade 12', 'grade', '2013-03-25 22:49:33', 4, 1),
 (6, '13', '13', '2013-03-25 23:17:29', 4, 1),
 (7, 'Temp Class', '7', '2013-03-26 22:16:26', 15, 1),
-(8, 'Ryans Class', '8', '2013-03-28 00:07:38', 17, 1);
+(8, 'Ryans Class', '8', '2013-03-28 00:07:38', 17, 1),
+(9, 'Class 8', '8', '2013-04-01 20:38:03', 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `veg_samples`
+--
+
+CREATE TABLE IF NOT EXISTS `veg_samples` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tree_count` int(10) DEFAULT NULL,
+  `cactus_count` int(10) DEFAULT NULL,
+  `collection_date` date DEFAULT NULL,
+  `observer` varchar(255) DEFAULT NULL,
+  `shrub_count` int(10) DEFAULT NULL,
+  `date_entered` datetime DEFAULT NULL,
+  `site_id` int(11) NOT NULL,
+  `habitat_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `site_id` (`site_id`),
+  KEY `habitat_id` (`habitat_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `veg_samples`
+--
+
+INSERT INTO `veg_samples` (`id`, `tree_count`, `cactus_count`, `collection_date`, `observer`, `shrub_count`, `date_entered`, `site_id`, `habitat_id`) VALUES
+(1, 10, 2, '2013-04-01', 'asd', 2, '2013-04-01 23:55:40', 54, 44);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `veg_specimens`
+--
+
+CREATE TABLE IF NOT EXISTS `veg_specimens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `veg_no` varchar(50) NOT NULL,
+  `sample_id` int(11) NOT NULL,
+  `plant_type` varchar(6) DEFAULT NULL,
+  `species_id` int(11) NOT NULL,
+  `circumference` double(15,5) DEFAULT NULL,
+  `canopy` double(15,5) DEFAULT NULL,
+  `height` double(15,5) DEFAULT NULL,
+  `comments` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `species_id` (`species_id`),
+  KEY `sample_id` (`sample_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `veg_specimens`
+--
+
+INSERT INTO `veg_specimens` (`id`, `veg_no`, `sample_id`, `plant_type`, `species_id`, `circumference`, `canopy`, `height`, `comments`) VALUES
+(1, '123', 1, 'Cactus', 3, 1.00000, 1.00000, 1.00000, '32asd'),
+(2, '123', 1, 'Shrub', 2, 4.00000, 7.00000, 8.00000, '92');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `veg_taxon`
+--
+
+CREATE TABLE IF NOT EXISTS `veg_taxon` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `species_id` varchar(6) NOT NULL,
+  `type` varchar(10) DEFAULT NULL,
+  `common_name` varchar(100) DEFAULT NULL,
+  `date_entered` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `species_id` (`species_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `veg_taxon`
+--
+
+INSERT INTO `veg_taxon` (`id`, `species_id`, `type`, `common_name`, `date_entered`) VALUES
+(1, 'Acagre', 'Tree', 'Cat claw acacia', '2013-04-01 15:41:57'),
+(2, 'AloWri', 'Shrub', 'Aloysia wrightii', '2013-04-01 15:41:57'),
+(3, 'AmbAmb', 'Shrub', 'Giant bursage', '2013-04-01 15:41:57'),
+(4, 'AmbDel', 'Tree', 'Triangle leaf bursage', '2013-04-01 15:41:57');
 
 --
 -- Constraints for dumped tables
@@ -361,7 +481,8 @@ ALTER TABLE `arthro_specimens`
 --
 ALTER TABLE `bird_samples`
   ADD CONSTRAINT `bird_samples_ibfk_1` FOREIGN KEY (`site_id`) REFERENCES `sites` (`id`),
-  ADD CONSTRAINT `bird_samples_ibfk_2` FOREIGN KEY (`habitat_id`) REFERENCES `habitats` (`id`);
+  ADD CONSTRAINT `bird_samples_ibfk_2` FOREIGN KEY (`habitat_id`) REFERENCES `habitats` (`id`),
+  ADD CONSTRAINT `bird_samples_ibfk_3` FOREIGN KEY (`cloud_cover`) REFERENCES `cloud_cover` (`id`);
 
 --
 -- Constraints for table `bird_specimens`
@@ -395,6 +516,20 @@ ALTER TABLE `teachers`
 ALTER TABLE `teachers_classes`
   ADD CONSTRAINT `teachers_classes_ibfk_1` FOREIGN KEY (`school`) REFERENCES `schools` (`id`),
   ADD CONSTRAINT `teachers_classes_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`);
+
+--
+-- Constraints for table `veg_samples`
+--
+ALTER TABLE `veg_samples`
+  ADD CONSTRAINT `veg_samples_ibfk_1` FOREIGN KEY (`site_id`) REFERENCES `sites` (`id`),
+  ADD CONSTRAINT `veg_samples_ibfk_2` FOREIGN KEY (`habitat_id`) REFERENCES `habitats` (`id`);
+
+--
+-- Constraints for table `veg_specimens`
+--
+ALTER TABLE `veg_specimens`
+  ADD CONSTRAINT `veg_specimens_ibfk_1` FOREIGN KEY (`species_id`) REFERENCES `veg_taxon` (`id`),
+  ADD CONSTRAINT `veg_specimens_ibfk_2` FOREIGN KEY (`sample_id`) REFERENCES `veg_samples` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

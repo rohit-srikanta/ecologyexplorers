@@ -83,10 +83,8 @@ class TeachersController extends AppController {
 	public function register()
 	{
 		//Loading the school model so that the school dropdown can be populated.
-		$this->loadModel('School');
-		$schooloptions = $this->School->loadSchools();
-		$this->set('schooloptions', $schooloptions);
-
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolOptions());
+		
 		if ($this->request->is('post'))
 		{
 
@@ -169,8 +167,7 @@ class TeachersController extends AppController {
 			throw new NotFoundException(__('Invalid Teacher'));
 		}
 
-		$this->loadModel('School');
-		$this->set('schooloptions', $this->School->schoolOptions());
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolOptions());
 
 		$userTypeOptions = array(array('name' => 'Teacher','value' => 'T'),array('name' => 'Admin','value' => 'A'),array('name' => 'Pending','value' => 'P'),);
 		$this->set('userTypeOptions', $userTypeOptions);
@@ -243,8 +240,7 @@ class TeachersController extends AppController {
 
 	public function editProfile()
 	{
-		$this->loadModel('School');
-		$this->set('schooloptions', $this->School->schoolOptions());
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolOptions());
 
 		$user = $this->Session->read('User');
 		$oldEmail = $user['Teacher']['email_address'];

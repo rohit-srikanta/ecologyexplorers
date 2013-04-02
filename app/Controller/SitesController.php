@@ -6,7 +6,7 @@ App::uses('AppController', 'Controller');
 */
 class SitesController extends AppController {
 
-	var $uses = array('Site', 'Habitat','School');
+	var $uses = array('Site','Habitat');
 	public $components = array('RequestHandler');
 	public $helpers = array('Js');
 	
@@ -15,8 +15,7 @@ class SitesController extends AppController {
 		$user = $this->Session->read('User');
 		$userDetails['Site']['school'] = $user['Teacher']['school'];
 
-		$this->loadModel('School');
-		$this->set('schooloptions', $this->School->schoolWithID($user['Teacher']['school']));
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school']));
 		
 		$habitatTypeOptions = array(array('name' => 'Arthropods','value' => 'AR'),array('name' => 'Birds','value' => 'BI'),array('name' => 'Bruchids','value' => 'BR'),array('name' => 'Vegetation','value' => 'VE'));
 		$this->set('habitatTypeOptions', $habitatTypeOptions);

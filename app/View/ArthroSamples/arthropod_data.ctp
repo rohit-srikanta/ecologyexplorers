@@ -32,7 +32,7 @@
 	echo $this->Form->input('Teacher',array('value' => $teacherName,'disabled' => 'disabled','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('site_name',array('disabled' => 'disabled','div'=>'formfield','options' => $siteOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('class_name',array('disabled' => 'disabled','div'=>'formfield','options' => $classOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
-	echo $this->Form->input('collection_date',array('default' => $this->Time->format('Y-m-d', date('Y-m-d'), null, 'PDT'),'div'=>'formfield'));
+	echo $this->Form->input('collection_date',array('div'=>'formfield'));
 	echo $this->Form->input('observer',array('label' =>'Observer\'s Name', 'div'=>'formfield'));
 	echo $this->Form->input('comments',array('div'=>'formfield','type'=>'textarea','rows' => 3, 'cols' => 35));  ?>
 	<br>
@@ -63,6 +63,6 @@
 	</table>
 </div>
 
-<br>
+<p><b>Please double check your entries before you click Submit.</b></p>
 <?php echo $this->Form->end('Submit Arthropod Data',array('div'=>'submit')); ?>
 </html>

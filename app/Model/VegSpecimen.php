@@ -1,15 +1,10 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * BirdSpecimen Model
+ * VegSpecimen Model
  *
  */
-class BirdSpecimen extends AppModel {
-	
-	public $validate = array(
-			'frequency'  => array(
-					'rule' => 'notEmpty')
-	);
+class VegSpecimen extends AppModel {
 	
 	public function saveFields($fields)
 	{

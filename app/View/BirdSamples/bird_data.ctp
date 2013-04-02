@@ -27,14 +27,14 @@
 	echo $this->Form->input('Teacher',array('value' => $teacherName,'disabled' => 'disabled','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('site_name',array('disabled' => 'disabled','div'=>'formfield','options' => $siteOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('class_name',array('disabled' => 'disabled','div'=>'formfield','options' => $classOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
-	echo $this->Form->input('collection_date',array('default' => $this->Time->format('Y-m-d', date('Y-m-d'), null, 'PDT'),'label'=> 'Date of Entry','div'=>'formfield'));
+	echo $this->Form->input('collection_date',array('label'=> 'Date of Entry','div'=>'formfield'));
 	echo $this->Form->input('observer',array('label' =>'Observer\'s Name', 'div'=>'formfield'));
 	echo $this->Form->input('comments',array('div'=>'formfield','type'=>'textarea','rows' => 3, 'cols' => 35));  ?>
 
 	<p>
 		<b>Weather Report : </b>
 
-		<?php echo $this->Form->input('cloud_cover',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
+		<?php echo $this->Form->input('cloud_cover',array('div'=>'formfield','empty' => 'Select','options' => $cloudOptions,'error' => array('wrap' => 'div','class' => 'formerror'))); 
 		echo $this->Form->input('air_temp',array('label'=>'Temperature', 'type' => 'number','interval' => 5,'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 		echo $this->Form->input('temp_units',array('label'=>'Temperature Unit', 'options' => array('1' =>'Celsius', '2'=>'Farenheit'),'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 		echo $this->Form->input('time_start',array('default' => $this->Time->format('H:i:s', date('H:i:s'), null, 'PDT'),'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
@@ -57,7 +57,7 @@
 		<?php for($i=0;$i<10;$i++) {?>
 
 		<tr>
-			<td><?php echo $this->Form->input('BirdSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $orderOptions))?>
+			<td><?php echo $this->Form->input('BirdSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $birdOptions))?>
 			</td>
 			<td><?php echo $this->Form->input('BirdSpecimen'.$i.'frequency',array('type' => 'number','label' => ''))?>
 			</td>
@@ -68,6 +68,6 @@
 	</table>
 </div>
 
-<br>
+<p><b>Please double check your entries before you click Submit.</b></p>
 <?php echo $this->Form->end('Submit Bird Data',array('div'=>'submit')); ?>
 </html>
