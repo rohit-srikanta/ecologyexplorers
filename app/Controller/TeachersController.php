@@ -293,7 +293,14 @@ class TeachersController extends AppController {
 
 		if ($this->request->is('post'))
 		{
-			$this->redirect(array('controller' => 'habitats','action' => 'habitatCheck',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
+			if($this->request->data['SubmitData']['protocol'] == 'BR')
+			{
+				$this->redirect(array('controller' => 'bruchidsamples','action' => 'bruchidData',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
+			}
+			else
+			{
+				$this->redirect(array('controller' => 'habitats','action' => 'habitatCheck',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
+			}
 		}
 	}
 

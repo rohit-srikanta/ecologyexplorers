@@ -8,8 +8,8 @@ App::uses('AppController', 'Controller');
 class VegSamplesController extends AppController {
 	
 	public function index() {
-		$this->ArthroSample->recursive = 0;
-		$this->set('arthroSamples', $this->paginate());
+		$this->VegSample->recursive = 0;
+		$this->set('vegSamples', $this->paginate());
 	}
 	
 	
@@ -43,6 +43,4 @@ class VegSamplesController extends AppController {
 		}
 	
 	}
-
-
 }

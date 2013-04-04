@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 02, 2013 at 12:38 AM
+-- Generation Time: Apr 04, 2013 at 12:25 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `rohitdb`
+-- Database: `rohitdb_1`
 --
 
 -- --------------------------------------------------------
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `arthro_samples` (
   PRIMARY KEY (`id`),
   KEY `site_id` (`site_id`),
   KEY `habitat_id` (`habitat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `arthro_samples`
@@ -47,7 +47,8 @@ INSERT INTO `arthro_samples` (`id`, `site_id`, `habitat_id`, `collection_date`, 
 (54, 50, 40, '2013-03-26', 'Recording from site Arthro', '2013-03-26 22:02:31', 'Rohit'),
 (55, 50, 40, '2013-03-26', 'asd', '2013-03-26 22:40:06', 'Ryan'),
 (56, 50, 40, '2013-03-28', 'qwe', '2013-03-28 00:08:29', 'ryan'),
-(57, 50, 40, '2013-03-31', '', '2013-04-01 20:39:17', 'test');
+(57, 50, 40, '2013-03-31', '', '2013-04-01 20:39:17', 'test'),
+(58, 50, 40, '2013-04-04', 'asd', '2013-04-04 00:10:31', '1232312');
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `arthro_specimens` (
   PRIMARY KEY (`id`),
   KEY `taxon` (`taxon`),
   KEY `sample_id` (`sample_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `arthro_specimens`
@@ -77,7 +78,9 @@ INSERT INTO `arthro_specimens` (`id`, `trap_no`, `taxon`, `frequency`, `sample_i
 (4, '2', 3, 4, 55),
 (5, '1', 1, 123, 56),
 (6, '1', 2, 10, 57),
-(7, '2', 1, 10, 57);
+(7, '2', 1, 10, 57),
+(8, 'asd', 2, 123, 58),
+(9, 'asd', 3, 132, 58);
 
 -- --------------------------------------------------------
 
@@ -125,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `bird_samples` (
   KEY `site_id` (`site_id`),
   KEY `habitat_id` (`habitat_id`),
   KEY `cloud_cover` (`cloud_cover`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `bird_samples`
@@ -133,7 +136,8 @@ CREATE TABLE IF NOT EXISTS `bird_samples` (
 
 INSERT INTO `bird_samples` (`id`, `site_id`, `habitat_id`, `observer`, `collection_date`, `time_start`, `time_end`, `air_temp`, `cloud_cover`, `comments`, `date_entered`) VALUES
 (1, 51, 41, 'Rohit', '2013-03-31', '05:04:00', '10:04:00', 45, 1, 'sd', '2013-04-01 20:04:53'),
-(2, 51, 41, '321', '2013-03-31', '03:39:00', '13:39:00', 89, 2, '55', '2013-04-01 20:41:00');
+(2, 51, 41, '321', '2013-03-31', '03:39:00', '13:39:00', 89, 2, '55', '2013-04-01 20:41:00'),
+(3, 51, 41, 'sad', '2013-04-04', '17:10:00', '17:10:00', 78, 2, 'asd', '2013-04-04 00:10:55');
 
 -- --------------------------------------------------------
 
@@ -149,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `bird_specimens` (
   PRIMARY KEY (`id`),
   KEY `species_id` (`species_id`),
   KEY `sample_id` (`sample_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `bird_specimens`
@@ -159,7 +163,8 @@ INSERT INTO `bird_specimens` (`id`, `sample_id`, `species_id`, `frequency`) VALU
 (1, 1, 3, 32),
 (2, 1, 6, 6),
 (3, 2, 2, 10),
-(4, 2, 1, 213);
+(4, 2, 1, 213),
+(5, 3, 3, 306);
 
 -- --------------------------------------------------------
 
@@ -188,6 +193,67 @@ INSERT INTO `bird_taxon` (`id`, `species_id`, `tsn`, `common_name`, `date_entere
 (4, 'NOFL', NULL, 'Northern Flicker', NULL),
 (5, 'UNWO', NULL, 'Unidentified Woodpecker', NULL),
 (6, 'YWAR', NULL, 'Yellow Warbler', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bruchid_samples`
+--
+
+CREATE TABLE IF NOT EXISTS `bruchid_samples` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `site_type` varchar(20) DEFAULT NULL,
+  `tree_type` varchar(10) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `observer` varchar(255) DEFAULT NULL,
+  `collection_date` date DEFAULT NULL,
+  `date_entered` datetime DEFAULT NULL,
+  `site_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `site_id` (`site_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `bruchid_samples`
+--
+
+INSERT INTO `bruchid_samples` (`id`, `site_type`, `tree_type`, `location`, `observer`, `collection_date`, `date_entered`, `site_id`) VALUES
+(1, 'Urban', 'B', 'asd', 'ad', '2013-04-04', '2013-04-04 00:04:14', 50),
+(2, 'Urban', 'B', 'asd', 'ad', '2013-04-04', '2013-04-04 00:04:57', 50),
+(3, 'Urban', 'B', 'asd', 'ad', '2013-04-04', '2013-04-04 00:07:15', 50),
+(4, 'Urban', 'B', 'asd', 'ad', '2013-04-04', '2013-04-04 00:07:45', 50),
+(5, 'Desert', 'B', 'sadsad', 'asd', '2013-04-04', '2013-04-04 00:09:45', 50),
+(6, 'Urban', 'F', 'asd', 'ad', '2013-04-04', '2013-04-04 00:11:14', 50);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bruchid_specimens`
+--
+
+CREATE TABLE IF NOT EXISTS `bruchid_specimens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tree_no` varchar(10) NOT NULL,
+  `pod_no` varchar(10) NOT NULL,
+  `sample_id` int(11) NOT NULL,
+  `hole_count` int(10) DEFAULT NULL,
+  `seed_count` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sample_id` (`sample_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `bruchid_specimens`
+--
+
+INSERT INTO `bruchid_specimens` (`id`, `tree_no`, `pod_no`, `sample_id`, `hole_count`, `seed_count`) VALUES
+(1, 'a', '1', 4, 3, 3),
+(2, 'a', '4', 4, 5, 5),
+(3, '234', '234', 5, 536, 456),
+(4, 'try', 'sdf', 5, 456, 456),
+(5, 'sdf', 'sdf', 5, 4, 54),
+(6, 's', 'sd', 5, 45, 45),
+(7, 'asd', 'ad', 6, 32, 98);
 
 -- --------------------------------------------------------
 
@@ -340,7 +406,7 @@ CREATE TABLE IF NOT EXISTS `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `email_address`, `password`, `type`, `name`, `school`, `date_created`, `last_login`) VALUES
-(4, 'rohit@asu.edu', '83d5e1e49bd5f0ebbf6c9ba40416057fac1b5d76', 'A', 'Rohit Srikanta', 1, '2013-03-06 10:18:36', '2013-04-01 23:33:33'),
+(4, 'rohit@asu.edu', '83d5e1e49bd5f0ebbf6c9ba40416057fac1b5d76', 'A', 'Rohit Srikanta', 1, '2013-03-06 10:18:36', '2013-04-03 23:35:57'),
 (15, 'temp@asu.edu', '5ef3f435d713ec7e69ee08f93f42a322ce180627', 'T', 'temp', 1, '2013-03-11 10:17:48', '2013-03-27 03:23:20'),
 (17, 'ryan@asu.edu', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'T', 'Ryan1', 1, '2013-03-17 06:17:14', '2013-03-28 22:04:26'),
 (18, 'tempeee@asu.edu', 'd969831eb8a99cff8c02e681f43289e5d3d69664', 'T', 'tempeee', 1, '2013-03-29 00:08:52', NULL);
@@ -394,14 +460,15 @@ CREATE TABLE IF NOT EXISTS `veg_samples` (
   PRIMARY KEY (`id`),
   KEY `site_id` (`site_id`),
   KEY `habitat_id` (`habitat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `veg_samples`
 --
 
 INSERT INTO `veg_samples` (`id`, `tree_count`, `cactus_count`, `collection_date`, `observer`, `shrub_count`, `date_entered`, `site_id`, `habitat_id`) VALUES
-(1, 10, 2, '2013-04-01', 'asd', 2, '2013-04-01 23:55:40', 54, 44);
+(1, 10, 2, '2013-04-01', 'asd', 2, '2013-04-01 23:55:40', 54, 44),
+(2, 1, 1, '2013-04-04', '3', 1, '2013-04-04 00:11:45', 54, 44);
 
 -- --------------------------------------------------------
 
@@ -422,7 +489,7 @@ CREATE TABLE IF NOT EXISTS `veg_specimens` (
   PRIMARY KEY (`id`),
   KEY `species_id` (`species_id`),
   KEY `sample_id` (`sample_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `veg_specimens`
@@ -430,7 +497,10 @@ CREATE TABLE IF NOT EXISTS `veg_specimens` (
 
 INSERT INTO `veg_specimens` (`id`, `veg_no`, `sample_id`, `plant_type`, `species_id`, `circumference`, `canopy`, `height`, `comments`) VALUES
 (1, '123', 1, 'Cactus', 3, 1.00000, 1.00000, 1.00000, '32asd'),
-(2, '123', 1, 'Shrub', 2, 4.00000, 7.00000, 8.00000, '92');
+(2, '123', 1, 'Shrub', 2, 4.00000, 7.00000, 8.00000, '92'),
+(3, '1', 2, 'Shrub', 3, 1123.00000, 123.00000, 123.00000, '213'),
+(4, '1', 2, 'Tree', 3, 213.00000, 213.00000, 213.00000, '213'),
+(5, '1', 2, 'Cactus', 3, 213.00000, 123.00000, 123.00000, '213');
 
 -- --------------------------------------------------------
 
@@ -490,6 +560,18 @@ ALTER TABLE `bird_samples`
 ALTER TABLE `bird_specimens`
   ADD CONSTRAINT `bird_specimens_ibfk_1` FOREIGN KEY (`species_id`) REFERENCES `bird_taxon` (`id`),
   ADD CONSTRAINT `bird_specimens_ibfk_2` FOREIGN KEY (`sample_id`) REFERENCES `bird_samples` (`id`);
+
+--
+-- Constraints for table `bruchid_samples`
+--
+ALTER TABLE `bruchid_samples`
+  ADD CONSTRAINT `bruchid_samples_ibfk_1` FOREIGN KEY (`site_id`) REFERENCES `sites` (`id`);
+
+--
+-- Constraints for table `bruchid_specimens`
+--
+ALTER TABLE `bruchid_specimens`
+  ADD CONSTRAINT `bruchid_specimens_ibfk_1` FOREIGN KEY (`sample_id`) REFERENCES `bruchid_samples` (`id`);
 
 --
 -- Constraints for table `habitats`

@@ -8,8 +8,8 @@ App::uses('AppController', 'Controller');
 class BirdSamplesController extends AppController {
 
 	public function index() {
-		$this->ArthroSample->recursive = 0;
-		$this->set('arthroSamples', $this->paginate());
+		$this->BirdSample->recursive = 0;
+		$this->set('birdSamples', $this->paginate());
 	}
 
 
