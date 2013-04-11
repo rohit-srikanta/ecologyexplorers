@@ -40,7 +40,7 @@ class TeachersControllerTest extends ControllerTestCase {
 						'password' => 'rohit29',
 						'email_address' => 'asdsad@asu.edu',
 						'name' => 'Rohit',
-						'school' => '1'));
+						'school_id' => '1'));
 
 		$result = $this->testAction('/teachers/register',array('data' => $data, 'method' => 'post','return'=>'view'));
 		$this->assertNull($result);
@@ -50,7 +50,7 @@ class TeachersControllerTest extends ControllerTestCase {
 						'password' => 'rohit',
 						'email_address' => 'asdsad@asu.edu',
 						'name' => 'Rohit',
-						'school' => '1'));
+						'school_id' => '1'));
 
 		$result = $this->testAction('/teachers/register',array('data' => $data, 'method' => 'post','return'=>'view'));
 		$this->assertContains('id="TeacherRegisterForm"',$result);

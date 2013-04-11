@@ -13,9 +13,9 @@ class SitesController extends AppController {
 	public function createSite()
 	{
 		$user = $this->Session->read('User');
-		$userDetails['Site']['school'] = $user['Teacher']['school'];
+		$userDetails['Site']['school_id'] = $user['Teacher']['school_id'];
 
-		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school']));
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school_id']));
 		
 		$habitatTypeOptions = array(array('name' => 'Arthropods','value' => 'AR'),array('name' => 'Birds','value' => 'BI'),array('name' => 'Bruchids','value' => 'BR'),array('name' => 'Vegetation','value' => 'VE'));
 		$this->set('habitatTypeOptions', $habitatTypeOptions);

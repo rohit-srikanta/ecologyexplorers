@@ -10,9 +10,11 @@
 			echo "To Participate and enter data ".$this->Html->link('Login',array('controller' => 'teachers', 'action' => 'login'));?>
 			<br>
 			<br>  
-			<?php echo "Dont have a profile? ".$this->Html->link('Register',array('controller' => 'teachers', 'action' => 'register')); 		
+			<?php echo "Dont have a profile? ".$this->Html->link('Register',array('controller' => 'teachers', 'action' => 'register'));
+
 		}
 ?>
+
 <?php if('A' == $this->Session->read('UserType'))
 		{
 			echo $this->Html->link('Approve Users', array('action' => 'approveUser'));?>
@@ -41,6 +43,9 @@ echo $this->Html->link('Edit Profile', array('action' => 'editProfile'));
 <br>
 <?php echo $this->Html->link('Submit Data',  array('controller' => 'teachers', 'action' => 'submitData')); 
 }?>
+<br>
+<br>
+<?php echo $this->Html->link('Download Data',array('controller' => 'teachers', 'action' => 'downloadData'));?>
 <br>
 <br></p>
 <div class="logout">

@@ -8,7 +8,7 @@ App::uses('Utitlity','Security');
  * @property Teacher $Teacher
 */
 class TeachersController extends AppController {
-	public $helpers = array('Html', 'Form');
+	public $helpers = array('Html', 'Form','CSV');
 	/**
 	 * index method
 	 *
@@ -84,7 +84,7 @@ class TeachersController extends AppController {
 	{
 		//Loading the school model so that the school dropdown can be populated.
 		$this->set('schooloptions', ClassRegistry::init('School')->schoolOptions());
-		
+
 		if ($this->request->is('post'))
 		{
 
@@ -303,5 +303,56 @@ class TeachersController extends AppController {
 			}
 		}
 	}
+
+	public function downloadData()
+	{
+		$habitatTypeOptions = array(array('name' => 'Ecology Explorers Arthropod Survey','value' => 'AR'),array('name' => 'Ecology Explorers Bird Survey','value' => 'BI'),array('name' => 'Ecology Explorers Bruchid Survey','value' => 'BR'),array('name' => 'Ecology Explorers Vegetation Survey','value' => 'VE'));
+		$this->set('habitatTypeOptions', $habitatTypeOptions);
+
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolOptions());
+
+		if ($this->request->is('post'))
+		{
+		
+			$dataConditions['protocol'] = $this->request->data['retrieveData']['protocol'];
+			$dataConditions['start_date'] = $this->request->data['retrieveData']['start_date']['year'].'-'.$this->request->data['retrieveData']['start_date']['month'].'-'.$this->request->data['retrieveData']['start_date']['day'];
+			$dataConditions['end_date'] = $this->request->data['retrieveData']['end_date']['year'].'-'.$this->request->data['retrieveData']['end_date']['month'].'-'.$this->request->data['retrieveData']['end_date']['day'];
+			$dataConditions['school_id'] = $this->request->data['retrieveData']['school_id'];
+			
+			$this->Session->delete('dateRetrieved');
+			$this->redirect(array('controller' => 'teachers','action' => 'retrievedData',$dataConditions['protocol'],$dataConditions['start_date'],$dataConditions['end_date'],$dataConditions['school_id']));
+		}
+	}
+
+	function retrievedData()
+	{
+		$param = $this->passedArgs;
+		
+		$dataConditions['protocol'] = $param[0];
+		$dataConditions['start_date'] = $param[1];
+		$dataConditions['end_date'] = $param[2];
+		$dataConditions['school_id'] = $param[3];
+		$this->Session->write('dataConditions',$dataConditions);
+		
+		$data = ClassRegistry::init('School')->retrieveData($dataConditions);
+		
+
+		if(empty($data))
+		{
+			$this->Session->setFlash('No data exists for the given protocol, date range and school combination.');
+			$this->redirect(array('controller' => 'teachers','action' => 'downloadData'));
+			return;
+		}
+		$this->Session->write('data',$data);
+	}
+
+	function export()
+	{
+		$this->set('dateRetrieved', $this->Session->read('data'));
+		$this->layout = null;
+		$this->autoLayout = false;
+		Configure::write('debug', '0');
+	}
+
 
 }

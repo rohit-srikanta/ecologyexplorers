@@ -18,6 +18,29 @@ class VegSample extends AppModel {
 			'shrub_count'  => array(
 					'rule' => 'notEmpty')
 	);
+	
+	public $actsAs = array('Containable');
+	public $hasMany = array(
+			'VegSpecimen' => array(
+					'className' => 'VegSpecimen',
+			)
+	);
+	
+	public $belongsTo = array(
+			'Habitat' => array(
+					'className' => 'Habitat',
+					'foreignKey'   => 'habitat_id',
+			),
+			'Site' => array(
+					'className' => 'Site',
+					'foreignKey'   => 'site_id',
+			),
+			'TeachersClass' => array(
+					'className' => 'TeachersClass',
+					'foreignKey'   => 'teachers_class_id',
+			)
+	);
+	
 
 	public function savingthedata($fields)
 	{
@@ -44,7 +67,7 @@ class VegSample extends AppModel {
 					$newRow[$i]['height'] = $fields['VegSample'][$str5];
 					$newRow[$i]['canopy'] = $fields['VegSample'][$str6];
 					$newRow[$i]['comments'] = $fields['VegSample'][$str7];
-					$newRow[$i]['sample_id'] = $this->getInsertID();
+					$newRow[$i]['veg_sample_id'] = $this->getInsertID();
 				}
 			}
 			if(ClassRegistry::init('VegSpecimen')->saveFields($newRow))

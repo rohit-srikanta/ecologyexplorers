@@ -5,6 +5,26 @@ App::uses('AppModel', 'Model');
  *
 */
 class Habitat extends AppModel {
+	
+	public $belongsTo = array(
+			'School' => array(
+					'className' => 'School',
+					'foreignKey'   => 'school_id',
+			),
+	);
+	
+	public $hasMany = array(
+			'BirdSample' => array(
+					'className' => 'BirdSample',
+			),
+			'ArthroSample' => array(
+					'className' => 'ArthroSample',
+			),
+			'VegSample' => array(
+					'className' => 'VegSample',
+			)
+				
+	);
 
 	public function createHabitat($fields,$siteId)
 	{
@@ -48,7 +68,7 @@ class Habitat extends AppModel {
 		else
 			return false;
 	}
-
+	
 	public function getHabitatDetails($siteId,$type)
 	{
 		if($siteId == null || $type == null)
@@ -58,4 +78,5 @@ class Habitat extends AppModel {
 		$habitat = $this->find('first', array('conditions' => $conditions));
 		return $habitat;
 	}
+	
 }

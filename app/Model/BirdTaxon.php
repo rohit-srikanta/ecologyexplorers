@@ -13,6 +13,13 @@ class BirdTaxon extends AppModel {
  */
 	public $useTable = 'bird_taxon';
 	
+	public $actsAs = array('Containable');
+	public $hasMany = array(
+			'BirdSpecimen' => array(
+					'className' => 'BirdSpecimen',
+			)
+	);
+	
 	public function getBirdList()
 	{
 		$taxon = $this->find('list', array(

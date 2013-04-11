@@ -24,7 +24,7 @@ class ArthroSamplesController extends AppController {
 		$user = $this->Session->read('User');
 		$this->set('teacherName', $user['Teacher']['name']);
 
-		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school']));
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school_id']));
 
 		$this->set('siteOptions',ClassRegistry::init('Site')->getSiteName($param[0]));
 
@@ -35,6 +35,7 @@ class ArthroSamplesController extends AppController {
 		if ($this->request->is('post'))
 		{
 			$this->request->data['ArthroSample']['site_id'] = $param[0];
+			$this->request->data['ArthroSample']['teachers_class_id'] = $param[1];
 			$this->request->data['ArthroSample']['habitat_id'] = $param[2];
 
 			if($this->ArthroSample->savingthedata($this->request->data))

@@ -13,6 +13,13 @@ class VegTaxon extends AppModel {
  */
 	public $useTable = 'veg_taxon';
 	
+	public $actsAs = array('Containable');
+	public $hasMany = array(
+			'VegSpecimen' => array(
+					'className' => 'VegSpecimen',
+			)
+	);
+	
 	public function getOrderList()
 	{
 		$taxon = $this->find('list', array(

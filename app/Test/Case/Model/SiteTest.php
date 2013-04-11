@@ -48,7 +48,7 @@ class SiteTest extends CakeTestCase {
 						'city' => 'ASUrite',
 						'zipcode' => '85281',
 						'location' => 'ASUrite',
-						'school' => '1',
+						'school_id' => '1',
 						'description' => '11sdf'),
 				'Habitat' => array
 				(
@@ -85,7 +85,7 @@ class SiteTest extends CakeTestCase {
 						'city' => 'ASUrite',
 						'zipcode' => '85281',
 						'location' => 'ASUrite',
-						'school' => '1',
+						'school_id' => '1',
 						'description' => '11sdf'),
 				'Habitat' => array
 				(
@@ -122,7 +122,7 @@ class SiteTest extends CakeTestCase {
 						'city' => 'ASUrite',
 						'zipcode' => '85281',
 						'location' => 'ASUrite',
-						'school' => '1',
+						'school_id' => '1',
 						'description' => '11sdf'),
 				'Habitat' => array
 				(
@@ -159,7 +159,7 @@ class SiteTest extends CakeTestCase {
 						'city' => 'ASUrite',
 						'zipcode' => '',
 						'location' => 'ASUrite',
-						'school' => '1',
+						'school_id' => '1',
 						'description' => '11sdf'),
 				'Habitat' => array
 				(
@@ -196,7 +196,7 @@ class SiteTest extends CakeTestCase {
 						'city' => 'ASUrite',
 						'zipcode' => '85281',
 						'location' => 'ASUrite',
-						'school' => '1',
+						'school_id' => '1',
 						'description' => '11sdf'),
 				'Habitat' => array
 				(
@@ -233,7 +233,7 @@ class SiteTest extends CakeTestCase {
 						'city' => '',
 						'zipcode' => '85281',
 						'location' => 'ASUrite',
-						'school' => '1',
+						'school_id' => '1',
 						'description' => '11sdf'),
 				'Habitat' => array
 				(
@@ -270,7 +270,7 @@ class SiteTest extends CakeTestCase {
 						'city' => 'ASUrite',
 						'zipcode' => '111111111',
 						'location' => 'ASUrite',
-						'school' => '1',
+						'school_id' => '1',
 						'description' => '11sdf'),
 				'Habitat' => Array
 				(
@@ -335,7 +335,7 @@ class SiteTest extends CakeTestCase {
 	public function testGetTeachersSites()
 	{
 		$result = $this->Site->getTeachersSites(1);
-		$conditions = array("Site.school" => '1');
+		$conditions = array("Site.school_id" => '1');
 		$expected = $this->Site->find('list', array('conditions' => $conditions,'fields' => array('Site.Id','Site.site_name')));
 		$this->assertEquals($result,$expected);
 		

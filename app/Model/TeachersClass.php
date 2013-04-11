@@ -15,11 +15,19 @@ class TeachersClass extends AppModel {
 					'rule' => 'notEmpty')
 	);
 	
+	public $hasMany = array(
+			'BirdSample' => array(
+					'className' => 'BirdSample',
+			));
+	
 	public $belongsTo = array(
 			'Teacher' => array(
 					'className' => 'Teacher',
 					'foreignKey' => 'teacher_id',
-					'dependent'=> true
+			),
+			'School' => array(
+					'className' => 'School',
+					'foreignKey'   => 'school_id',
 			),
 	);
 
@@ -41,7 +49,7 @@ class TeachersClass extends AppModel {
 	{
 		if($schoolId == null || $teacherId == null)
 			return false;
-		$conditions = array("TeachersClass.school" => $schoolId,"TeachersClass.teacher_id" => $teacherId);
+		$conditions = array("TeachersClass.school_id" => $schoolId,"TeachersClass.teacher_id" => $teacherId);
 		$class = $this->find('list', array('conditions' => $conditions,'fields' => array('TeachersClass.Id','TeachersClass.class_name')));
 		return $class;
 	}

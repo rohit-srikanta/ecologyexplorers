@@ -38,9 +38,9 @@ class HabitatsController extends AppController {
 			$this->redirect(array('controller' => 'teachers','action' => 'submitData'));
 		}
 		$user = $this->Session->read('User');
-		$userDetails['Site']['school'] = $user['Teacher']['school'];
+		$userDetails['Site']['school_id'] = $user['Teacher']['school_id'];
 
-		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school']));
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school_id']));
 
 		$this->set('siteOptions', ClassRegistry::init('Site')->getSiteName($param[1]));
 

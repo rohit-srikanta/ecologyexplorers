@@ -38,7 +38,7 @@
 		</td>
 		<td><?php echo $teacher['Teacher']['email_address']; ?>
 		</td>
-		<td><?php echo $teacher['Teacher']['school']; ?>
+		<td><?php echo $teacher['Teacher']['school_id']; ?>
 		</td>
 		<td><?php echo $this->Time->format('F jS, Y h:i A', $teacher['Teacher']['date_created'], null, 'PDT'); ?>
 		</td>

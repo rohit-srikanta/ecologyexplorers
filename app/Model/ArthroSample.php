@@ -15,6 +15,28 @@ class ArthroSample extends AppModel {
 			'collection_date'  => array(
 					'rule' => 'notEmpty')
 	);
+	
+	public $actsAs = array('Containable');
+	public $hasMany = array(
+			'ArthroSpecimen' => array(
+					'className' => 'ArthroSpecimen',
+			)
+	);
+	
+	public $belongsTo = array(
+			'Habitat' => array(
+					'className' => 'Habitat',
+					'foreignKey'   => 'habitat_id',
+			),
+			'Site' => array(
+					'className' => 'Site',
+					'foreignKey'   => 'site_id',
+			),
+			'TeachersClass' => array(
+					'className' => 'TeachersClass',
+					'foreignKey'   => 'teachers_class_id',
+			)
+	);
 
 	public function savingthedata($fields)
 	{
@@ -33,7 +55,7 @@ class ArthroSample extends AppModel {
 					$newRow[$i]['trap_no'] = $fields['ArthroSample'][$str1];
 					$newRow[$i]['taxon'] = $fields['ArthroSample'][$str2];
 					$newRow[$i]['frequency'] = $fields['ArthroSample'][$str3];
-					$newRow[$i]['sample_id'] = $this->getInsertID();
+					$newRow[$i]['arthro_sample_id'] = $this->getInsertID();
 				}
 			}
 			if(ClassRegistry::init('ArthroSpecimen')->saveFields($newRow))

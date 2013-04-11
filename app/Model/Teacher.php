@@ -25,29 +25,21 @@ class Teacher extends AppModel {
 					'message' => 'Please enter a valid email address'),
 			'name' => array(
 					'rule' => 'notEmpty'),
-			'school' => array(
+			'school_id' => array(
 					'rule' => 'notEmpty')
 	);
 
-
-	public $hasOne = array(
+	public $belongsTo = array(
 			'School' => array(
-					'className'    => 'School',
-					'conditions'   => array('School.id = Teacher.school'),
-					'fields'       => 'School.school_name',
-					//'dependent'    => true,
-					'foreignKey'   => 'id'
-			)
+					'className' => 'School',
+					'foreignKey'   => 'school_id',
+			),
 	);
 
 	public $hasMany = array(
 			'TeachersClass' => array(
 					'className' => 'TeachersClass',
-					'foreignKey' => 'id',
-					'dependent'=> true
-			)
-	);
-
+			));
 	public $recursive = -1;
 
 
@@ -149,7 +141,7 @@ class Teacher extends AppModel {
 
 		for($i=0; $i<count($Userlist); $i++)
 		{
-			$Userlist[$i]['Teacher']['school'] = $justschoolNames[$Userlist[$i]['Teacher']['school']];
+			$Userlist[$i]['Teacher']['school_id'] = $justschoolNames[$Userlist[$i]['Teacher']['school_id']];
 		}
 
 		return $Userlist;
@@ -191,7 +183,7 @@ class Teacher extends AppModel {
 		if($user == null)
 			return false;
 
-		$site = ClassRegistry::init('Site')->getTeachersSites($user['Teacher']['school']);
+		$site = ClassRegistry::init('Site')->getTeachersSites($user['Teacher']['school_id']);
 		return $site;
 	}
 
@@ -200,7 +192,7 @@ class Teacher extends AppModel {
 		if($user == null)
 			return false;
 
-		$class =  ClassRegistry::init('TeachersClass')->getClassIDs($user['Teacher']['school'],$user['Teacher']['id']);
+		$class =  ClassRegistry::init('TeachersClass')->getClassIDs($user['Teacher']['school_id'],$user['Teacher']['id']);
 		return $class;
 	}
 

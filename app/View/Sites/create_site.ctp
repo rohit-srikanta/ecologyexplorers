@@ -68,7 +68,7 @@
 </legend>
 
 <div class="formfield">
-	<?php echo $this->Form->input('school',array('div'=>'formfield_school','options' => $schooloptions));
+	<?php echo $this->Form->input('school_id',array('div'=>'formfield','options' => $schooloptions));
  echo $this->Form->input('Habitat.type',array('div'=>'formfield','empty' => 'Select','label' => 'Habitat Type','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
  echo $this->Form->input('site_Id',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
  echo $this->Form->input('site_name',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));  

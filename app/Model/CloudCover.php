@@ -13,6 +13,12 @@ class CloudCover extends AppModel {
  */
 	public $useTable = 'cloud_cover';
 	
+	public $hasMany = array(
+			'BirdSample' => array(
+					'className' => 'BirdSample',
+			)
+	);
+	
 	public function getCloudCover()
 	{
 		$cloud = $this->find('list', array(

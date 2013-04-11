@@ -12,6 +12,25 @@ class BruchidSample extends AppModel {
 			'location'  => array(
 					'rule' => 'notEmpty')
 	);
+	
+	public $actsAs = array('Containable');
+	public $hasMany = array(
+			'BruchidSpecimen' => array(
+					'className' => 'BruchidSpecimen',
+			)
+	);
+	
+	public $belongsTo = array(
+			'Site' => array(
+					'className' => 'Site',
+					'foreignKey'   => 'site_id',
+			),
+			'TeachersClass' => array(
+					'className' => 'TeachersClass',
+					'foreignKey'   => 'teachers_class_id',
+			)
+	);
+	
 
 	public function savingthedata($fields)
 	{
@@ -32,7 +51,7 @@ class BruchidSample extends AppModel {
 					$newRow[$i]['pod_no'] = $fields['BruchidSample'][$str2];
 					$newRow[$i]['hole_count'] = $fields['BruchidSample'][$str3];
 					$newRow[$i]['seed_count'] = $fields['BruchidSample'][$str4];
-					$newRow[$i]['sample_id'] = $this->getInsertID();
+					$newRow[$i]['bruchid_sample_id'] = $this->getInsertID();
 				}
 			}
 

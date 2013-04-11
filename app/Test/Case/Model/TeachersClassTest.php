@@ -43,7 +43,7 @@ class TeachersClassTest extends CakeTestCase {
 				'TeachersClass' => array(
 						'class_name' => 'Class name',
 						'grade' => '12',
-						'school' => '1')
+						'school_id' => '1')
 		);
 			
 		$result = $this->TeachersClass->createNewClass($data,'1');
@@ -53,7 +53,7 @@ class TeachersClassTest extends CakeTestCase {
 				'TeachersClass' => array(
 						'class_name' => 'Class name',
 						'grade' => '',
-						'school' => '1')
+						'school_id' => '1')
 		);
 			
 		$result = $this->TeachersClass->createNewClass($data,'1');
@@ -63,7 +63,7 @@ class TeachersClassTest extends CakeTestCase {
 				'TeachersClass' => array(
 						'class_name' => '',
 						'grade' => '12',
-						'school' => '1')
+						'school_id' => '1')
 		);
 			
 		$result = $this->TeachersClass->createNewClass($data,'1');
@@ -76,12 +76,12 @@ class TeachersClassTest extends CakeTestCase {
 		$this->assertEquals($result,false);
 
 		$result = $this->TeachersClass->getClassIDs(1,1);
-		$conditions = array("TeachersClass.school" => '1',"TeachersClass.teacher_id" => '1');
+		$conditions = array("TeachersClass.school_id" => '1',"TeachersClass.teacher_id" => '1');
 		$expected = $this->TeachersClass->find('list', array('conditions' => $conditions,'fields' => array('TeachersClass.Id','TeachersClass.class_name')));
 		$this->assertEquals($result,$expected);
 
 		$result = $this->TeachersClass->getClassIDs(100,100);
-		$conditions = array("TeachersClass.school" => '100',"TeachersClass.teacher_id" => '100');
+		$conditions = array("TeachersClass.school_id" => '100',"TeachersClass.teacher_id" => '100');
 		$expected = $this->TeachersClass->find('list', array('conditions' => $conditions,'fields' => array('TeachersClass.Id','TeachersClass.class_name')));
 		$this->assertEquals($result,$expected);
 	}

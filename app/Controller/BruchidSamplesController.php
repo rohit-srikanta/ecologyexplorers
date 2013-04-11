@@ -21,7 +21,7 @@ class BruchidSamplesController extends AppController {
 		$user = $this->Session->read('User');
 		$this->set('teacherName', $user['Teacher']['name']);
 
-		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school']));
+		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school_id']));
 
 		$this->set('siteOptions',ClassRegistry::init('Site')->getSiteName($param[1]));
 
@@ -36,7 +36,7 @@ class BruchidSamplesController extends AppController {
 
 		if ($this->request->is('post'))
 		{
-				
+			pr($this->request->data);	
 			if($this->request->data['BruchidSample']['tree_type'] == null )
 			{
 				$this->Session->setFlash('Please select the tree type');
@@ -49,6 +49,7 @@ class BruchidSamplesController extends AppController {
 			}
 				
 			$this->request->data['BruchidSample']['site_id'] = $param[1];
+			$this->request->data['BruchidSample']['teachers_class_id'] = $param[2];
 
 			if($this->BruchidSample->savingthedata($this->request->data))
 			{

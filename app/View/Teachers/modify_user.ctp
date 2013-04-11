@@ -34,7 +34,7 @@
 	<tr>
 		<td><?php echo $teacher['Teacher']['name']; ?></td>
 		<td><?php echo $teacher['Teacher']['email_address']; ?></td>
-		<td><?php echo $teacher['Teacher']['school']; ?></td>
+		<td><?php echo $teacher['Teacher']['school_id']; ?></td>
 		<td><?php echo $this->Html->link('Edit', array('action' => 'editUser', $teacher['Teacher']['id']));
 		?>
 		</td>
@@ -56,11 +56,7 @@
 		<td><?php echo $this->Time->format('F jS, Y h:i A', $teacher['Teacher']['date_created'], null, 'PDT'); ?>
 		</td>
 		<td></td>
-
-
-
-
-	</tr>
+</tr>
 	<?php endforeach; ?>
 </table>
 <br>

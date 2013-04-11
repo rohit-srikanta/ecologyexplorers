@@ -25,13 +25,35 @@ class Site extends AppModel {
 					'message' => 'Please enter a valid zipcode')
 	);
 
+	
+	public $belongsTo = array(
+			'School' => array(
+					'className' => 'School',
+					'foreignKey'   => 'school_id',
+			),
+	);
+	
+	public $hasMany = array(
+			'BirdSample' => array(
+					'className' => 'BirdSample',
+			),
+			'ArthroSample' => array(
+					'className' => 'ArthroSample',
+			),
+			'VegSample' => array(
+					'className' => 'VegSample',
+			),
+			'BruchidSample' => array(
+					'className' => 'BruchidSample',
+			)
+	);
 
 	public function createNewSite($siteDetails)
 	{
 		$this->create();
 		$siteDetails['Site']['date_entered'] = date('Y-m-d H:i:s');
 		$siteDetails['Site']['site_id'] = $siteDetails['Site']['site_Id'];
-		$siteDetails['Habitat']['school_id'] = $siteDetails['Site']['school'];
+		$siteDetails['Habitat']['school_id'] = $siteDetails['Site']['school_id'];
 		if($this->save($siteDetails['Site']) && ClassRegistry::init('Habitat')->createHabitat($siteDetails['Habitat'],$this->getInsertID()))
 		{
 			
@@ -67,7 +89,7 @@ class Site extends AppModel {
 	{
 		if($schoolId ==null)
 			return false;
-		$conditions = array("Site.school" => $schoolId);
+		$conditions = array("Site.school_id" => $schoolId);
 		$site = $this->find('list', array('conditions' => $conditions,'fields' => array('Site.Id','Site.site_name')));
 		return $site;
 	}
