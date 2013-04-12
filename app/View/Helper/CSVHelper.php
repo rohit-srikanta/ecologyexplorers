@@ -67,7 +67,6 @@ class CSVHelper extends AppHelper
 			$output = mb_convert_encoding($output, $to_encoding, $from_encoding);
 		}
 
-		pr($output);
 		return $this->output($output);
 	}
 }

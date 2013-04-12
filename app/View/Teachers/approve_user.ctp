@@ -11,9 +11,9 @@
 	if(!empty($teachersYetToBeApproved))
 	{
 		?>
-<b><h2>New user profiles</h2> </b>
+<p>New user profiles</p>
 <br>
-<br>
+<br><div class="text">
 <table>
 	<?php echo $this->Form->create('Approve',array('class'=>'form'));?>
 	<tr>
@@ -49,14 +49,14 @@
 		<td></td>
 	</tr>
 	<?php endforeach; ?>
-</table>
+</table></div>
 <br>
 <?php echo $this->Form->end('Approve'); ?>
 <?php 
 	}
 	else {
 	?>
-<b><p class="text">No new user to approve</p> </b>
+<p>No new user profiles to approve </p>
 <?php
 	}
 }

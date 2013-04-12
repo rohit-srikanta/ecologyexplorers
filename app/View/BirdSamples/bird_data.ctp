@@ -34,7 +34,7 @@
 	<p>
 		<b>Weather Report : </b>
 
-		<?php echo $this->Form->input('cloud_cover',array('div'=>'formfield','empty' => 'Select','options' => $cloudOptions,'error' => array('wrap' => 'div','class' => 'formerror'))); 
+		<?php echo $this->Form->input('cloud_cover_id',array('div'=>'formfield','empty' => 'Select','options' => $cloudOptions,'error' => array('wrap' => 'div','class' => 'formerror'))); 
 		echo $this->Form->input('air_temp',array('label'=>'Temperature', 'type' => 'number','interval' => 5,'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 		echo $this->Form->input('temp_units',array('label'=>'Temperature Unit', 'options' => array('1' =>'Celsius', '2'=>'Farenheit'),'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 		echo $this->Form->input('time_start',array('default' => $this->Time->format('H:i:s', date('H:i:s'), null, 'PDT'),'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
@@ -54,7 +54,7 @@
 			<th>Number of Birds</th>
 					</tr>
 
-		<?php for($i=0;$i<10;$i++) {?>
+		<?php for($i=0;$i<20;$i++) {?>
 
 		<tr>
 			<td><?php echo $this->Form->input('BirdSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $birdOptions))?>

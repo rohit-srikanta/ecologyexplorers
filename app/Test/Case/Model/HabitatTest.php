@@ -4,59 +4,64 @@ App::uses('Habitat', 'Model');
 /**
  * Habitat Test Case
  *
- */
+*/
 class HabitatTest extends CakeTestCase {
 
-/**
- * Fixtures
- *
- * @var array
- */
+	/**
+	 * Fixtures
+	 *
+	 * @var array
+	 */
 	public $fixtures = array(
-		'app.habitat'
+			'app.habitat',
+			'app.School',
+			'app.BirdSample',
+			'app.VegSample',
+			'app.BruchidSample',
+			'app.ArthroSample'
 	);
 
-/**
- * setUp method
- *
- * @return void
- */
+	/**
+	 * setUp method
+	 *
+	 * @return void
+	*/
 	public function setUp() {
 		parent::setUp();
 		$this->Habitat = ClassRegistry::init('Habitat');
 	}
 
-/**
- * tearDown method
- *
- * @return void
- */
+	/**
+	 * tearDown method
+	 *
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->Habitat);
 
 		parent::tearDown();
 	}
-	
+
 	public function testGetHabitatDetails()
 	{
 		$result = $this->Habitat->getHabitatDetails(null,null);
 		$this->assertEquals($result,false);
-		
+
 		$result = $this->Habitat->getHabitatDetails(null,'AR');
 		$this->assertEquals($result,false);
-		
+
 		$result = $this->Habitat->getHabitatDetails(1,'AR');
 		$conditions = array("Habitat.site_id" => 1,"Habitat.type" => 'AR');
 		$expected = $this->Habitat->find('first', array('conditions' => $conditions));
-		$this->assertEquals($result,$expected);		
-		
+		$this->assertEquals($result,$expected);
+
 	}
-	
+
 	public function testCreateHabitat()
 	{
 		$result = $this->Habitat->createHabitat(null,null);
 		$this->assertEquals($result,false);
-		
+
 		$data = array(
 				'Habitat' => array
 				(
@@ -81,10 +86,10 @@ class HabitatTest extends CakeTestCase {
 						'water' => '0',
 				)
 		);
-		
+
 		$result = $this->Habitat->createHabitat($data['Habitat'],'1');
 		$this->assertEquals($result,true);
-		
+
 		$data = array(
 				'Habitat' => array
 				(
@@ -109,10 +114,10 @@ class HabitatTest extends CakeTestCase {
 						'water' => '10',
 				)
 		);
-		
+
 		$result = $this->Habitat->createHabitat($data['Habitat'],'1');
 		$this->assertEquals($result,true);
-		
+
 		$data = array(
 				'Habitat' => array
 				(
@@ -137,10 +142,10 @@ class HabitatTest extends CakeTestCase {
 						'water' => '0',
 				)
 		);
-		
+
 		$result = $this->Habitat->createHabitat($data['Habitat'],'1');
 		$this->assertEquals($result,true);
-		
+
 		$data = array(
 				'Habitat' => array
 				(
@@ -165,10 +170,10 @@ class HabitatTest extends CakeTestCase {
 						'water' => '0',
 				)
 		);
-		
+
 		$result = $this->Habitat->createHabitat($data['Habitat'],'1');
 		$this->assertEquals($result,true);
-		
+
 		$data = array(
 				'Habitat' => array
 				(
@@ -193,7 +198,7 @@ class HabitatTest extends CakeTestCase {
 						'water' => '0',
 				)
 		);
-		
+
 		$result = $this->Habitat->createHabitat($data['Habitat'],'1');
 		$this->assertEquals($result,true);
 	}

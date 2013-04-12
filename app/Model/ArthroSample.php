@@ -44,7 +44,7 @@ class ArthroSample extends AppModel {
 
 		if($this->save($fields['ArthroSample']))
 		{
-			for($i=0;$i<10;$i++)
+			for($i=0;$i<20;$i++)
 			{
 				$str1 = "ArthroSpecimen".$i."trap_no";
 				$str2 = "ArthroSpecimen".$i."taxon";
@@ -53,7 +53,7 @@ class ArthroSample extends AppModel {
 				if(null != $fields['ArthroSample'][$str2] && null != $fields['ArthroSample'][$str1] && null != $fields['ArthroSample'][$str3])
 				{
 					$newRow[$i]['trap_no'] = $fields['ArthroSample'][$str1];
-					$newRow[$i]['taxon'] = $fields['ArthroSample'][$str2];
+					$newRow[$i]['arthro_taxon_id'] = $fields['ArthroSample'][$str2];
 					$newRow[$i]['frequency'] = $fields['ArthroSample'][$str3];
 					$newRow[$i]['arthro_sample_id'] = $this->getInsertID();
 				}

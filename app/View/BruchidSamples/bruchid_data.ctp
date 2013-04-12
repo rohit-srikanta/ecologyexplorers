@@ -49,7 +49,7 @@
 			<th>Number of Seeds</th>
 		</tr>
 
-		<?php for($i=0;$i<10;$i++) {?>
+		<?php for($i=0;$i<20;$i++) {?>
 
 		<tr>
 			<td><?php echo $this->Form->input('BruchidSpecimen'.$i.'tree_no',array('label' => '','size' => '10'))?>

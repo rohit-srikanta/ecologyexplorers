@@ -48,7 +48,7 @@ class VegSample extends AppModel {
 
 		if($this->save($fields['VegSample']))
 		{
-			for($i=0;$i<10;$i++)
+			for($i=0;$i<20;$i++)
 			{
 				$str1 = "VegSpecimen".$i."veg_no";
 				$str2 = "VegSpecimen".$i."plant_type";

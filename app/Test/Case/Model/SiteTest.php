@@ -14,7 +14,12 @@ class SiteTest extends CakeTestCase {
 	 */
 	public $fixtures = array(
 			'app.site',
-			'app.habitat'
+			'app.habitat',
+			'app.School',
+			'app.BirdSample',
+			'app.VegSample',
+			'app.BruchidSample',
+			'app.ArthroSample'
 	);
 
 	/**

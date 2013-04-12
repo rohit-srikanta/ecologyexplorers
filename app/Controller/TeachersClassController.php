@@ -15,7 +15,6 @@ class TeachersClassController extends AppController {
 
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
-			pr($this->request->data);
 			if ($this->TeachersClass->createNewClass($this->request->data, $user['Teacher']['id']))
 			{
 				$this->Session->setFlash('Your class was created successfully.');

@@ -38,7 +38,7 @@ class BruchidSample extends AppModel {
 
 		if($this->save($fields['BruchidSample']))
 		{
-			for($i=0;$i<10;$i++)
+			for($i=0;$i<20;$i++)
 			{
 				$str1 = "BruchidSpecimen".$i."tree_no";
 				$str2 = "BruchidSpecimen".$i."pod_no";

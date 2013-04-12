@@ -47,7 +47,7 @@
 			<th>Comments/Location</th>
 		</tr>
 
-		<?php for($i=0;$i<10;$i++) {?>
+		<?php for($i=0;$i<20;$i++) {?>
 
 		<tr>
 			<td><?php echo $this->Form->input('VegSpecimen'.$i.'veg_no',array('label' => '','size' => '10'))?></td>

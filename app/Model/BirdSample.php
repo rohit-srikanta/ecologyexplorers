@@ -48,7 +48,7 @@ class BirdSample extends AppModel {
 
 		if($this->save($fields['BirdSample']))
 		{
-			for($i=0;$i<10;$i++)
+			for($i=0;$i<20;$i++)
 			{
 				$str1 = "BirdSpecimen".$i."taxon";
 				$str2 = "BirdSpecimen".$i."frequency";

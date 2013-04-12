@@ -36,7 +36,6 @@ class BruchidSamplesController extends AppController {
 
 		if ($this->request->is('post'))
 		{
-			pr($this->request->data);	
 			if($this->request->data['BruchidSample']['tree_type'] == null )
 			{
 				$this->Session->setFlash('Please select the tree type');

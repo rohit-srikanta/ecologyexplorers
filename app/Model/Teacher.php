@@ -48,7 +48,10 @@ class Teacher extends AppModel {
 	public function validateLogin($emailAddress = null,$password = null)
 	{
 		$password1 = Security::hash($password);
-		$user = $this->findByEmailAddressAndPassword($emailAddress,$password1);
+		$fields = array('Teacher.id','Teacher.email_address','Teacher.type','Teacher.name','Teacher.school_id');
+		$conditions = array("Teacher.email_address" => $emailAddress,"Teacher.password" => $password1,);
+		$user = $this->find('first',array('conditions' => $conditions,'fields'=>$fields));
+		
 		if($user)
 		{
 			if('P' != $user['Teacher']['type'])
@@ -159,7 +162,7 @@ class Teacher extends AppModel {
 			return false;
 		$fields['Teacher']['password'] = Security::hash($fields['Teacher']['password']);
 
-		if($this->save($fields))
+		if($this->save($fields,$validate = true))
 			return true;
 	}
 
@@ -211,7 +214,6 @@ class Teacher extends AppModel {
 				foreach($query as $class)
 				{
 					$status = ClassRegistry::init('TeachersClass')->delete($class['TeachersClass']['id']);
-					pr($status);
 					if($status != true)
 						return false;
 				}

@@ -48,7 +48,7 @@
 			<th>Tally Number</th>
 		</tr>
 
-		<?php for($i=0;$i<10;$i++) {?>
+		<?php for($i=0;$i<20;$i++) {?>
 
 		<tr>
 			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'trap_no',array('label' => ''))?>

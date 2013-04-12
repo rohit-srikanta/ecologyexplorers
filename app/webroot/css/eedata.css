@@ -7,141 +7,147 @@
     Modified on : Mar 14, 2013
     Author     : rohit srikanta
 */
-
 BODY {
-    FONT-SIZE: 10pt;
-    FONT-FAMILY: Verdana, Arial, Helvetica;
-    BACKGROUND-COLOR: #f0ffcc; 
-    position: relative;
-    height: auto;
-	
+	FONT-SIZE: 10pt;
+	FONT-FAMILY: Verdana, Arial, Helvetica;
+	BACKGROUND-COLOR: #f0ffcc;
+	position: relative;
+	height: auto;
 }
+
 p {
 	padding-left: 60px;
 	vertical-align: baseline;
-}
-h1,H1 {
-   font-size: 24pt;
-    text-align: center;
+	font-family: Verdana;
 }
 
-h2, H2{
-    font-size: 18pt;
-    text-align: center;
+p.text {
+	padding-left: 60px;
+	vertical-align: baseline;
+}
+
+h1,H1 {
+	font-size: 24pt;
+	text-align: center;
+}
+
+h2,H2 {
+	font-size: 18pt;
+	text-align: center;
 }
 
 a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 a:link {
-    color: green;
+	color: green;
 }
 
-a:visited {   
-    color: blue;
+a:visited {
+	color: blue;
 }
 
 a:active {
-    color: firebrick;
+	color: firebrick;
 }
 
 a:hover {
-    color: firebrick;
-    text-decoration: underline;
+	color: firebrick;
+	text-decoration: underline;
 }
 
 .errorMsg {
-    color : Red;	
-    font-size: 12pt;
+	color: Red;
+	font-size: 12pt;
 }
 
 .footer {
-    position: relative;
-    font-family: Arial,Helvetica,sans-serif;
-    font-size: 80%;
-    text-align: center;
-    border-top-style: solid;
-    border-top-width: 1px;
-    border-top-color: silver;
-    width: auto;
-    height: auto;
-    padding-top: 10px;
+	position: relative;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 80%;
+	text-align: center;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: silver;
+	width: auto;
+	height: auto;
+	padding-top: 10px;
 }
+
 
 .header {
-    position: relative;
-    top: 0%;
-    width: auto;
-    left: 0%;
-    height: auto;
-    vertical-align: baseline;
+	position: relative;
+	top: 0%;
+	width: auto;
+	left: 0%;
+	height: auto;
+	vertical-align: baseline;
 }
 
-.highlight{
-    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-    font-size: 14pt;
-    background-color: #ADD8E6;
-    position: relative;
-    border-top-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-right-style: solid;
-    border-top-color: black;
-    border-bottom-color: black;
-    border-left-color: black;
-    border-right-color: black;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    left: 10%;
-    width: 70%;
-    height: auto;
-    text-align: center;
+.highlight {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	background-color: #ADD8E6;
+	position: relative;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-top-color: black;
+	border-bottom-color: black;
+	border-left-color: black;
+	border-right-color: black;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	left: 10%;
+	width: 70%;
+	height: auto;
+	text-align: center;
 }
 
-.indexmain, .navpath, .main {
-    position: relative;
-    left: 10%;
+.indexmain,.navpath,.main {
+	position: relative;
+	left: 10%;
 }
 
-.indexmain, .main {
-    width: 80%;
-    height: auto;
-    padding-top: 10px;
+.indexmain,.main {
+	width: 80%;
+	height: auto;
+	padding-top: 10px;
 }
 
 .navpath {
-    font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
-    font-size : 10pt;
-    color : Green;
-    width: 80%;
-    height: auto;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: Green;
+	width: 80%;
+	height: auto;
 }
 
 .text {
-    color: black;
-    font-size: 11pt;
-    font-family: Arial, Helvetica, Verdana, sans-serif;
-    width: 70%;
-    text-align: left;
-    height: auto;
+	color: black;
+	font-size: 10pt;
+	font-family: Verdana, sans-serif;
+	width: 70%;
+	text-align: left;
+	height: auto;
 }
 
-
-root { 
-    display: block;
-    position: relative;
-    height: auto;
+root {
+	display: block;
+	position: relative;
+	height: auto;
 }
 
 .message {
@@ -155,29 +161,34 @@ root {
 
 /** Tables **/
 table {
-	border-right:0;
+	border-right: 0;
 	clear: both;
 	color: #333;
 	margin-bottom: 10px;
 	width: 100%;
 }
+
 th {
-	border:0;
-	border-bottom:2px solid #555;
+	border: 0;
+	border-bottom: 2px solid #555;
 	text-align: left;
-	padding:4px;
+	padding: 4px;
 }
+
 th a {
 	display: block;
 	padding: 2px 4px;
 	text-decoration: none;
 }
+
 th a.asc:after {
 	content: ' ⇣';
 }
+
 th a.desc:after {
 	content: ' ⇡';
 }
+
 table tr td {
 	padding: 6px;
 	text-align: left;
@@ -188,148 +199,158 @@ td.actions {
 	text-align: center;
 	white-space: nowrap;
 }
+
 table td.actions a {
 	margin: 0px 6px;
-	padding:2px 5px;
+	padding: 2px 5px;
 }
 /** containers **/
 div.form
-div.index,
-div.view {
-	float:right;
-	width:76%;
-	border-left:1px solid #666;
-	padding:10px 2%;
+div.index,div.view {
+	float: right;
+	width: 76%;
+	border-left: 1px solid #666;
+	padding: 10px 2%;
 }
+
+div.text {
+	position: relative;
+	left: 5%;
+}
+
 div.actions {
-	float:left;
-	width:16%;
-	padding:10px 1.5%;
+	float: left;
+	width: 16%;
+	padding: 10px 1.5%;
 }
+
 div.actions h3 {
-	float:left;
-	color:#777;
+	float: left;
+	color: #777;
 }
 
 div.logout {
 	padding-left: 60px;
 }
 
-div.topright{
-    display:block;
-
-    /*set the div in the top right corner*/
-    position:absolute;
-    top:200;
-    right:0;
-    width:150px;
-    
- }
- 
- div.topleft{
-    display:block;
-    position:absolute;
-    top:200;
-    left:0;
-    width:150px;
-    
- }
-.form{
-    font-family: Verdana;    
-    font-size:1em;
-    margin:1em;
-    padding:1em;    
-}
- 
-.form p.formtitle{
-    font-size:10pt;
-    width:70em;
-    text-align:justify;
-}
- 
-.form fieldset{
-    width:40em;
-    border:1px solid #FFE545;   
-    background-position: bottom right;
-    background-repeat: no-repeat;
-}
- 
-.form fieldset legend{
-    color: #026475;
-}
- 
-.formfield{
-    width:50em;
-    padding:5px;
+div.topright {
+	display: block;
+	/*set the div in the top right corner*/
+	position: absolute;
+	top: 200;
+	right: 0;
+	width: 150px;
 }
 
-.formfield legend{
-    color: #026475;
-    font-family: Verdana;    
-    font-size:1.2em;
+div.topleft {
+	display: block;
+	position: absolute;
+	top: 200;
+	left: 0;
+	width: 150px;
 }
 
-.formfield label{
-    display:block;
-    float:left;
-    width:15em;
-    padding:2px;
-    text-align:right;
-    font-family: Verdana;   
-}
- 
-.formfield input{
-    padding:0.15em;
-    border:1px solid #ddd;
-    background:#ffffff;
-     
-    font-family: Verdana;    
-    font-size:1em;
-     
-    -moz-border-radius:0.4em;
-    -khtml-border-radius:0.4em;
-}
- 
- .formfield  select{
- 	padding:0.2em;
-    border:1px solid #ddd;
-    background:#ffffff;
-    
-    font-family: Verdana;    
-    font-size:1em;
-     
-    -moz-border-radius:0.4em;
-    -khtml-border-radius:0.4em;
- }
- 
-.formfield table{
-    font-family: Verdana;    
-    font-size:1em;
+div.seperation
+{
+
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: silver;
+	width: auto;
+	height: auto;
 }
 
-.formfield td{
-    font-family: Verdana;    
-    font-size:1em;
+.form {
+	font-family: Verdana;
+	font-size: 1em;
+	margin: 1em;
+	padding: 1em;
 }
 
-.formfield input:hover, input:focus {
-    border-color:#5555c5;
-    background:#f6f6f6;
-} 
- 
+.form p.formtitle {
+	font-size: 10pt;
+	width: 70em;
+	text-align: justify;
+}
+
+.form fieldset {
+	width: 40em;
+	border: 1px solid #FFE545;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+
+.form fieldset legend {
+	color: #026475;
+}
+
+.formfield {
+	width: 50em;
+	padding: 5px;
+}
+
+.formfield legend {
+	color: #026475;
+	font-family: Verdana;
+	font-size: 1.2em;
+}
+
+.formfield label {
+	display: block;
+	float: left;
+	width: 15em;
+	padding: 2px;
+	text-align: right;
+	font-family: Verdana;
+}
+
+.formfield input {
+	padding: 0.15em;
+	border: 1px solid #ddd;
+	background: #ffffff;
+	font-family: Verdana;
+	font-size: 1em;
+	-moz-border-radius: 0.4em;
+	-khtml-border-radius: 0.4em;
+}
+
+.formfield  select {
+	padding: 0.2em;
+	border: 1px solid #ddd;
+	background: #ffffff;
+	font-family: Verdana;
+	font-size: 1em;
+	-moz-border-radius: 0.4em;
+	-khtml-border-radius: 0.4em;
+}
+
+.formfield table {
+	font-family: Verdana;
+	font-size: 1em;
+}
+
+.formfield td {
+	font-family: Verdana;
+	font-size: 1em;
+}
+
+.formfield input:hover,input:focus {
+	border-color: #5555c5;
+	background: #f6f6f6;
+}
+
 .required input {
-    border:1px solid #DD0000;
-}
- 
-.form .submit input{
-    font-family: Verdana;    
-    font-size:1em;
-    margin-top: 0.3em;
-}
- 
-.formerror{
-    position:relative;
-    left:12.1em;
-    color:#FBB829;
+	border: 1px solid #DD0000;
 }
 
+.form .submit input {
+	font-family: Verdana;
+	font-size: 1em;
+	margin-top: 0.3em;
+}
+
+.formerror {
+	position: relative;
+	left: 12.1em;
+	color: #FBB829;
+}

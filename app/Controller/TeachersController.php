@@ -68,7 +68,7 @@ class TeachersController extends AppController {
 			$this->Session->destroy();
 			$this->Session->setFlash('You have been logged out!');
 			$this->redirect(array(
-					'action' => 'index'));
+					'controller' => 'pages', 'action' => 'display'));
 			//exit();
 		}
 	}
@@ -169,7 +169,11 @@ class TeachersController extends AppController {
 
 		$this->set('schooloptions', ClassRegistry::init('School')->schoolOptions());
 
-		$userTypeOptions = array(array('name' => 'Teacher','value' => 'T'),array('name' => 'Admin','value' => 'A'),array('name' => 'Pending','value' => 'P'),);
+		$userTypeOptions = array(
+				array(
+						'name' => 'Teacher','value' => 'T'),array(
+								'name' => 'Admin','value' => 'A'),array(
+										'name' => 'Pending','value' => 'P'),);
 		$this->set('userTypeOptions', $userTypeOptions);
 
 
@@ -209,7 +213,8 @@ class TeachersController extends AppController {
 			if($this->Teacher->deleteTeacher($id))
 			{
 				$this->Session->setFlash($name .' has been deleted.');
-				$this->redirect(array('action' => 'modifyUser'));
+				$this->redirect(array(
+						'action' => 'modifyUser'));
 			}
 			else
 			{
@@ -223,23 +228,23 @@ class TeachersController extends AppController {
 
 		if($this->authorizedUser())
 		{
-
-			if ($this->request->is('get'))
-			{
-				throw new MethodNotAllowedException();
-			}
-
 			if ($this->Teacher->userResetPassword($id))
 			{
 				$this->Session->setFlash($name .'\'s password has been reset to "CAPLTER".');
-				$this->redirect(array('action' => 'modifyUser'));
+				$this->redirect(array(
+						'action' => 'modifyUser'));
 			}
 		}
-
 	}
 
 	public function editProfile()
 	{
+		if(!$this->Session->check('User'))
+		{
+			$this->Session->setFlash('Please login to access this page.');
+			$this->redirect(array(
+					'action' => 'index'));
+		}
 		$this->set('schooloptions', ClassRegistry::init('School')->schoolOptions());
 
 		$user = $this->Session->read('User');
@@ -247,9 +252,10 @@ class TeachersController extends AppController {
 
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
-			if($this->request->data['Teacher']['password'] != $this->request->data['Teacher']['password1'])
+			if($this->request->data['Teacher']['password'] != $this->request->data['Teacher']['confirm_password'])
 			{
 				$this->Session->setFlash('The passwords you have entered do not match. Please verify the passwords again.');
+				return;
 			}
 			if($oldEmail != $this->request->data['Teacher']['email_address'])
 			{
@@ -257,21 +263,27 @@ class TeachersController extends AppController {
 				{
 					$this->Session->setFlash('Email Address already exists. Please try a different one.');
 				}
+				else
+				{
+					$this->Session->setFlash('Unable to update your profile. Please check the email address that you have entered.');
+					return;
+				}
 			}
 			else
 			{
-				pr($this->request->data);
 				if ($this->Teacher->saveModification($this->request->data))
 				{
 					$user = $this->Teacher->getUserDetails($user['Teacher']['id']);
 					$this->Session->write('User', $user);
 
 					$this->Session->setFlash('Your Profile has been updated.');
-					$this->redirect(array('action' => 'index'));
+					$this->redirect(array(
+							'action' => 'index'));
 				}
 				else
 				{
 					$this->Session->setFlash('Unable to update your profile.');
+					return;
 				}
 			}
 		}
@@ -284,9 +296,21 @@ class TeachersController extends AppController {
 
 	public function submitData()
 	{
+
+		if(!$this->Session->check('User'))
+		{
+			$this->Session->setFlash('Please login to access the page.');
+			$this->redirect(array('action' => 'index'));
+		}
+
 		$user = $this->Session->read('User');
 
-		$habitatTypeOptions = array(array('name' => 'Arthropods','value' => 'AR'),array('name' => 'Birds','value' => 'BI'),array('name' => 'Bruchids','value' => 'BR'),array('name' => 'Vegetation','value' => 'VE'));
+		$habitatTypeOptions = array(
+				array(
+						'name' => 'Arthropods','value' => 'AR'),array(
+								'name' => 'Birds','value' => 'BI'),array(
+										'name' => 'Bruchids','value' => 'BR'),array(
+												'name' => 'Vegetation','value' => 'VE'));
 		$this->set('habitatTypeOptions', $habitatTypeOptions);
 		$this->set('siteIDOptions', $this->Teacher->getSiteIDs($user));
 		$this->set('classIDOptions', $this->Teacher->getClassIDs($user));
@@ -295,30 +319,37 @@ class TeachersController extends AppController {
 		{
 			if($this->request->data['SubmitData']['protocol'] == 'BR')
 			{
-				$this->redirect(array('controller' => 'bruchidsamples','action' => 'bruchidData',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
+				$this->redirect(array(
+						'controller' => 'bruchidsamples','action' => 'bruchidData',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
 			}
 			else
 			{
-				$this->redirect(array('controller' => 'habitats','action' => 'habitatCheck',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
+				$this->redirect(array(
+						'controller' => 'habitats','action' => 'habitatCheck',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
 			}
 		}
 	}
 
 	public function downloadData()
 	{
-		$habitatTypeOptions = array(array('name' => 'Ecology Explorers Arthropod Survey','value' => 'AR'),array('name' => 'Ecology Explorers Bird Survey','value' => 'BI'),array('name' => 'Ecology Explorers Bruchid Survey','value' => 'BR'),array('name' => 'Ecology Explorers Vegetation Survey','value' => 'VE'));
+		$habitatTypeOptions = array(
+				array(
+						'name' => 'Ecology Explorers Arthropod Survey','value' => 'AR'),array(
+								'name' => 'Ecology Explorers Bird Survey','value' => 'BI'),array(
+										'name' => 'Ecology Explorers Bruchid Survey','value' => 'BR'),array(
+												'name' => 'Ecology Explorers Vegetation Survey','value' => 'VE'));
 		$this->set('habitatTypeOptions', $habitatTypeOptions);
 
 		$this->set('schooloptions', ClassRegistry::init('School')->schoolOptions());
 
 		if ($this->request->is('post'))
 		{
-		
+
 			$dataConditions['protocol'] = $this->request->data['retrieveData']['protocol'];
 			$dataConditions['start_date'] = $this->request->data['retrieveData']['start_date']['year'].'-'.$this->request->data['retrieveData']['start_date']['month'].'-'.$this->request->data['retrieveData']['start_date']['day'];
 			$dataConditions['end_date'] = $this->request->data['retrieveData']['end_date']['year'].'-'.$this->request->data['retrieveData']['end_date']['month'].'-'.$this->request->data['retrieveData']['end_date']['day'];
 			$dataConditions['school_id'] = $this->request->data['retrieveData']['school_id'];
-			
+				
 			$this->Session->delete('dateRetrieved');
 			$this->redirect(array('controller' => 'teachers','action' => 'retrievedData',$dataConditions['protocol'],$dataConditions['start_date'],$dataConditions['end_date'],$dataConditions['school_id']));
 		}
@@ -327,15 +358,15 @@ class TeachersController extends AppController {
 	function retrievedData()
 	{
 		$param = $this->passedArgs;
-		
+
 		$dataConditions['protocol'] = $param[0];
 		$dataConditions['start_date'] = $param[1];
 		$dataConditions['end_date'] = $param[2];
 		$dataConditions['school_id'] = $param[3];
 		$this->Session->write('dataConditions',$dataConditions);
-		
+
 		$data = ClassRegistry::init('School')->retrieveData($dataConditions);
-		
+
 
 		if(empty($data))
 		{
