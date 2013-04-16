@@ -26,7 +26,6 @@
 		<th>Action</th>
 		<th>Last Login</th>
 		<th>Profile Created On</th>
-		<th></th>
 
 	</tr>
 
@@ -55,7 +54,6 @@
 		</td>
 		<td><?php echo $this->Time->format('F jS, Y h:i A', $teacher['Teacher']['date_created'], null, 'PDT'); ?>
 		</td>
-		<td></td>
 </tr>
 	<?php endforeach; ?>
 </table></div>

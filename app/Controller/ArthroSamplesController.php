@@ -19,6 +19,13 @@ class ArthroSamplesController extends AppController {
 
 	public function arthropodData()
 	{
+		if(!$this->Session->check('User'))
+		{
+			$this->Session->setFlash('Please login to access this page.');
+			$this->redirect(array(
+					'action' => 'login'));
+		}
+		
 		$param = $this->passedArgs;
 
 		$user = $this->Session->read('User');
@@ -40,7 +47,7 @@ class ArthroSamplesController extends AppController {
 
 			if($this->ArthroSample->savingthedata($this->request->data))
 			{
-				$this->Session->setFlash("Arthropod Data has be saved. ");
+				$this->Session->setFlash("Arthropod Data has been saved. ");
 				$this->redirect(array('controller' => 'teachers','action' => 'index'));
 			}
 		}

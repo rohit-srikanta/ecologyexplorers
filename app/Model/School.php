@@ -13,7 +13,7 @@ class School extends AppModel {
 	 * @var array
 	 */
 	public $validate = array(
-			'school_Id' => array(
+			'school_id' => array(
 					'rule' => array('between', 3, 3),
 					'message' => 'School ID must be of 3 characters'),
 			'school_name'  => array(
@@ -60,7 +60,7 @@ class School extends AppModel {
 	{
 		$school = $this->find('list', array(
 				'fields' => array(
-						'School.Id',
+						'School.id',
 						'School.school_Name')));
 
 		return $school;
@@ -104,7 +104,6 @@ class School extends AppModel {
 	public function createSchool($fields)
 	{
 		$this->create();
-		$fields['School']['school_id'] = strtoupper($fields['School']['school_Id']);
 		$fields['School']['date_entered'] = date('Y-m-d H:i:s');
 
 		if($this->save($fields))

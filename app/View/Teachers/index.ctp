@@ -42,13 +42,15 @@
 			<br> <br>
 			<?php echo $this->Html->link('Modify Users', array('action' => 'modifyUser'));?>
 			<br><br>
-			<?php echo $this->Html->link('Modify Species Data', array('controller' => 'birdtaxon', 'action' => 'modifyBirdTaxonData'));?>
+			<?php echo $this->Html->link('Modify Ecology Explorers Data', array('action' => 'modifySpeciesData'));?>
 			<br><br>
 		<?php }
 		?>
 		<?php if($this->Session->read('User'))
 		{
-			echo $this->Html->link('Edit Profile', array('action' => 'editProfile'));?>
+			if('T' == $this->Session->read('UserType')){?>
+			Welcome back <?php echo $this->Session->read('Username')?>!<br> <br>
+			<?php }echo $this->Html->link('Edit Profile', array('action' => 'editProfile'));?>
 			<br> <br>
 			<?php echo $this->Html->link('Create Class',  array('controller' => 'teachersclass', 'action' => 'createClass')); ?>
 			<br> <br>

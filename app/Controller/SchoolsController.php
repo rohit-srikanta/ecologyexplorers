@@ -26,12 +26,14 @@ class SchoolsController extends AppController {
 		if('A' != $this->Session->read('UserType'))
 		{
 			$this->Session->setFlash(__('You do not have permissions to access this page !'));
+			$this->redirect(array(
+					'action' => 'index'));
 		}
 		else
 		{
 			if ($this->request->is('post'))
 			{
-				if($this->School->checkSchoolIdPresent($this->request->data['School']['school_Id']))
+				if($this->School->checkSchoolIdPresent($this->request->data['School']['school_id']))
 				{
 					$this->Session->setFlash('School ID exists. Please try with a different School ID.');
 				}

@@ -38,7 +38,7 @@ class VegSamplesController extends AppController {
 			
 			if($this->VegSample->savingthedata($this->request->data))
 			{
-				$this->Session->setFlash("Vegetation Data has be saved. ");
+				$this->Session->setFlash("Vegetation Data has been saved. ");
 				$this->redirect(array('controller' => 'teachers','action' => 'index'));
 			}
 		}

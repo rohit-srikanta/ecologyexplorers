@@ -11,7 +11,7 @@
 	if(!empty($teachersYetToBeApproved))
 	{
 		?>
-<p>New user profiles</p>
+<p><b>New user profiles</b></p>
 <br>
 <br><div class="text">
 <table>
@@ -22,11 +22,6 @@
 		<th>Email Address</th>
 		<th>School</th>
 		<th>Profile Created On</th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
 	</tr>
 
 	<!-- Here is where we loop through our $posts array, printing out post info -->
@@ -42,20 +37,16 @@
 		</td>
 		<td><?php echo $this->Time->format('F jS, Y h:i A', $teacher['Teacher']['date_created'], null, 'PDT'); ?>
 		</td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
 	</tr>
 	<?php endforeach; ?>
-</table></div>
+</table>
 <br>
 <?php echo $this->Form->end('Approve'); ?>
 <?php 
 	}
 	else {
 	?>
+</div>
 <p>No new user profiles to approve </p>
 <?php
 	}

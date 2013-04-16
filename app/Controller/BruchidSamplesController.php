@@ -15,9 +15,15 @@ class BruchidSamplesController extends AppController {
 
 	public function bruchidData()
 	{
+		
+		if(!$this->Session->check('User'))
+		{
+			$this->Session->setFlash('Please login to access this page.');
+			$this->redirect(array(
+					'action' => 'login'));
+		}
+		
 		$param = $this->passedArgs;
-
-
 		$user = $this->Session->read('User');
 		$this->set('teacherName', $user['Teacher']['name']);
 
@@ -52,7 +58,7 @@ class BruchidSamplesController extends AppController {
 
 			if($this->BruchidSample->savingthedata($this->request->data))
 			{
-				$this->Session->setFlash("Beetles Data has be saved. ");
+				$this->Session->setFlash("Beetles Data has been saved. ");
 				$this->redirect(array('controller' => 'teachers','action' => 'index'));
 			}
 				

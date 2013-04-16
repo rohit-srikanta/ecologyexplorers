@@ -12,6 +12,14 @@ class SitesController extends AppController {
 	
 	public function createSite()
 	{
+		if(!$this->Session->check('User'))
+		{
+			$this->Session->setFlash('Please login to access this page.');
+			$this->redirect(array(
+					'action' => 'login'));
+		}
+		
+		
 		$user = $this->Session->read('User');
 		$userDetails['Site']['school_id'] = $user['Teacher']['school_id'];
 
@@ -26,7 +34,7 @@ class SitesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
 
-			if($this->Site->checkSiteIDExists($this->request->data['Site']['site_Id']))
+			if($this->Site->checkSiteIDExists($this->request->data['Site']['site_id']))
 			{
 				$this->Session->setFlash('Site ID already exists. Please try a different one.');
 			}

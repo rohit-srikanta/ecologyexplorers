@@ -20,6 +20,14 @@ class HabitatsController extends AppController {
 
 	public function habitatCheck()
 	{
+		if(!$this->Session->check('User'))
+		{
+			$this->Session->setFlash('Please login to access this page.');
+			$this->redirect(array(
+					'action' => 'login'));
+		}
+		
+		
 		$param = $this->passedArgs;
 		$habitat = $this->Habitat->getHabitatDetails($param[1],$param[0]);
 

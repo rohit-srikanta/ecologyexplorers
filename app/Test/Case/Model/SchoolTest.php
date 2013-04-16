@@ -28,7 +28,7 @@ class SchoolTest extends CakeTestCase  {
 		$result = $this->School->loadSchools();
 		$expected =  $this->School->find('list', array(
 												'fields' => array(
-												'School.Id',
+												'School.id',
 												'School.school_Name')));
 
 		$this->assertEquals($result,$expected);
@@ -50,7 +50,7 @@ class SchoolTest extends CakeTestCase  {
 		//Case 1 : Positive
 		$data = array(
 				'School' => array(
-						'school_Id' => 'NCU',
+						'school_id' => 'NCU',
 						'school_name' => 'North Carolina',
 						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
 						'zipcode' => '78965',
@@ -63,7 +63,7 @@ class SchoolTest extends CakeTestCase  {
 		//Case 3 : Negative
 		$data = array(
 				'School' => array(
-						'school_Id' => 'ASU',
+						'school_id' => 'ASU',
 						'school_name' => 'Arizona State University',
 						'address' => '',
 						'zipcode' => '',
@@ -76,7 +76,7 @@ class SchoolTest extends CakeTestCase  {
 		//Case 4 : Negative
 		$data = array(
 				'School' => array(
-						'school_Id' => 'ASUTempe',
+						'school_id' => 'ASUTempe',
 						'school_name' => 'Arizona State University',
 						'address' => '',
 						'zipcode' => '',
@@ -89,7 +89,7 @@ class SchoolTest extends CakeTestCase  {
 		//Case 5 : Negative
 		$data = array(
 				'School' => array(
-						'school_Id' => 'ASUTempe',
+						'school_id' => 'ASUTempe',
 						'school_name' => 'Arizona State University',
 						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
 						'zipcode' => '85287',
@@ -102,7 +102,7 @@ class SchoolTest extends CakeTestCase  {
 		//Case 6 : Negative
 		$data = array(
 				'School' => array(
-						'school_Id' => 'SU',
+						'school_id' => 'SU',
 						'school_name' => 'Arizona State University',
 						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
 						'zipcode' => '85287',
@@ -115,7 +115,7 @@ class SchoolTest extends CakeTestCase  {
 		//Case 7 : Negative
 		$data = array(
 				'School' => array(
-						'school_Id' => '',
+						'school_id' => '',
 						'school_name' => 'Arizona State University',
 						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
 						'zipcode' => '85287',
@@ -128,7 +128,7 @@ class SchoolTest extends CakeTestCase  {
 		//Case 8 : Negative
 		$data = array(
 				'School' => array(
-						'school_Id' => 'ASU',
+						'school_id' => 'ASU',
 						'school_name' => '',
 						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
 						'zipcode' => '85287',
@@ -140,7 +140,7 @@ class SchoolTest extends CakeTestCase  {
 		//Case 8 : Negative
 		$data = array(
 				'School' => array(
-						'school_Id' => 'ASU',
+						'school_id' => 'ASU',
 						'school_name' => 'Arizona State University',
 						'address' => 'Brickyard 6th Floor,Arizona State University,P.O. Box 879309',
 						'zipcode' => '1',

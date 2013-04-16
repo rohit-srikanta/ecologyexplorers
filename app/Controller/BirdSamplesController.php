@@ -15,6 +15,14 @@ class BirdSamplesController extends AppController {
 
 	public function birdData()
 	{
+		if(!$this->Session->check('User'))
+		{
+			$this->Session->setFlash('Please login to access this page.');
+			$this->redirect(array(
+					'action' => 'login'));
+		}
+		
+		
 		$param = $this->passedArgs;
 		$user = $this->Session->read('User');
 		$this->set('teacherName', $user['Teacher']['name']);
@@ -42,7 +50,7 @@ class BirdSamplesController extends AppController {
 
 			if($this->BirdSample->savingthedata($this->request->data))
 			{
-				$this->Session->setFlash("Bird Data has be saved. ");
+				$this->Session->setFlash("Bird Data has been saved. ");
 				$this->redirect(array('controller' => 'teachers','action' => 'index'));
 			}
 		}

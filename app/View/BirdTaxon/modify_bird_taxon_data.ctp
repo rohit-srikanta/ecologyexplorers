@@ -15,7 +15,7 @@
 <br>
 <br><div class="text">
 <table>
-	<?php echo $this->Form->create('ModifyUser');?>
+	<?php echo $this->Form->create('BirdTaxon');?>
 	<tr>
 
 		<th>ID</th>
@@ -23,8 +23,6 @@
 		<th>TSN</th>
 		<th>Common Name</th>
 		<th>Action</th>
-		<th>Action</th>
-
 	</tr>
 
 	<?php foreach ($birdTaxon as $bird):?>
@@ -39,20 +37,15 @@
 		</td>
 		<td><?php echo $this->Html->link('Edit', array('action' => 'edit', $bird['BirdTaxon']['id']));?>
 		</td>
-		<td><?php  echo $this->Form->postLink(
-				'Delete',
-				array('action' => 'delete', $bird['BirdTaxon']['id']),
-				array('confirm' => 'Are you sure you want to delete the bird details ?'));
-		?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>
-</div>
+
 <br>
 <?php echo $this->Form->end(); ?>
-<?php }
+<?php } echo $this->Html->link('Add Bird Details',array('controller' => 'birdtaxon', 'action' => 'addBird'));
 ?>
-
+</div>
 <br>
 <br>
 </html>

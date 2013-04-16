@@ -241,7 +241,14 @@ div.topright {
 	right: 0;
 	width: 150px;
 }
-
+div.buttonPosition
+{
+	color: #026475;
+	width: 150px;
+	position: absolute;
+	top: 200;
+	right: 0;
+}
 div.topleft {
 	display: block;
 	position: absolute;
@@ -279,6 +286,7 @@ div.seperation
 	background-position: bottom right;
 	background-repeat: no-repeat;
 }
+
 
 .form fieldset legend {
 	color: #026475;
