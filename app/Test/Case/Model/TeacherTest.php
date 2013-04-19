@@ -73,6 +73,10 @@ class TeachersTest extends CakeTestCase  {
 						'name' => 'Rohit Srikanta',
 						'school_id' => '1'
 				));
+		
+		debug(Security::hash('CAPLTER'));
+		
+		
 		$this->assertNotEqual($result, $expected,'Incorrect Login');
 
 		//Case 3 : Negative
