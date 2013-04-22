@@ -144,7 +144,7 @@ class School extends AppModel {
 
 			$conditionsDate = array('BirdSample.collection_date between ? and ?' => array($startDate, $endDate));
 
-			$fieldsHabitat= array('Habitat.type','Habitat.recording_date','Habitat.radius','Habitat.percent_observed','Habitat.tree_canopy','Habitat.shrubcover','Habitat.gravel_soil','Habitat.lawn','Habitat.paved_building','Habitat.other');
+			$fieldsHabitat= array('Habitat.type','Habitat.recording_date','Habitat.radius','Habitat.percent_observed','Habitat.tree_canopy','Habitat.shrubcover','Habitat.gravel_soil','Habitat.lawn','Habitat.paved_building','Habitat.other','Habitat.water');
 			$fieldsSchool = array('School.school_name','School.city','School.zipcode');
 			$fieldsBirdSample = array('BirdSample.time_start','BirdSample.time_end','BirdSample.collection_date','BirdSample.air_temp','BirdSample.comments');
 			$fieldsTeachersClass = array('TeachersClass.class_name');
@@ -211,7 +211,9 @@ class School extends AppModel {
 						$data[$i]['Gravel_Soil'] = $habitat['gravel_soil'];
 						$data[$i]['Lawn'] = $habitat['lawn'];
 						$data[$i]['Paved_Building'] = $habitat['paved_building'];
+						$data[$i]['Water'] = $habitat['water'];
 						$data[$i]['Other'] = $habitat['other'];
+						
 						
 						$i++;
 					}
@@ -223,7 +225,7 @@ class School extends AppModel {
 		{
 			$conditionsDate = array('ArthroSample.collection_date between ? and ?' => array($startDate, $endDate));
 
-			$fieldsHabitat= array('Habitat.type','Habitat.recording_date','Habitat.area','Habitat.num_traps','Habitat.trap_arrange','Habitat.tree_canopy','Habitat.shrubcover','Habitat.gravel_soil','Habitat.lawn','Habitat.paved_building','Habitat.other');
+			$fieldsHabitat= array('Habitat.type','Habitat.recording_date','Habitat.area','Habitat.num_traps','Habitat.trap_arrange','Habitat.tree_canopy','Habitat.shrubcover','Habitat.gravel_soil','Habitat.lawn','Habitat.paved_building','Habitat.other','Habitat.water');
 			$fieldsSchool = array('School.school_name','School.city','School.zipcode');
 			$fieldsArthroSample = array('ArthroSample.collection_date','ArthroSample.comments');
 			$fieldsTeachersClass = array('TeachersClass.class_name');
@@ -283,7 +285,9 @@ class School extends AppModel {
 						$data[$i]['Gravel_Soil'] = $habitat['gravel_soil'];
 						$data[$i]['Lawn'] = $habitat['lawn'];
 						$data[$i]['Paved_Building'] = $habitat['paved_building'];
+						$data[$i]['Water'] = $habitat['water'];
 						$data[$i]['Other'] = $habitat['other'];
+						
 							
 						$i++;
 					}
@@ -297,7 +301,7 @@ class School extends AppModel {
 		{
 			$conditionsDate = array('VegSample.collection_date between ? and ?' => array($startDate, $endDate));
 
-			$fieldsHabitat= array('Habitat.type','Habitat.recording_date','Habitat.area','Habitat.tree_canopy','Habitat.shrubcover','Habitat.gravel_soil','Habitat.lawn','Habitat.paved_building','Habitat.other');
+			$fieldsHabitat= array('Habitat.type','Habitat.recording_date','Habitat.area','Habitat.tree_canopy','Habitat.shrubcover','Habitat.gravel_soil','Habitat.lawn','Habitat.paved_building','Habitat.other','Habitat.water');
 			$fieldsSchool = array('School.school_name','School.city','School.zipcode');
 			$fieldsVegSample = array('VegSample.collection_date','VegSample.tree_count','VegSample.shrub_count','VegSample.cactus_count');
 			$fieldsTeachersClass = array('TeachersClass.class_name');
@@ -362,6 +366,7 @@ class School extends AppModel {
 						$data[$i]['Gravel_Soil'] = $habitat['gravel_soil'];
 						$data[$i]['Lawn'] = $habitat['lawn'];
 						$data[$i]['Paved_Building'] = $habitat['paved_building'];
+						$data[$i]['Water'] = $habitat['water'];
 						$data[$i]['Other'] = $habitat['other'];
 						
 						$i++;

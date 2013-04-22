@@ -12,23 +12,33 @@ class VegSamplesController extends AppController {
 		$this->set('vegSamples', $this->paginate());
 	}
 	
-	
+	//This method is used to submit the veg data from the user.
 	public function vegData()
 	{
+		//Submission of data is a privilege of logged in users. Checking if the user has logged it.
+		if(!$this->Session->check('User'))
+		{
+			$this->Session->setFlash('Please login to access this page.');
+			$this->redirect(array(
+					'action' => 'login'));
+		}
+		
+		//Data is passed from the page where we choose site and class, which will be used to submit the data.
 		$param = $this->passedArgs;
 	
 		$user = $this->Session->read('User');
 		$this->set('teacherName', $user['Teacher']['name']);
 	
+		//Hard coding the school id of the current user
 		$this->set('schooloptions', ClassRegistry::init('School')->schoolWithID($user['Teacher']['school_id']));
 	
 		$this->set('siteOptions',ClassRegistry::init('Site')->getSiteName($param[0]));
 	
 		$this->set('classOptions', ClassRegistry::init('TeachersClass')->getClassName($param[1]));
 	
+		//Prepopulating the veg taxon drop down box with the values retrieved from DB.
 		$this->set('vegOptions',  ClassRegistry::init('VegTaxon')->getOrderList());
 		
-		$this->set('typeOptions',  ClassRegistry::init('VegTaxon')->getOrderList());
 	
 		if ($this->request->is('post'))
 		{

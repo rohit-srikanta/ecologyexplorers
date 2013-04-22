@@ -11,6 +11,7 @@ class CloudCoverController extends AppController {
 
 	}
 
+	//UI to edit the cloud data.
 	public function modifyCloudCover()
 	{
 		if('A' != $this->Session->read('UserType'))
@@ -24,6 +25,7 @@ class CloudCoverController extends AppController {
 		}
 	}
 
+	//Method to edit the cloud data details. Only the cloud name can be edited. The entry cannot be deleted.
 	public function edit($id = null) {
 		if (!$id) {
 			throw new NotFoundException(__('Invalid Cloud Cover ID'));
@@ -50,6 +52,7 @@ class CloudCoverController extends AppController {
 		}
 	}
 
+	//Method of adding new cloud data.
 	public function addCloudCover() {
 		if ($this->request->is('post')) {
 			$this->CloudCover->create();

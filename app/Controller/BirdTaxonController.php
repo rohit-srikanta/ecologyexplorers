@@ -10,9 +10,10 @@ class BirdTaxonController extends AppController {
 	public function index() {
 
 	}
-
+	//UI to edit the bird taxon data.
 	public function modifyBirdTaxonData()
 	{
+		//Checking if the user logged in is an admin.
 		if('A' != $this->Session->read('UserType'))
 		{
 			$this->Session->setFlash(__('You do not have permissions to access this page !'));
@@ -24,6 +25,7 @@ class BirdTaxonController extends AppController {
 		}
 	}
 
+	//Method to edit the arthrotaxon details. Only the taxon name and the taxon. The entry cannot be deleted.
 	public function edit($id = null) {
 		if (!$id) {
 			throw new NotFoundException(__('Invalid Bird taxon ID'));
@@ -50,6 +52,7 @@ class BirdTaxonController extends AppController {
 		}
 	}
 
+	//Method of adding new arthro taxon data.
 	public function addBird() {
 		if ($this->request->is('post')) {
 			$this->BirdTaxon->create();

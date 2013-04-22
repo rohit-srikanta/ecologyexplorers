@@ -11,8 +11,10 @@ class VegTaxonController extends AppController {
 
 	}
 
+	//UI to edit the veg taxon data.
 	public function modifyVegTaxonData()
 	{
+		//Checking if the user logged in is an admin.
 		if('A' != $this->Session->read('UserType'))
 		{
 			$this->Session->setFlash(__('You do not have permissions to access this page !'));
@@ -24,6 +26,7 @@ class VegTaxonController extends AppController {
 		}
 	}
 
+	//Method to edit the vegtaxon details. Only the common name, type and taxon. The entry cannot be deleted.
 	public function edit($id = null) {
 		if (!$id) {
 			throw new NotFoundException(__('Invalid Vegetation taxon ID'));
@@ -50,6 +53,7 @@ class VegTaxonController extends AppController {
 		}
 	}
 
+	//Method of adding new veg taxon data.
 	public function addVeg() {
 		if ($this->request->is('post')) {
 			$this->VegTaxon->create();
