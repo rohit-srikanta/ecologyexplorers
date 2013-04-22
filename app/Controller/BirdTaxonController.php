@@ -20,7 +20,7 @@ class BirdTaxonController extends AppController {
 		else
 		{
 			$this->BirdTaxon->recursive = 0;
-			$this->set('birdTaxon', $this->BirdTaxon->find('all',array('fields'=> array('BirdTaxon.id','BirdTaxon.species_id','BirdTaxon.tsn','BirdTaxon.common_name'))));
+			$this->set('birdTaxon', $this->BirdTaxon->find('all',array('fields'=> array('BirdTaxon.id','BirdTaxon.species_id','BirdTaxon.common_name'))));
 		}
 	}
 

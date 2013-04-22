@@ -166,7 +166,7 @@ class School extends AppModel {
 					),
 					'fields' => $fieldsSchool,
 			));
-
+			
 			$i=0;
 			$data ='';
 			foreach ($school[0]['Habitat'] as $habitat)
@@ -180,7 +180,12 @@ class School extends AppModel {
 						$data[$i]['Bird_Common_Name'] = $birdSpecimen['BirdTaxon']['common_name'];
 						$data[$i]['Frequency'] = $birdSpecimen['frequency'];
 						$data[$i]['Air_Temperature'] = $birdSamples['air_temp'];
-						$data[$i]['Cloud_Cover'] = $birdSamples['CloudCover']['cloud_cover_name'];
+										
+						$data[$i]['Cloud_Cover'] = "";
+						if(count($birdSamples['CloudCover']) > 0)
+						{
+							$data[$i]['Cloud_Cover'] = $birdSamples['CloudCover']['cloud_cover_name'];
+						}
 						$data[$i]['Start_Time'] = $birdSamples['time_start'];
 						$data[$i]['End_Time'] = $birdSamples['time_end'];
 						$data[$i]['Comments'] = $birdSamples['comments'];
@@ -189,6 +194,14 @@ class School extends AppModel {
 						$data[$i]['Site_Location'] = $birdSamples['Site']['location'];
 						$data[$i]['City'] = $school[0]['School']['city'];
 						$data[$i]['ZipCode'] = $school[0]['School']['zipcode'];
+						
+						$data[$i]['Teachers_Name'] = "";
+						$data[$i]['Class_Name'] = "";
+						if(count($birdSamples['TeachersClass']) > 0)
+						{
+							$data[$i]['Teachers_Name'] = $birdSamples['TeachersClass']['Teacher']['name'];
+							$data[$i]['Class_Name'] = $birdSamples['TeachersClass']['class_name'];
+						}
 						$data[$i]['Teachers_Name'] = $birdSamples['TeachersClass']['Teacher']['name'];
 						$data[$i]['Class_Name'] = $birdSamples['TeachersClass']['class_name'];			
 						$data[$i]['Radius'] = $habitat['radius'];
@@ -253,8 +266,15 @@ class School extends AppModel {
 						$data[$i]['Site_Location'] = $arthroSamples['Site']['location'];
 						$data[$i]['City'] = $school[0]['School']['city'];
 						$data[$i]['Zipcode'] = $school[0]['School']['zipcode'];
-						$data[$i]['Teachers_Name'] = $arthroSamples['TeachersClass']['Teacher']['name'];
-						$data[$i]['Class_Name'] = $arthroSamples['TeachersClass']['class_name'];											
+						
+						$data[$i]['Teachers_Name'] = "";
+						$data[$i]['Class_Name'] = "";
+						if(count($arthroSamples['TeachersClass']) > 0)
+						{
+							$data[$i]['Teachers_Name'] = $arthroSamples['TeachersClass']['Teacher']['name'];
+							$data[$i]['Class_Name'] = $arthroSamples['TeachersClass']['class_name'];
+						}
+														
 						$data[$i]['Area'] = $habitat['area'];
 						$data[$i]['No_Of_Traps'] = $habitat['num_traps'];
 						$data[$i]['Trap_Arrange'] = $habitat['trap_arrange'];
@@ -327,8 +347,15 @@ class School extends AppModel {
 						$data[$i]['Site_Location'] = $vegSamples['Site']['location'];
 						$data[$i]['City'] = $school[0]['School']['city'];
 						$data[$i]['Zipcode'] = $school[0]['School']['zipcode'];
-						$data[$i]['Teachers_Name'] = $vegSamples['TeachersClass']['Teacher']['name'];
-						$data[$i]['Class_Name'] = $vegSamples['TeachersClass']['class_name'];						
+						
+						$data[$i]['Teachers_Name'] = "";
+						$data[$i]['Class_Name'] = "";
+						if(count($vegSamples['TeachersClass']) > 0)
+						{
+							$data[$i]['Teachers_Name'] = $vegSamples['TeachersClass']['Teacher']['name'];
+							$data[$i]['Class_Name'] = $vegSamples['TeachersClass']['class_name'];
+						}
+												
 						$data[$i]['Area'] = $habitat['area'];
 						$data[$i]['Tree_Canopy'] = $habitat['tree_canopy'];
 						$data[$i]['Shrubcover'] = $habitat['shrubcover'];
@@ -380,7 +407,12 @@ class School extends AppModel {
 						
 						$data[$i]['Sample_Date'] = $bruchidSamples['collection_date'];
 						$data[$i]['Site_ID'] = $site['site_name'];
-						$data[$i]['Tree_type'] = $bruchidSamples['tree_type'];
+
+						if($bruchidSamples['tree_type'] == 'B')
+							$data[$i]['Tree_type'] = 'Blue Palo Verde';
+						else
+							$data[$i]['Tree_type'] = 'Foothills Palo Verde';					
+
 						$data[$i]['Site_type'] = $bruchidSamples['site_type'];
 						$data[$i]['Tree_no'] = $bruchidSpecimen['tree_no'];
 						$data[$i]['Pod_no'] = $bruchidSpecimen['pod_no'];

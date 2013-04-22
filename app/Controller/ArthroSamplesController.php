@@ -17,6 +17,7 @@ class ArthroSamplesController extends AppController {
 		$this->set('arthroSamples', $this->paginate());
 	}
 
+	//This method is used to create 
 	public function arthropodData()
 	{
 		if(!$this->Session->check('User'))

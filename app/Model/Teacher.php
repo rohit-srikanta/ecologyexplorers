@@ -48,7 +48,7 @@ class Teacher extends AppModel {
 	public function validateLogin($emailAddress = null,$password = null)
 	{
 		$password1 = Security::hash($password);
-		$fields = array('Teacher.id','Teacher.email_address','Teacher.type','Teacher.name','Teacher.school_id');
+		$fields = array('Teacher.id','Teacher.email_address','Teacher.type','Teacher.name','Teacher.school_id','Teacher.password');
 		$conditions = array("Teacher.email_address" => $emailAddress,"Teacher.password" => $password1,);
 		$user = $this->find('first',array('conditions' => $conditions,'fields'=>$fields));
 		

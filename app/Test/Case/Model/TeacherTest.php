@@ -50,7 +50,7 @@ class TeachersTest extends CakeTestCase  {
 		$result = $this->Teacher->validateLogin('rohit@asu.edu','rohit');
 		
 		$conditions = array("Teacher.email_address" => "rohit@asu.edu");
-		$fields = array('Teacher.id','Teacher.email_address','Teacher.type','Teacher.name','Teacher.school_id');
+		$fields = array('Teacher.id','Teacher.email_address','Teacher.type','Teacher.name','Teacher.school_id','Teacher.password');
 		$expected = $this->Teacher->find('first', array('conditions' => $conditions,'fields'=>$fields));
 		
 		debug($result);

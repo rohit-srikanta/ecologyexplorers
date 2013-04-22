@@ -47,7 +47,7 @@ class SiteTest extends CakeTestCase {
 	{
 		$data = array(
 				'Site' => array(
-						'site_Id' => '12345',
+						'site_id' => '12345',
 						'site_name' => '123',
 						'address' => 'ASUrite',
 						'city' => 'ASUrite',
@@ -84,7 +84,7 @@ class SiteTest extends CakeTestCase {
 		
 		$data = array(
 				'Site' => array(
-						'site_Id' => '',
+						'site_id' => '',
 						'site_name' => '123',
 						'address' => 'ASUrite',
 						'city' => 'ASUrite',
@@ -121,7 +121,7 @@ class SiteTest extends CakeTestCase {
 		
 		$data = array(
 				'Site' => array(
-						'site_Id' => 'ASU111',
+						'site_id' => 'ASU111',
 						'site_name' => '',
 						'address' => 'ASUrite',
 						'city' => 'ASUrite',
@@ -158,7 +158,7 @@ class SiteTest extends CakeTestCase {
 		
 		$data = array(
 				'Site' => array(
-						'site_Id' => 'ASU111',
+						'site_iid' => 'ASU111',
 						'site_name' => '123',
 						'address' => 'ASUrite',
 						'city' => 'ASUrite',
@@ -195,7 +195,7 @@ class SiteTest extends CakeTestCase {
 		
 		$data = array(
 				'Site' => array(
-						'site_Id' => 'ASU111',
+						'site_id' => 'ASU111',
 						'site_name' => '123',
 						'address' => '',
 						'city' => 'ASUrite',
@@ -232,7 +232,7 @@ class SiteTest extends CakeTestCase {
 		
 		$data = array(
 				'Site' => array(
-						'site_Id' => 'ASU111',
+						'site_id' => 'ASU111',
 						'site_name' => '123',
 						'address' => 'ASUrite',
 						'city' => '',
@@ -269,7 +269,7 @@ class SiteTest extends CakeTestCase {
 		
 		$data = array(
 				'Site' => array(
-						'site_Id' => 'ASU111',
+						'site_id' => 'ASU111',
 						'site_name' => '123',
 						'address' => 'ASUrite',
 						'city' => 'ASUrite',

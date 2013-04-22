@@ -20,7 +20,6 @@
 
 		<th>ID</th>
 		<th>Species ID</th>
-		<th>TSN</th>
 		<th>Common Name</th>
 		<th>Action</th>
 	</tr>
@@ -30,8 +29,6 @@
 		<td><?php echo $bird['BirdTaxon']['id']; ?>
 		</td>
 		<td><?php echo $bird['BirdTaxon']['species_id']; ?>
-		</td>
-		<td><?php echo $bird['BirdTaxon']['tsn']; ?>
 		</td>
 		<td><?php echo $bird['BirdTaxon']['common_name']; ?>
 		</td>

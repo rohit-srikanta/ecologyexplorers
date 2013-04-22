@@ -51,6 +51,12 @@ class TeachersController extends AppController {
 					$this->Session->write('User', $user);
 					$this->Session->write('Username', $user['Teacher']['name']);
 					$this->Session->write('UserType',$user['Teacher']['type']);
+					if($user['Teacher']['password'] == Security::hash("CAPLTER"))
+					{
+						$this->Session->setFlash('Login Successful.Please change the default password.');
+						$this->redirect(array(
+								'action' => 'editProfile'));
+					}	
 					$this->redirect(array(
 							'action' => 'index'));
 				}
@@ -110,7 +116,7 @@ class TeachersController extends AppController {
 
 					$this->sendemail($body,$to,$this->fromEmailAddress,$subject);
 
-					$this->Session->setFlash(__('Data can be submitted once your profile is approved. Until then please feel free to download existing data.'));
+					$this->Session->setFlash(__('Profile Created. Data can be submitted once your profile is approved. Until then please feel free to download existing data.'));
 
 					//After registering, the user is redirected to the main page.
 					$this->redirect(array(

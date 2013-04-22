@@ -6,6 +6,8 @@ $pass = "rootpassword";
 $db = "datamigration";
 $db2 = "ecologyexplorers_data";
 
+ini_set('max_execution_time', 60);
+
 $mysqli_temp = new mysqli($host, $user, $pass);
 
 if (mysqli_connect_errno())
@@ -20,7 +22,9 @@ mysqli_close($mysqli_temp);
 $mysqli_old = new mysqli($host, $user, $pass,$db2);
 $mysqli_new = new mysqli($host, $user, $pass,$db);
 
-/*echo "Connection established";
+echo "Connection established";?>
+<br>
+<?php
 
 $query_new_school_table = "CREATE TABLE IF NOT EXISTS `schools` (
 		`id` int NOT NULL AUTO_INCREMENT,
@@ -33,7 +37,7 @@ $query_new_school_table = "CREATE TABLE IF NOT EXISTS `schools` (
 		PRIMARY KEY (`id`),
 		UNIQUE(`school_id`),
 		INDEX(`school_id`)
-);";
+		);";
 $result_new_school_table = $mysqli_new->query($query_new_school_table) or die($mysqli_new->error.__LINE__);
 
 $query_old_school = "SELECT * FROM school";
@@ -42,19 +46,19 @@ $result_old_school = $mysqli_old->query($query_old_school) or die($mysqli_old->e
 // GOING THROUGH THE SCHOOL DATA
 if($result_old_school->num_rows > 0) {
 
-$querySchool = "INSERT into schools (school_id,school_name,address,zipcode,city,date_entered) VALUES ";
-while($row = $result_old_school->fetch_assoc())
-{
-//Harcoding null values if the zipcode and address contain null values.
-$address = ($row['address'] == NULL) ? "NULL" : "'".$row['address']."'";
+	$querySchool = "INSERT into schools (school_id,school_name,address,zipcode,city,date_entered) VALUES ";
+	while($row = $result_old_school->fetch_assoc())
+	{
+		//Harcoding null values if the zipcode and address contain null values.
+		$address = ($row['address'] == NULL) ? "NULL" : "'".$row['address']."'";
 
-//Zipcode cannot contain text. Changing the value to null if it does.
-if($row['zipcode'] == 'test' ||$row['zipcode'] == NULL )
-	$row['zipcode'] = "NULL";
-$querySchool = $querySchool."('".$row['school_id']."','".$mysqli_old->real_escape_string($row['school_name'])."',".$address.",".$row['zipcode'].",'".$row['city']."','".$row['date_entered']."'),";
-}
-$querySchool = substr($querySchool, 0, -1);
-$querySchool = $querySchool.";";
+		//Zipcode cannot contain text. Changing the value to null if it does.
+		if($row['zipcode'] == 'test' ||$row['zipcode'] == NULL )
+			$row['zipcode'] = "NULL";
+		$querySchool = $querySchool."('".$row['school_id']."','".$mysqli_old->real_escape_string($row['school_name'])."',".$address.",".$row['zipcode'].",'".$row['city']."','".$row['date_entered']."'),";
+	}
+	$querySchool = substr($querySchool, 0, -1);
+	$querySchool = $querySchool.";";
 
 }
 else {
@@ -65,7 +69,9 @@ $result_old_school->close();
 
 
 $result = $mysqli_new->query($querySchool) or die($mysqli_new->error.__LINE__);
-echo "Schools table inserted with data";*/
+echo "Schools table inserted with data";?>
+<br>
+<?php
 
 
 $query_new_school = "SELECT id,school_id FROM schools";
@@ -74,7 +80,7 @@ while($row = $result_new_school->fetch_assoc())
 {
 	$schoolMapping[$row['id']] = $row['school_id'];
 }
-/*
+
 
 $query_new_teachers_table = "CREATE TABLE IF NOT EXISTS `teachers` (
 		`id` int NOT NULL AUTO_INCREMENT,
@@ -90,7 +96,7 @@ $query_new_teachers_table = "CREATE TABLE IF NOT EXISTS `teachers` (
 		UNIQUE(`email_address`),
 		INDEX(`email_address`,`password`),
 		FOREIGN KEY (school_id) REFERENCES schools(id)
-);";
+		);";
 $result_new_teachers_table = $mysqli_new->query($query_new_teachers_table) or die($mysqli_new->error.__LINE__);
 
 
@@ -100,67 +106,67 @@ $result_old_teacher = $mysqli_old->query($query_old_teacher) or die($mysqli_old-
 // GOING THROUGH THE TEACHERs DATA
 if($result_old_teacher->num_rows > 0) {
 
-$queryteacher = "INSERT into teachers (old_teacher_id,email_address,password,type,name,school_id,date_created) VALUES ";
-$i=0;
-while($row = $result_old_teacher->fetch_assoc())
-{
-//If the teacher has no email associated, then add a default email address of "nullemail" is added
-if($row['email'] == NULL)
-	$row['email'] = 'nullemail'.$i++.'@null.com';
+	$queryteacher = "INSERT into teachers (old_teacher_id,email_address,password,type,name,school_id,date_created) VALUES ";
+	$i=0;
+	while($row = $result_old_teacher->fetch_assoc())
+	{
+		//If the teacher has no email associated, then add a default email address of "nullemail" is added
+		if($row['email'] == NULL)
+			$row['email'] = 'nullemail'.$i++.'@null.com';
 
-//There are 3 teachers with ecology.explorers@asu.edu email address and may have some data associated with them.
-//Append their email address with number.
-if($row['email'] == 'ecology.explorers@asu.edu')
-	$row['email'] = 'ecology.explorers'.$i++.'@asu.edu';
+		//There are 3 teachers with ecology.explorers@asu.edu email address and may have some data associated with them.
+		//Append their email address with number.
+		if($row['email'] == 'ecology.explorers@asu.edu')
+			$row['email'] = 'ecology.explorers'.$i++.'@asu.edu';
 
-//Map the school ids with their primary key from the school table.
-$school = array_search($row['school_id'], $schoolMapping);
+		//Map the school ids with their primary key from the school table.
+		$school = array_search($row['school_id'], $schoolMapping);
 
-//If the teacher has no school associated,teachers profile is not created for that data.
-if($school == NULL)
-	continue;
+		//If the teacher has no school associated,teachers profile is not created for that data.
+		if($school == NULL)
+			continue;
 
-//Duplicate email address are removed.
-if($row['teacher_id'] == 'brbarker' || $row['teacher_id'] == 'crvitale' || $row['teacher_id'] == 'phillipshope' || $row['teacher_id'] == '148148' || $row['teacher_id'] == 'tscarlson'||$row['teacher_id'] =='test2')
-	continue;
+		//Duplicate email address are removed.
+		if($row['teacher_id'] == 'brbarker' || $row['teacher_id'] == 'crvitale' || $row['teacher_id'] == 'phillipshope' || $row['teacher_id'] == '148148' || $row['teacher_id'] == 'tscarlson'||$row['teacher_id'] =='test2')
+			continue;
 
-//This teacher has 4 profile but has data associated with only one. Keeping that profile and removing the rest.
-if($row['email'] == 'jhdonova@guhsdaz.org' && $row['teacher_id'] != 'jhdonova' )
-	continue;
+		//This teacher has 4 profile but has data associated with only one. Keeping that profile and removing the rest.
+		if($row['email'] == 'jhdonova@guhsdaz.org' && $row['teacher_id'] != 'jhdonova' )
+			continue;
 
-$queryteacher = $queryteacher."('".$row['teacher_id']."','".$row['email']."','5ef3f435d713ec7e69ee08f93f42a322ce180627','T','".$row['name']."',".$school.",now()),";
-}
-$queryteacher = substr($queryteacher, 0, -1);
-$queryteacher = $queryteacher.";";
+		$queryteacher = $queryteacher."('".$row['teacher_id']."','".$row['email']."','5ef3f435d713ec7e69ee08f93f42a322ce180627','T','".$row['name']."',".$school.",now()),";
+	}
+	$queryteacher = substr($queryteacher, 0, -1);
+	$queryteacher = $queryteacher.";";
 
 }
 else {
-echo 'NO RESULTS';
+	echo 'NO RESULTS';
 }
 $result_old_teacher->close();
 //echo $queryteacher;
 
 
 $result = $mysqli_new->query($queryteacher) or die($mysqli_new->error.__LINE__);
-echo "Teachers table inserted with data";
+echo "Teachers table inserted with data";?><br><?php
 
 
 
 $query_new_sites_table = "CREATE TABLE IF NOT EXISTS `sites` (
-		`id` int NOT NULL AUTO_INCREMENT,
-		`site_id` varchar(50) NOT NULL,
-		`school_id` int  NOT NULL,
-		`site_name` varchar(40) DEFAULT NULL,
-		`address` varchar(100) DEFAULT NULL,
-		`description` varchar(100),
-		`city` varchar(50) DEFAULT NULL,
-		`zipcode` varchar(10) DEFAULT NULL,
-		`date_entered` datetime DEFAULT NULL,
-		`location` varchar(255) DEFAULT NULL,
-		PRIMARY KEY (`id`),
-		UNIQUE(`site_id`),
-		FOREIGN KEY (school_id) REFERENCES schools(id)
-) ;";
+				`id` int NOT NULL AUTO_INCREMENT,
+				`site_id` varchar(50) NOT NULL,
+				`school_id` int  NOT NULL,
+				`site_name` varchar(40) DEFAULT NULL,
+				`address` varchar(100) DEFAULT NULL,
+				`description` varchar(100),
+				`city` varchar(50) DEFAULT NULL,
+				`zipcode` varchar(10) DEFAULT NULL,
+				`date_entered` datetime DEFAULT NULL,
+				`location` varchar(255) DEFAULT NULL,
+				PRIMARY KEY (`id`),
+				UNIQUE(`site_id`),
+				FOREIGN KEY (school_id) REFERENCES schools(id)
+				) ;";
 $result_new_sites_table = $mysqli_new->query($query_new_sites_table) or die($mysqli_new->error.__LINE__);
 
 $query_old_sites = "SELECT * FROM sites";
@@ -169,44 +175,44 @@ $result_old_sites = $mysqli_old->query($query_old_sites) or die($mysqli_old->err
 // GOING THROUGH THE SITES DATA
 if($result_old_sites->num_rows > 0) {
 
-$querysites = "INSERT into sites (site_id,site_name,address,description,city,zipcode,location,school_id,date_entered) VALUES ";
-while($row = $result_old_sites->fetch_assoc())
-{
+	$querysites = "INSERT into sites (site_id,site_name,address,description,city,zipcode,location,school_id,date_entered) VALUES ";
+	while($row = $result_old_sites->fetch_assoc())
+	{
 
-$location = ($row['location'] == NULL) ? "NULL" : "'".$row['location']."'";
-$address = ($row['address'] == NULL  || $row['address'] == ' ') ? "NULL" : "'".$row['address']."'";
-$city = ($row['city'] == NULL || $row['city'] == ' ') ? "NULL" : "'".$row['city']."'";
-$description = ($row['description'] == NULL || $row['description'] == ' ') ? " " : "".$row['description']."";
-$zipcode = ($row['zipcode'] == NULL || $row['zipcode'] == ' ' || $row['zipcode'] == 'Mesa') ? "NULL" : $row['zipcode'];
+		$location = ($row['location'] == NULL) ? "NULL" : "'".$row['location']."'";
+		$address = ($row['address'] == NULL  || $row['address'] == ' ') ? "NULL" : "'".$row['address']."'";
+		$city = ($row['city'] == NULL || $row['city'] == ' ') ? "NULL" : "'".$row['city']."'";
+		$description = ($row['description'] == NULL || $row['description'] == ' ') ? " " : "".$row['description']."";
+		$zipcode = ($row['zipcode'] == NULL || $row['zipcode'] == ' ' || $row['zipcode'] == 'Mesa') ? "NULL" : $row['zipcode'];
 
-if($row['sitename'] == NULL)
-	$row['sitename'] = $row['description'];
-if($row['sitename'] == NULL && $row['description'] == NULL)
-	$row['sitename'] = $row['address'];
+		if($row['sitename'] == NULL)
+			$row['sitename'] = $row['description'];
+		if($row['sitename'] == NULL && $row['description'] == NULL)
+			$row['sitename'] = $row['address'];
 
-if($row['site_id'] == 'bbc' || $row['site_id'] == 'BBC' || $row['site_id'] == 'M1')
-	$row['site_id'] = $row['site_id'].$row['sitename'];
+		if($row['site_id'] == 'bbc' || $row['site_id'] == 'BBC' || $row['site_id'] == 'M1')
+			$row['site_id'] = $row['site_id'].$row['sitename'];
 
-if($row['site_id'] == 'TEST')
-	continue;
+		if($row['site_id'] == 'TEST')
+			continue;
 
-$school = array_search($row['school_id'], $schoolMapping);
-$querysites = $querysites."('".$row['site_id']."','".$row['sitename']."',".$address.",'".$mysqli_old->real_escape_string($description)."',".$city.",".$zipcode.",".$location.",".$school.",'".$row['date_entered']."'),";
-}
-$querysites = substr($querysites, 0, -1);
-$querysites = $querysites.";";
+		$school = array_search($row['school_id'], $schoolMapping);
+		$querysites = $querysites."('".$row['site_id']."','".$row['sitename']."',".$address.",'".$mysqli_old->real_escape_string($description)."',".$city.",".$zipcode.",".$location.",".$school.",'".$row['date_entered']."'),";
+	}
+	$querysites = substr($querysites, 0, -1);
+	$querysites = $querysites.";";
 
 }
 else {
-echo 'NO RESULTS';
+	echo 'NO RESULTS';
 }
 $result_old_sites->close();
-echo $querysites;
+//echo $querysites;
 
 $result = $mysqli_new->query($querysites) or die($mysqli_new->error.__LINE__);
-echo "Sites table inserted with data";
+echo "Sites table inserted with data";?><br><?php
 
-*/
+
 $query_new_teacher = "SELECT id,old_teacher_id FROM teachers";
 $result_new_teacher = $mysqli_new->query($query_new_teacher) or die($mysqli_old->error.__LINE__);
 while($row = $result_new_teacher->fetch_assoc())
@@ -214,19 +220,19 @@ while($row = $result_new_teacher->fetch_assoc())
 	$teacherMapping[$row['id']] = $row['old_teacher_id'];
 }
 
-/*
+
 $query_new_teachersclass_table = "CREATE TABLE IF NOT EXISTS `teachers_classes` (
-		`id` int NOT NULL AUTO_INCREMENT,
-		`class_name` varchar(50) DEFAULT NULL,
-		`grade` varchar(10) DEFAULT NULL,
-		`date_entered` datetime DEFAULT NULL,
-		`old_class_id` int NOT NULL,
-		`teacher_id` int  NOT NULL,
-		`school_id` int  NOT NULL,
-		PRIMARY KEY (`id`),
-		FOREIGN KEY (school_id) REFERENCES schools(id),
-		FOREIGN KEY (teacher_id) REFERENCES teachers(id)
-		);";
+						`id` int NOT NULL AUTO_INCREMENT,
+						`class_name` varchar(50) DEFAULT NULL,
+						`grade` varchar(10) DEFAULT NULL,
+						`date_entered` datetime DEFAULT NULL,
+						`old_class_id` int NOT NULL,
+						`teacher_id` int  NOT NULL,
+						`school_id` int  NOT NULL,
+						PRIMARY KEY (`id`),
+						FOREIGN KEY (school_id) REFERENCES schools(id),
+						FOREIGN KEY (teacher_id) REFERENCES teachers(id)
+						);";
 
 $result_new_teachersclass_table = $mysqli_new->query($query_new_teachersclass_table) or die($mysqli_new->error.__LINE__);
 
@@ -270,12 +276,12 @@ else {
 	echo 'NO RESULTS';
 }
 $result_old_teachersclass->close();
-echo $queryteachersclass;
+//echo $queryteachersclass;
 
 
 $result = $mysqli_new->query($queryteachersclass) or die($mysqli_new->error.__LINE__);
-echo "Teachers Class table inserted with data";
-*/
+echo "Teachers Class table inserted with data";?><br><?php
+
 
 $query_new_sites = "SELECT id,site_id FROM sites";
 $result_new_sites = $mysqli_new->query($query_new_sites) or die($mysqli_old->error.__LINE__);
@@ -284,31 +290,31 @@ while($row = $result_new_sites->fetch_assoc())
 	$sitesMapping[$row['id']] = $row['site_id'];
 }
 
-/*
+
 $query_new_habitat_table = "CREATE TABLE IF NOT EXISTS `habitats` (
-		`id` int NOT NULL AUTO_INCREMENT,
-		`type` varchar(2) NOT NULL ,
-		`recording_date` date DEFAULT NULL,
-		`area` smallint DEFAULT NULL,
-		`shrubcover` smallint DEFAULT NULL,
-		`tree_canopy` smallint DEFAULT NULL,
-		`lawn` TINYINT DEFAULT NULL,
-		`other` TINYINT DEFAULT NULL,
-		`paved_building` TINYINT DEFAULT NULL,
-		`gravel_soil` TINYINT DEFAULT NULL,
-		`water` TINYINT DEFAULT NULL,
-		`num_traps` smallint DEFAULT NULL,
-		`trap_arrange` varchar(255) DEFAULT NULL,
-		`percent_observed` TINYINT DEFAULT NULL,
-		`radius` smallint DEFAULT NULL,
-		`date_entered` datetime DEFAULT NULL,
-		`old_habitat_id` int NOT NULL,
-		`site_id` int NOT NULL,
-		`school_id` int  NOT NULL,
-		PRIMARY KEY (`id`),
-		FOREIGN KEY (school_id) REFERENCES schools(id),
-		FOREIGN KEY (site_id) REFERENCES sites(id)
-		);";
+								`id` int NOT NULL AUTO_INCREMENT,
+								`type` varchar(2) NOT NULL ,
+								`recording_date` date DEFAULT NULL,
+								`area` smallint DEFAULT NULL,
+								`shrubcover` smallint DEFAULT NULL,
+								`tree_canopy` smallint DEFAULT NULL,
+								`lawn` TINYINT DEFAULT NULL,
+								`other` TINYINT DEFAULT NULL,
+								`paved_building` TINYINT DEFAULT NULL,
+								`gravel_soil` TINYINT DEFAULT NULL,
+								`water` TINYINT DEFAULT NULL,
+								`num_traps` smallint DEFAULT NULL,
+								`trap_arrange` varchar(255) DEFAULT NULL,
+								`percent_observed` TINYINT DEFAULT NULL,
+								`radius` smallint DEFAULT NULL,
+								`date_entered` datetime DEFAULT NULL,
+								`old_habitat_id` int NOT NULL,
+								`site_id` int NOT NULL,
+								`school_id` int  NOT NULL,
+								PRIMARY KEY (`id`),
+								FOREIGN KEY (school_id) REFERENCES schools(id),
+								FOREIGN KEY (site_id) REFERENCES sites(id)
+								);";
 
 $result_new_habitat_table = $mysqli_new->query($query_new_habitat_table) or die($mysqli_new->error.__LINE__);
 
@@ -355,17 +361,17 @@ $result_old_arthro_hab->close();
 
 
 $result = $mysqli_new->query($queryhabitats) or die($mysqli_new->error.__LINE__);
-echo "Habitats table inserted with data";
+echo "Habitats table inserted with data";?><br><?php
 
 
 $query_new_arthro_taxon_table = "CREATE TABLE IF NOT EXISTS `arthro_taxon` (
-		`id` int NOT NULL AUTO_INCREMENT,
-		`taxon` varchar(6) NOT NULL ,
-		`taxon_name` varchar(50) DEFAULT NULL,
-		`date_entered` datetime DEFAULT NULL,
-		PRIMARY KEY (`id`),
-		UNIQUE(`taxon`)
-		);";
+										`id` int NOT NULL AUTO_INCREMENT,
+										`taxon` varchar(6) NOT NULL ,
+										`taxon_name` varchar(50) DEFAULT NULL,
+										`date_entered` datetime DEFAULT NULL,
+										PRIMARY KEY (`id`),
+										UNIQUE(`taxon`)
+										);";
 
 $result_new_arthro_taxon_table = $mysqli_new->query($query_new_arthro_taxon_table) or die($mysqli_new->error.__LINE__);
 
@@ -395,7 +401,7 @@ $result_old_arthro_taxon->close();
 
 
 $result = $mysqli_new->query($queryarthro_taxon) or die($mysqli_new->error.__LINE__);
-echo "Arthro taxon table inserted with data";
+echo "Arthro taxon table inserted with data";?><br><?php
 
 
 
@@ -407,7 +413,7 @@ while($row = $result_new_habitats->fetch_assoc())
 	$habitatsMapping[$row['id']] = $temp;
 
 }
-*/
+
 $query_new_class = "SELECT id,old_class_id FROM teachers_classes";
 $result_new_class = $mysqli_new->query($query_new_class) or die($mysqli_old->error.__LINE__);
 while($row = $result_new_class->fetch_assoc())
@@ -416,22 +422,22 @@ while($row = $result_new_class->fetch_assoc())
 
 }
 
-/*
+
 $query_new_arthro_samples_table = "CREATE TABLE IF NOT EXISTS `arthro_samples` (
-		`id` int NOT NULL AUTO_INCREMENT,
-		`site_id` int DEFAULT NULL,
-		`teachers_class_id` int  DEFAULT NULL,
-		`habitat_id` int DEFAULT NULL,
-		`collection_date` date DEFAULT NULL,
-		`comments` varchar(250) DEFAULT NULL,
-		`date_entered` datetime DEFAULT NULL,
-		`observer` varchar(255) DEFAULT NULL,
-		`old_sample_id` int DEFAULT NULL,
-		PRIMARY KEY (`id`),
-		FOREIGN KEY (site_id) REFERENCES sites(id) ,
-		FOREIGN KEY (teachers_class_id) REFERENCES teachers_classes(id),
-		FOREIGN KEY (habitat_id) REFERENCES habitats(id)
-		);";
+				`id` int NOT NULL AUTO_INCREMENT,
+				`site_id` int DEFAULT NULL,
+				`teachers_class_id` int  DEFAULT NULL,
+				`habitat_id` int DEFAULT NULL,
+				`collection_date` date DEFAULT NULL,
+				`comments` varchar(250) DEFAULT NULL,
+				`date_entered` datetime DEFAULT NULL,
+				`observer` varchar(255) DEFAULT NULL,
+				`old_sample_id` int DEFAULT NULL,
+				PRIMARY KEY (`id`),
+				FOREIGN KEY (site_id) REFERENCES sites(id) ,
+				FOREIGN KEY (teachers_class_id) REFERENCES teachers_classes(id),
+				FOREIGN KEY (habitat_id) REFERENCES habitats(id)
+				);";
 
 $result_new_arthro_samples_table = $mysqli_new->query($query_new_arthro_samples_table) or die($mysqli_new->error.__LINE__);
 
@@ -476,7 +482,7 @@ $result_old_arthro_samples->close();
 
 
 $result = $mysqli_new->query($queryarthro_samples) or die($mysqli_new->error.__LINE__);
-echo "Arthro Samples table inserted with data";
+echo "Arthro Samples table inserted with data";?><br><?php
 
 
 $query_new_arthroSamples = "SELECT id,old_sample_id FROM arthro_samples";
@@ -496,15 +502,15 @@ while($row = $result_new_arthro_taxon->fetch_assoc())
 
 
 $query_new_arthro_specimens_table = "CREATE TABLE IF NOT EXISTS `arthro_specimens` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `trap_no` varchar(20) NOT NULL,
-  `arthro_taxon_id` int DEFAULT NULL,
-  `frequency` int(10) NOT NULL,
-  `arthro_sample_id` int  NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (arthro_taxon_id) REFERENCES arthro_taxon(id) ,
-  FOREIGN KEY (arthro_sample_id) REFERENCES arthro_samples(id) 
-);";
+		`id` int NOT NULL AUTO_INCREMENT,
+		`trap_no` varchar(20) NOT NULL,
+		`arthro_taxon_id` int DEFAULT NULL,
+		`frequency` int(10) NOT NULL,
+		`arthro_sample_id` int  NOT NULL,
+		PRIMARY KEY (`id`),
+		FOREIGN KEY (arthro_taxon_id) REFERENCES arthro_taxon(id) ,
+		FOREIGN KEY (arthro_sample_id) REFERENCES arthro_samples(id)
+		);";
 
 $query_new_arthro_specimens_table = $mysqli_new->query($query_new_arthro_specimens_table) or die($mysqli_new->error.__LINE__);
 
@@ -520,11 +526,11 @@ if($result_old_arthro_specimens->num_rows > 0) {
 	{
 		$arthrotaxon = array_search($row['taxon'], $arthroTaxonMapping);
 		$arthrosample = array_search($row['sample_id'], $arthroSamplesMapping);
-		
+
 		//Removing entries that do not have a sample id associated.
 		if($arthrosample == NULL)
 			continue;
-		
+
 		$queryarthro_specimens = $queryarthro_specimens."('".$row['trap_id']."',".$arthrotaxon.",".$row['frequency'].",".$arthrosample."),";
 
 	}
@@ -540,7 +546,7 @@ $result_old_arthro_specimens->close();
 
 
 $result = $mysqli_new->query($queryarthro_specimens) or die($mysqli_new->error.__LINE__);
-echo "Arthro Specimens table inserted with data";
+echo "Arthro Specimens table inserted with data";?><br><?php
 
 
 
@@ -560,7 +566,7 @@ if($result_old_bird_hab->num_rows > 0) {
 		$date_entered= ($row['date_entered'] == NULL) ? "NULL" : "'".$row['date_entered']."'";
 		$water= ($row['water'] == NULL) ? "NULL" : $row['water'];
 		$recording_date= ($row['recording_date'] == NULL) ? "NULL" : "'".$row['recording_date']."'";
-		
+
 		$school = array_search($row['school_id'], $schoolMapping);
 		$site = array_search($row['site_id'], $sitesMapping);
 
@@ -576,7 +582,7 @@ if($result_old_bird_hab->num_rows > 0) {
 		{
 			$site = array_search('bbcbbcourt', $sitesMapping);
 		}
-		
+
 		//Testing data that was present in database.
 		if($school == 129)
 			continue;
@@ -592,22 +598,22 @@ else {
 	echo 'NO RESULTS';
 }
 $result_old_bird_hab->close();
-echo $queryhabitats;
+//echo $queryhabitats;
 
 
 $result = $mysqli_new->query($queryhabitats) or die($mysqli_new->error.__LINE__);
-echo "Habitats table inserted with bird data";
+echo "Habitats table inserted with bird data";?><br><?php
 
 
 
 $query_new_bird_taxon_table = "CREATE TABLE IF NOT EXISTS `bird_taxon` (
-  `id` int NOT NULL AUTO_INCREMENT,  
-  `species_id` varchar(4) NOT NULL,
-  `common_name` varchar(100) DEFAULT NULL,
-  `date_entered` datetime DEFAULT NULL,
-   PRIMARY KEY (`id`),
-   UNIQUE(`species_id`)
-);";
+		`id` int NOT NULL AUTO_INCREMENT,
+		`species_id` varchar(4) NOT NULL,
+		`common_name` varchar(100) DEFAULT NULL,
+		`date_entered` datetime DEFAULT NULL,
+		PRIMARY KEY (`id`),
+		UNIQUE(`species_id`)
+		);";
 
 $result_new_bird_taxon_table = $mysqli_new->query($query_new_bird_taxon_table) or die($mysqli_new->error.__LINE__);
 
@@ -637,15 +643,15 @@ $result_old_bird_taxon->close();
 
 
 $result = $mysqli_new->query($querybird_taxon) or die($mysqli_new->error.__LINE__);
-echo "Bird taxon table inserted with data";
+echo "Bird taxon table inserted with data";?><br><?php
 
 
 
 $query_new_cloud_cover_table = "CREATE TABLE IF NOT EXISTS `cloud_cover` (
-  `id` int NOT NULL AUTO_INCREMENT, 
-  `cloud_cover_name` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+					`id` int NOT NULL AUTO_INCREMENT,
+					`cloud_cover_name` varchar(50) DEFAULT NULL,
+					PRIMARY KEY (`id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
 $result_new_cloud_cover_table = $mysqli_new->query($query_new_cloud_cover_table) or die($mysqli_new->error.__LINE__);
 
@@ -675,7 +681,7 @@ $result_old_cloud_cover->close();
 
 
 $result = $mysqli_new->query($querycloud_cover) or die($mysqli_new->error.__LINE__);
-echo "Cloud Cover table inserted with data";
+echo "Cloud Cover table inserted with data";?><br><?php
 
 
 
@@ -690,25 +696,25 @@ while($row = $result_new_habitats->fetch_assoc())
 }
 
 $query_new_bird_samples_table = "CREATE TABLE IF NOT EXISTS `bird_samples` (
-  `id` int NOT NULL AUTO_INCREMENT, 
-  `site_id` int  NOT NULL,
-  `habitat_id` int  NOT NULL,
-  `teachers_class_id` int  NOT NULL,
-  `observer` varchar(255) DEFAULT NULL,
-  `collection_date` date DEFAULT NULL,
-  `time_start` time DEFAULT NULL,
-  `time_end` time DEFAULT NULL,
-  `air_temp` int(4) DEFAULT NULL,
-  `cloud_cover_id` int DEFAULT NULL,
-  `comments` varchar(250) DEFAULT NULL,
-  `date_entered` datetime DEFAULT NULL,
-  `old_sample_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (site_id) REFERENCES sites(id),
-  FOREIGN KEY (habitat_id) REFERENCES habitats(id),
-  FOREIGN KEY (teachers_class_id) REFERENCES teachers_classes(id),
-  FOREIGN KEY (cloud_cover_id) REFERENCES cloud_cover(id) 
-);";
+		`id` int NOT NULL AUTO_INCREMENT,
+		`site_id` int  NOT NULL,
+		`habitat_id` int  NOT NULL,
+		`teachers_class_id` int  NOT NULL,
+		`observer` varchar(255) DEFAULT NULL,
+		`collection_date` date DEFAULT NULL,
+		`time_start` time DEFAULT NULL,
+		`time_end` time DEFAULT NULL,
+		`air_temp` int(4) DEFAULT NULL,
+		`cloud_cover_id` int DEFAULT NULL,
+		`comments` varchar(250) DEFAULT NULL,
+		`date_entered` datetime DEFAULT NULL,
+		`old_sample_id` int DEFAULT NULL,
+		PRIMARY KEY (`id`),
+		FOREIGN KEY (site_id) REFERENCES sites(id),
+		FOREIGN KEY (habitat_id) REFERENCES habitats(id),
+		FOREIGN KEY (teachers_class_id) REFERENCES teachers_classes(id),
+		FOREIGN KEY (cloud_cover_id) REFERENCES cloud_cover(id)
+		);";
 
 $result_new_bird_samples_table = $mysqli_new->query($query_new_bird_samples_table) or die($mysqli_new->error.__LINE__);
 
@@ -748,7 +754,7 @@ if($result_old_bird_samples->num_rows > 0) {
 		$airtemp = ($row['air_temp'] == NULL) ? "NULL" : $row['air_temp'];
 		$cloud = ($row['cloud_cover'] == NULL) ? "NULL" : $row['cloud_cover'];
 		$class = ($class == NULL) ? "NULL" : $class;
-		
+
 		if($row['temp_units'] =='C' && $row['air_temp'] != NULL)
 		{
 			$airtemp = ($airtemp * 1.8) + 32 ;
@@ -773,7 +779,7 @@ $result_old_bird_samples->close();
 
 
 $result = $mysqli_new->query($querybird_samples) or die($mysqli_new->error.__LINE__);
-echo "Bird Samples table inserted with data";
+echo "Bird Samples table inserted with data";?><br><?php
 
 $query_new_birdSamples = "SELECT id,old_sample_id FROM bird_samples";
 $result_new_birdSamples= $mysqli_new->query($query_new_birdSamples) or die($mysqli_old->error.__LINE__);
@@ -792,14 +798,14 @@ while($row = $result_new_bird_taxon->fetch_assoc())
 
 
 $query_new_bird_specimens_table = "CREATE TABLE IF NOT EXISTS `bird_specimens` (
-  `id` int NOT NULL AUTO_INCREMENT, 
-  `bird_sample_id` int  NOT NULL,
-  `species_id` int NOT NULL,
-  `frequency` int(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (species_id) REFERENCES bird_taxon(`id`) ,
-  FOREIGN KEY (bird_sample_id) REFERENCES bird_samples(`id`) 
-) ;";
+					`id` int NOT NULL AUTO_INCREMENT,
+					`bird_sample_id` int  NOT NULL,
+					`species_id` int NOT NULL,
+					`frequency` int(10) NOT NULL,
+					PRIMARY KEY (`id`),
+					FOREIGN KEY (species_id) REFERENCES bird_taxon(`id`) ,
+					FOREIGN KEY (bird_sample_id) REFERENCES bird_samples(`id`)
+					) ;";
 
 $query_new_bird_specimens_table = $mysqli_new->query($query_new_bird_specimens_table) or die($mysqli_new->error.__LINE__);
 
@@ -815,14 +821,14 @@ if($result_old_bird_specimens->num_rows > 0) {
 	{
 		$birdtaxon = array_search($row['species_id'], $birdTaxonMapping);
 		$birdsample = array_search($row['survey_id'], $birdSamplesMapping);
-		
+
 		if($row['frequency'] == NULL)
 			$row['frequency'] = 0;
 
 		//Removing entries that do not have a sample id associated.
 		if($birdsample == NULL)
 			continue;
-		
+
 		if($birdtaxon == NULL)
 			continue;
 
@@ -841,7 +847,7 @@ $result_old_bird_specimens->close();
 
 
 $result = $mysqli_new->query($querybird_specimens) or die($mysqli_new->error.__LINE__);
-echo "Bird Specimens table inserted with data";
+echo "Bird Specimens table inserted with data";?><br><?php
 
 
 $query_old_veg_hab = "SELECT * FROM vegetation_hab";
@@ -898,19 +904,19 @@ $result_old_veg_hab->close();
 
 
 $result = $mysqli_new->query($queryhabitats) or die($mysqli_new->error.__LINE__);
-echo "Habitats table inserted with veg data";
+echo "Habitats table inserted with veg data";?><br><?php
 
 
 
 $query_new_veg_taxon_table = "CREATE TABLE IF NOT EXISTS `veg_taxon` (
-  `id` int NOT NULL AUTO_INCREMENT, 
-  `species_id` varchar(6) NOT NULL,
-  `type` varchar(10) DEFAULT NULL,
-  `common_name` varchar(100) DEFAULT NULL,
-  `date_entered` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE(`species_id`)
-) ;";
+		`id` int NOT NULL AUTO_INCREMENT,
+		`species_id` varchar(6) NOT NULL,
+		`type` varchar(10) DEFAULT NULL,
+		`common_name` varchar(100) DEFAULT NULL,
+		`date_entered` datetime DEFAULT NULL,
+		PRIMARY KEY (`id`),
+		UNIQUE(`species_id`)
+		) ;";
 
 $result_new_veg_taxon_table = $mysqli_new->query($query_new_veg_taxon_table) or die($mysqli_new->error.__LINE__);
 
@@ -940,7 +946,7 @@ $result_old_veg_taxon->close();
 
 
 $result = $mysqli_new->query($querybird_taxon) or die($mysqli_new->error.__LINE__);
-echo "Veg taxon table inserted with data";
+echo "Veg taxon table inserted with data";?><br><?php
 
 
 
@@ -954,22 +960,22 @@ while($row = $result_new_habitats->fetch_assoc())
 }
 
 $query_new_veg_samples_table = "CREATE TABLE IF NOT EXISTS `veg_samples` (
-  `id` int NOT NULL AUTO_INCREMENT, 
-  `tree_count` int(10) DEFAULT NULL,
-  `cactus_count` int(10) DEFAULT NULL,
-  `collection_date` date DEFAULT NULL,
-  `observer` varchar(255) DEFAULT NULL,
-  `shrub_count` int(10) DEFAULT NULL,
-  `date_entered` datetime DEFAULT NULL,
-  `site_id` int NOT NULL,
-  `habitat_id` int NOT NULL,
-  `teachers_class_id` int  DEFAULT NULL,
-  `old_sample_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (site_id) REFERENCES sites(id),
-  FOREIGN KEY (teachers_class_id) REFERENCES teachers_classes(id),
-  FOREIGN KEY (habitat_id) REFERENCES habitats(id)
-);";
+				`id` int NOT NULL AUTO_INCREMENT,
+				`tree_count` int(10) DEFAULT NULL,
+				`cactus_count` int(10) DEFAULT NULL,
+				`collection_date` date DEFAULT NULL,
+				`observer` varchar(255) DEFAULT NULL,
+				`shrub_count` int(10) DEFAULT NULL,
+				`date_entered` datetime DEFAULT NULL,
+				`site_id` int NOT NULL,
+				`habitat_id` int NOT NULL,
+				`teachers_class_id` int  DEFAULT NULL,
+				`old_sample_id` int DEFAULT NULL,
+				PRIMARY KEY (`id`),
+				FOREIGN KEY (site_id) REFERENCES sites(id),
+				FOREIGN KEY (teachers_class_id) REFERENCES teachers_classes(id),
+				FOREIGN KEY (habitat_id) REFERENCES habitats(id)
+				);";
 
 $result_new_veg_samples_table = $mysqli_new->query($query_new_veg_samples_table) or die($mysqli_new->error.__LINE__);
 
@@ -1008,7 +1014,7 @@ $result_old_veg_samples->close();
 
 
 $result = $mysqli_new->query($queryveg_samples) or die($mysqli_new->error.__LINE__);
-echo "Veg Samples table inserted with data";
+echo "Veg Samples table inserted with data";?><br><?php
 
 $query_new_vegSamples = "SELECT id,old_sample_id FROM veg_samples";
 $result_new_vegSamples= $mysqli_new->query($query_new_vegSamples) or die($mysqli_old->error.__LINE__);
@@ -1027,20 +1033,20 @@ while($row = $result_new_veg_taxon->fetch_assoc())
 
 
 $query_new_veg_specimens_table = "CREATE TABLE IF NOT EXISTS `veg_specimens` (
-  `id` int NOT NULL AUTO_INCREMENT, 
-  `veg_no` varchar(50) NOT NULL,
-  `veg_sample_id` int  NOT NULL,
-  `plant_type` varchar(6) DEFAULT NULL,
-  `species_id` int NOT NULL,
-  `circumference` double(15,5) DEFAULT NULL,
-  `canopy` double(15,5) DEFAULT NULL,
-  `height` double(15,5) DEFAULT NULL,
-  `comments` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (species_id) REFERENCES veg_taxon(`id`) ,
-  FOREIGN KEY (veg_sample_id) REFERENCES veg_samples(`id`) 
-) ;
-";
+						`id` int NOT NULL AUTO_INCREMENT,
+						`veg_no` varchar(50) NOT NULL,
+						`veg_sample_id` int  NOT NULL,
+						`plant_type` varchar(6) DEFAULT NULL,
+						`species_id` int NOT NULL,
+						`circumference` double(15,5) DEFAULT NULL,
+						`canopy` double(15,5) DEFAULT NULL,
+						`height` double(15,5) DEFAULT NULL,
+						`comments` varchar(100) DEFAULT NULL,
+						PRIMARY KEY (`id`),
+						FOREIGN KEY (species_id) REFERENCES veg_taxon(`id`) ,
+						FOREIGN KEY (veg_sample_id) REFERENCES veg_samples(`id`)
+						) ;
+						";
 
 $result_new_bird_specimens_table = $mysqli_new->query($query_new_veg_specimens_table) or die($mysqli_new->error.__LINE__);
 
@@ -1080,25 +1086,25 @@ $result_old_veg_specimens->close();
 
 
 $result = $mysqli_new->query($queryveg_specimens) or die($mysqli_new->error.__LINE__);
-echo "Veg Specimens table inserted with data";
+echo "Veg Specimens table inserted with data";?><br><?php
 
-*/
+
 
 $query_new_bruchid_samples_table = "CREATE TABLE IF NOT EXISTS `bruchid_samples` (
-  `id` int NOT NULL AUTO_INCREMENT, 
-  `site_type` varchar(20) DEFAULT NULL,
-  `tree_type` varchar(10) DEFAULT NULL,
-  `location` varchar(255) DEFAULT NULL,
-  `observer` varchar(255) DEFAULT NULL,  
-  `collection_date` date DEFAULT NULL,
-  `date_entered` datetime DEFAULT NULL,
-  `site_id` int NOT NULL,
-  `teachers_class_id` int  NOT NULL,
-  `old_sample_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (teachers_class_id) REFERENCES teachers_classes(id),
-  FOREIGN KEY (site_id) REFERENCES sites(id)
-);";
+		`id` int NOT NULL AUTO_INCREMENT,
+		`site_type` varchar(20) DEFAULT NULL,
+		`tree_type` varchar(10) DEFAULT NULL,
+		`location` varchar(255) DEFAULT NULL,
+		`observer` varchar(255) DEFAULT NULL,
+		`collection_date` date DEFAULT NULL,
+		`date_entered` datetime DEFAULT NULL,
+		`site_id` int NOT NULL,
+		`teachers_class_id` int  NOT NULL,
+		`old_sample_id` int DEFAULT NULL,
+		PRIMARY KEY (`id`),
+		FOREIGN KEY (teachers_class_id) REFERENCES teachers_classes(id),
+		FOREIGN KEY (site_id) REFERENCES sites(id)
+		);";
 
 $result_new_bruchid_samples_table = $mysqli_new->query($query_new_bruchid_samples_table) or die($mysqli_new->error.__LINE__);
 
@@ -1114,15 +1120,14 @@ if($result_old_bruchid_samples->num_rows > 0) {
 	{
 
 		$site = array_search($row['site_id'], $sitesMapping);
-
-		$habitat = array_search(($site." ".$row['habitat_id']), $habitatsMapping);
 		$class = array_search($row['class_id'], $classMapping);
-
 		$observer = ($row['observer'] == NULL) ? "NULL" : "'".$row['observer']."'";
+		$location = ($row['location'] == NULL) ? "NULL" : "'".$row['location']."'";
 		$class = ($class == NULL) ? "NULL" : $class;
+		$treetype = ($row['tree_type'] == 'blue' || $row['tree_type'] == 'bluee') ? "'B'" : "'F'" ;
 
 
-		$querybruchid_samples = $querybruchid_samples."('".$row['survey_date']."',".$row['tree_count'].",".$row['cactus_count'].",".$row['shrub_count'].",".$observer.",".$site.",".$habitat.",".$class.",'".$row['date_entered']."',".$row['survey_id']."),";
+		$querybruchid_samples = $querybruchid_samples."('".$row['sample_date']."','".$row['site_type']."',".$treetype.",".$location.",".$observer.",".$site.",".$class.",'".$row['date_entered']."',".$row['sample_id']."),";
 
 	}
 	$querybruchid_samples= substr($querybruchid_samples, 0, -1);
@@ -1133,89 +1138,95 @@ else {
 	echo 'NO RESULTS';
 }
 $result_old_bruchid_samples->close();
-echo $querybruchid_samples;
+//echo $querybruchid_samples;
 
 
-//$result = $mysqli_new->query($querybruchid_samples) or die($mysqli_new->error.__LINE__);
-//echo "Bruchid Samples table inserted with data";
+$result = $mysqli_new->query($querybruchid_samples) or die($mysqli_new->error.__LINE__);
+echo "Bruchid Samples table inserted with data";?><br><?php
 
-/*
 
-$query_new_vegSamples = "SELECT id,old_sample_id FROM veg_samples";
-$result_new_vegSamples= $mysqli_new->query($query_new_vegSamples) or die($mysqli_old->error.__LINE__);
-while($row = $result_new_vegSamples->fetch_assoc())
+
+$query_new_bruchidSamples = "SELECT id,old_sample_id FROM bruchid_samples";
+$result_new_bruchidSamples= $mysqli_new->query($query_new_bruchidSamples) or die($mysqli_old->error.__LINE__);
+while($row = $result_new_bruchidSamples->fetch_assoc())
 {
-	$vegSamplesMapping[$row['id']] = $row['old_sample_id'];
+	$bruchidSamplesMapping[$row['id']] = $row['old_sample_id'];
 
 }
 
-$query_new_veg_taxon = "SELECT id,species_id FROM veg_taxon";
-$result_new_veg_taxon= $mysqli_new->query($query_new_veg_taxon) or die($mysqli_old->error.__LINE__);
-while($row = $result_new_veg_taxon->fetch_assoc())
-{
-	$vegTaxonMapping[$row['id']] = $row['species_id'];
-}
+$query_new_bruchid_specimens_table = "CREATE TABLE IF NOT EXISTS `bruchid_specimens` (
+				`id` int NOT NULL AUTO_INCREMENT,
+				`tree_no` varchar(10) NOT NULL,
+				`pod_no` varchar(10) NOT NULL,
+				`bruchid_sample_id` int  NOT NULL,
+				`hole_count` int(10) DEFAULT NULL,
+				`seed_count` int(10) DEFAULT NULL,
+				PRIMARY KEY (`id`),
+				FOREIGN KEY (bruchid_sample_id) REFERENCES bruchid_samples(`id`)
+				);";
+
+$result_new_bruchid_specimens_table = $mysqli_new->query($query_new_bruchid_specimens_table) or die($mysqli_new->error.__LINE__);
 
 
-$query_new_veg_specimens_table = "CREATE TABLE IF NOT EXISTS `veg_specimens` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `veg_no` varchar(50) NOT NULL,
-  `veg_sample_id` int  NOT NULL,
-  `plant_type` varchar(6) DEFAULT NULL,
-  `species_id` int NOT NULL,
-  `circumference` double(15,5) DEFAULT NULL,
-  `canopy` double(15,5) DEFAULT NULL,
-  `height` double(15,5) DEFAULT NULL,
-  `comments` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (species_id) REFERENCES veg_taxon(`id`) ,
-  FOREIGN KEY (veg_sample_id) REFERENCES veg_samples(`id`)
-) ;
-";
-
-$result_new_bird_specimens_table = $mysqli_new->query($query_new_veg_specimens_table) or die($mysqli_new->error.__LINE__);
-
-
-$query_old_veg_specimens= "SELECT * FROM veg_measure";
-$result_old_veg_specimens  = $mysqli_old->query($query_old_veg_specimens) or die($mysqli_old->error.__LINE__);
+$query_old_bruchid_specimens= "SELECT * FROM bruchid_pods";
+$result_old_bruchid_specimens  = $mysqli_old->query($query_old_bruchid_specimens) or die($mysqli_old->error.__LINE__);
 
 // GOING THROUGH THE ARTHROHAB DATA
-if($result_old_veg_specimens->num_rows > 0) {
+if($result_old_bruchid_specimens->num_rows > 0) {
 
-	$queryveg_specimens = "INSERT into veg_specimens (species_id,veg_sample_id,veg_no,plant_type,circumference,canopy,height,comments) VALUES ";
-	while($row = $result_old_veg_specimens->fetch_assoc())
+	$querybruchid_specimens = "INSERT into bruchid_specimens (tree_no,pod_no,hole_count,seed_count,bruchid_sample_id) VALUES ";
+	while($row = $result_old_bruchid_specimens->fetch_assoc())
 	{
-		$vegtaxon = array_search($row['species_id'], $vegTaxonMapping);
-		$vegsample = array_search($row['survey_id'], $vegSamplesMapping);
-		$comments = ($row['location'] == NULL) ? " " : $row['location'];
+		$bruchidsample = array_search($row['sample_id'], $bruchidSamplesMapping);
 
-		//Removing entries that do not have a sample id associated.
-		if($vegsample == NULL)
-			continue;
+		$pod = ($row['pod_id'] == ' ') ? "NULL" : $row['pod_id'];
+		$hole= ($row['hole_count'] == NULL) ? "NULL" : $row['hole_count'];
+		$seed = ($row['seed_count'] == NULL) ? "NULL" : $row['seed_count'];
 
-		if($vegtaxon == NULL)
-			continue;
-
-		$queryveg_specimens = $queryveg_specimens."(".$vegtaxon.",".$vegsample.",".$row['veg_id'].",'".$row['plant_type']."',".$row['circumference'].",".$row['canopy'].",".$row['height'].",'".$comments."'),";
+		$querybruchid_specimens = $querybruchid_specimens."('".$row['tree_id']."','".$pod."',".$hole.",".$seed.",".$bruchidsample."),";
 
 	}
-	$queryveg_specimens= substr($queryveg_specimens, 0, -1);
-	$queryveg_specimens = $queryveg_specimens.";";
+	$querybruchid_specimens= substr($querybruchid_specimens, 0, -1);
+	$querybruchid_specimens = $querybruchid_specimens.";";
 
 }
 else {
 	echo 'NO RESULTS';
 }
-$result_old_veg_specimens->close();
-//echo $queryveg_specimens;
+$result_old_bruchid_specimens->close();
+//echo $querybruchid_specimens;
 
 
-$result = $mysqli_new->query($queryveg_specimens) or die($mysqli_new->error.__LINE__);
-echo "Veg Specimens table inserted with data";
+$result = $mysqli_new->query($querybruchid_specimens) or die($mysqli_new->error.__LINE__);
+echo "Bruchid Specimens table inserted with data";?><br><?php
+
+$query_new_alter_teachers= "ALTER TABLE teachers DROP old_teacher_id;";
+$result = $mysqli_new->query($query_new_alter_teachers) or die($mysqli_new->error.__LINE__);
+
+$query_new_alter_arthro_samples= "ALTER TABLE arthro_samples DROP old_sample_id;";
+$result = $mysqli_new->query($query_new_alter_arthro_samples) or die($mysqli_new->error.__LINE__);
+
+$query_new_alter_bird_samples= "ALTER TABLE bird_samples DROP old_sample_id;";
+$result = $mysqli_new->query($query_new_alter_bird_samples) or die($mysqli_new->error.__LINE__);
+
+$query_new_alter_veg_samples= "ALTER TABLE veg_samples DROP old_sample_id;";
+$result = $mysqli_new->query($query_new_alter_veg_samples) or die($mysqli_new->error.__LINE__);
+
+$query_new_alter_bruchid_samples= "ALTER TABLE bruchid_samples DROP old_sample_id;";
+$result = $mysqli_new->query($query_new_alter_bruchid_samples) or die($mysqli_new->error.__LINE__);
+
+$query_new_alter_habitat= "ALTER TABLE habitats DROP old_habitat_id;";
+$result = $mysqli_new->query($query_new_alter_habitat) or die($mysqli_new->error.__LINE__);
+
+$query_new_alter_teachers_classes= "ALTER TABLE teachers_classes DROP old_class_id;";
+$result = $mysqli_new->query($query_new_alter_teachers_classes) or die($mysqli_new->error.__LINE__);
+
+echo "Successully removed old database columns in new database";?><br><?php
 
 // CLOSE CONNECTION
 mysqli_close($mysqli_new);
 mysqli_close($mysqli_old);
+
 
 ?>
 
