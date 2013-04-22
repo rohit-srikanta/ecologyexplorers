@@ -343,7 +343,7 @@ if($result_old_arthro_hab->num_rows > 0) {
 		}
 
 		//Testing data that was present in database.
-		if($school == 129)
+		if($school == 130)
 			continue;
 
 		$queryhabitats = $queryhabitats."('AR',".$recording_date.",".$row['area'].",".$row['shrubcover'].",".$row['tree_canopy'].",".$row['lawn'].",".$row['other'].",".$row['paved_building'].",".$row['gravel_soil'].",".$water.",".$row['num_traps'].",'".$mysqli_old->real_escape_string($row['trap_arrange'])."',".$row['percent_observed'].",".$row['radius'].",".$site.",".$school.",".$date_entered.",".$row['habitat_id']."),";
@@ -584,7 +584,7 @@ if($result_old_bird_hab->num_rows > 0) {
 		}
 
 		//Testing data that was present in database.
-		if($school == 129)
+		if($school == 130)
 			continue;
 
 		$queryhabitats = $queryhabitats."('BI',".$recording_date.",".$row['area'].",".$row['shrubcover'].",".$row['tree_canopy'].",".$row['lawn'].",".$row['other'].",".$row['paved_building'].",".$row['gravel_soil'].",".$water.",".$row['num_traps'].",".$row['trap_arrange'].",".$row['percent_observed'].",".$row['radius'].",".$site.",".$school.",".$date_entered.",".$row['habitat_id']."),";
@@ -886,7 +886,7 @@ if($result_old_veg_hab->num_rows > 0) {
 		}
 
 		//Testing data that was present in database.
-		if($school == 129)
+		if($school == 130)
 			continue;
 
 		$queryhabitats = $queryhabitats."('VE',".$recording_date.",".$row['area'].",".$row['shrubcover'].",".$row['tree_canopy'].",".$row['lawn'].",".$row['other'].",".$row['paved_building'].",".$row['gravel_soil'].",".$water.",".$row['num_traps'].",".$row['trap_arrange'].",".$row['percent_observed'].",".$row['radius'].",".$site.",".$school.",".$date_entered.",".$row['habitat_id']."),";
