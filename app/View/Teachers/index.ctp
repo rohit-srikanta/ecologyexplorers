@@ -59,7 +59,7 @@
 			</p><div class="seperation"></div><p>
 				<?php echo $this->Html->link('Submit Data',  array('controller' => 'teachers', 'action' => 'submitData'));?>
 			<p>Submit data from your Ecology Explorer research project</p>		
-			<p>Available only to registered Ecology Explorers teachers.</p>
+			<p>Available only to registered Ecology Explorers teachers.</p>	
 		
 			<div class="seperation"></div><p>
 	
