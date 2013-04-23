@@ -31,7 +31,7 @@ class BruchidSample extends AppModel {
 			)
 	);
 	
-
+	//Saving the arthro sample data along with brutchid specimen data.
 	public function savingthedata($fields)
 	{
 		$fields['BruchidSample']['date_entered'] = date('Y-m-d H:i:s');

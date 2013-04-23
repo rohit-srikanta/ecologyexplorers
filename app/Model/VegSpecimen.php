@@ -18,7 +18,7 @@ class VegSpecimen extends AppModel {
 			),
 	);
 	
-	
+	//Saving the data passed from veg samples class
 	public function saveFields($fields)
 	{
 		if($this->saveAll($fields))

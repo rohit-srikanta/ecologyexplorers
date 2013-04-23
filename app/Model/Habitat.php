@@ -26,6 +26,7 @@ class Habitat extends AppModel {
 				
 	);
 
+	//This method is used to create habitats during site creating. Since the habitat table
 	public function createHabitat($fields,$siteId)
 	{
 		if($siteId == null || $fields == null)
@@ -69,6 +70,7 @@ class Habitat extends AppModel {
 			return false;
 	}
 	
+	//For the given site id, retieving the habitat details so that the user can check if the details are the same or needs updating.
 	public function getHabitatDetails($siteId,$type)
 	{
 		if($siteId == null || $type == null)

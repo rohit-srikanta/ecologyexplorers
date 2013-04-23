@@ -19,6 +19,7 @@ class CloudCover extends AppModel {
 			)
 	);
 	
+	//Retrieving the list of cloud cover names and id
 	public function getCloudCover()
 	{
 		$cloud = $this->find('list', array(

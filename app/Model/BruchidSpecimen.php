@@ -14,6 +14,7 @@ class BruchidSpecimen extends AppModel {
 			)
 	);
 	
+	//Saving the data passed from bruchid samples class
 	public function saveFields($fields)
 	{
 		if($this->saveAll($fields))

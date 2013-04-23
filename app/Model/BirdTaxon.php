@@ -20,6 +20,7 @@ class BirdTaxon extends AppModel {
 			)
 	);
 	
+	//Retrieving the list of taxon names and id
 	public function getBirdList()
 	{
 		$taxon = $this->find('list', array(

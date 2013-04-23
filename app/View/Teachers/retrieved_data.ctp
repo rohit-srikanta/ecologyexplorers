@@ -12,6 +12,7 @@
 	<br>
 	<p>
 		<?php
+		echo $this->Html->image('downloadData.png', array('width'=>'150px'));
 		echo $this->Html->link('To Save Data,Click Here',array('controller'=>'teachers','action'=>'export'), array('target'=>'_blank'));
 		?></p>
 	<br>

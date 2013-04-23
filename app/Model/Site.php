@@ -48,6 +48,7 @@ class Site extends AppModel {
 			)
 	);
 
+	//Creating new site.
 	public function createNewSite($siteDetails)
 	{
 		$this->create();
@@ -62,6 +63,7 @@ class Site extends AppModel {
 			return false;
 	}
 	
+	//The sum of all the characteristics of vegetaion should be 100 or less. 
 	public function validateVegetation($fields)
 	{
 		
@@ -71,6 +73,7 @@ class Site extends AppModel {
 			return false;
 		
 	}
+	//Validation to check if the site if given by the user also exists.
 	public function checkSiteIDExists($fields = null)
 	{
 		if($this->findBySiteId($fields) != null)
@@ -84,6 +87,7 @@ class Site extends AppModel {
 	
 	}
 	
+	//Get the sites for the logged in user based on his school assoication
 	public function getTeachersSites($schoolId)
 	{
 		if($schoolId ==null)

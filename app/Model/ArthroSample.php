@@ -38,6 +38,7 @@ class ArthroSample extends AppModel {
 			)
 	);
 
+	//Saving the arthro sample data along with arthro specimen data.
 	public function savingthedata($fields)
 	{
 		$fields['ArthroSample']['date_entered'] = date('Y-m-d H:i:s');

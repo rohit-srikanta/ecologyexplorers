@@ -23,7 +23,7 @@ class BirdSpecimen extends AppModel {
 			),
 	);
 
-
+	//Saving the data passed from bird samples class
 	public function saveFields($fields)
 	{
 		if($this->saveAll($fields))
@@ -32,9 +32,4 @@ class BirdSpecimen extends AppModel {
 		}
 	}
 
-	public function retrieveBirdData($startDate,$endDate)
-	{
-		$data2 = $this->find('all', array('contain' => array('BirdSample','BirdTaxon'),'conditions' => array('BirdSample.collection_date between ? and ?' => array($startDate, $endDate)),'fields' => array('BirdSample.id','BirdSample.site_id','BirdSample.habitat_id','BirdSample.air_temp AS Temperature','BirdSample.cloud_cover','BirdSample.comments','BirdSpecimen.frequency')));
-		return $data2;
-	}
 }

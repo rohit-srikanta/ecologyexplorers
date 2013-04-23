@@ -101,6 +101,7 @@ class Teacher extends AppModel {
 			return false;
 	}
 
+	//Change the type of the user from P (pending) to T(teacher)
 	public function approveUser($id,$value)
 	{
 
@@ -116,6 +117,7 @@ class Teacher extends AppModel {
 		return false;
 	}
 
+	//List of all the users who have type as pending. This is used to populate the approve users page
 	public function getUsers()
 	{
 		$conditions = array("Teacher.type" => "P");
@@ -123,6 +125,7 @@ class Teacher extends AppModel {
 		return($this->associateSchoolNames($query));
 	}
 
+	//This data is used to populate the modify users page.
 	public function userList($user)
 	{
 		if($user == null)
@@ -130,6 +133,7 @@ class Teacher extends AppModel {
 		$query = $this->find('all',array('conditions' => array('NOT' => array('Teacher.id' => $user['Teacher']['id']))));
 		return($this->associateSchoolNames($query));
 	}
+
 
 	public function associateSchoolNames($Userlist)
 	{
@@ -150,6 +154,7 @@ class Teacher extends AppModel {
 		return $Userlist;
 	}
 
+	//
 	public function getUserDetails($id)
 	{
 		$query = $this->find('all',array('conditions' => array('Teacher.id' => $id)));
@@ -199,6 +204,8 @@ class Teacher extends AppModel {
 		return $class;
 	}
 
+	//Deleting a teacher is to first delete any teachers class he has created before deleting the teacher himself.
+	//This resolves the foreign key constraint.
 	public function deleteTeacher($id)
 	{
 		if($id ==null)

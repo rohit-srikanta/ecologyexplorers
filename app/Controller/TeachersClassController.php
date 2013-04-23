@@ -6,6 +6,7 @@ App::uses('AppController', 'Controller');
 */
 class TeachersClassController extends AppController {
 
+	//This method is used to create a new class for the teacher so that he can submit the data.
 	public function createClass()
 	{
 		$user = $this->Session->read('User');

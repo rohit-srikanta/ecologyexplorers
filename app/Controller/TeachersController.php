@@ -51,12 +51,27 @@ class TeachersController extends AppController {
 					$this->Session->write('User', $user);
 					$this->Session->write('Username', $user['Teacher']['name']);
 					$this->Session->write('UserType',$user['Teacher']['type']);
-					if($user['Teacher']['password'] == Security::hash("CAPLTER"))
+					
+					//Prompting the user to change the username and password the profile has default values 
+					$pos = strpos($user['Teacher']['email_address'], "nullemail");
+					if($user['Teacher']['password'] == Security::hash("CAPLTER") && $pos !== false)
 					{
-						$this->Session->setFlash('Login Successful.Please change the default password.');
+						$this->Session->setFlash('Login Successful. Please change the email address and password.');
 						$this->redirect(array(
 								'action' => 'editProfile'));
 					}	
+					if($user['Teacher']['password'] == Security::hash("CAPLTER"))
+					{
+						$this->Session->setFlash('Login Successful. Please change the password.');
+						$this->redirect(array(
+								'action' => 'editProfile'));
+					}
+					if($pos !== false)
+					{
+						$this->Session->setFlash('Login Successful. Please correct the email address.');
+						$this->redirect(array(
+								'action' => 'editProfile'));
+					}
 					$this->redirect(array(
 							'action' => 'index'));
 				}
@@ -131,19 +146,20 @@ class TeachersController extends AppController {
 		}
 	}
 
-
+	//This method is called to send email to the user or the admin. Users get email when the profile is approved is created and if password has to be reset.
+	//Admin will get an email when a new profile is created and needs to be approved.
 	function sendemail($body,$to,$from,$subject)
 	{
 
-		$Email = new CakeEmail('gmail');
+		$Email = new CakeEmail();
 		$Email->from($from)
 		->to($to)
 		->emailFormat('html')
 		->subject($subject)
 		->send($body);
-
 	}
 
+	//This method is called to approve the users pending profile. This is accessible by admins only. 
 	function approveUser()
 	{
 		if($this->authorizedUser())
@@ -174,6 +190,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//This method is called before accessing any admin functionality
 	function authorizedUser()
 	{
 		if('A' != $this->Session->read('UserType'))
@@ -185,6 +202,7 @@ class TeachersController extends AppController {
 			return true;
 	}
 
+	//This method is used to change the users profile. This functionality can be performed by the admin.
 	function modifyUser()
 	{
 		if($this->authorizedUser())
@@ -194,6 +212,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//After the details has been entered by the admin in the edit UI, the validations are done before commiting the data.
 	public function editUser($id = null)
 	{
 		if (!$id) {
@@ -240,6 +259,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//This method is used to delete a user from the DB. 
 	public function deleteUser($id,$name)
 	{
 		if($this->authorizedUser())
@@ -262,6 +282,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//This method is called to reset the users password to a default value.
 	public function userResetPassword($id,$name)
 	{
 
@@ -276,6 +297,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//This method is called to change the current users profile. 
 	public function editProfile()
 	{
 		if(!$this->Session->check('User'))
@@ -333,6 +355,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//Submit data can be performed by the logged in user. Before data can be submitted, the user has to select the protocol, site and class.
 	public function submitData()
 	{
 
@@ -360,6 +383,7 @@ class TeachersController extends AppController {
 		$this->set('siteIDOptions', $this->Teacher->getSiteIDs($user));
 		$this->set('classIDOptions', $this->Teacher->getClassIDs($user));
 
+		//Based on the users protocol, he is redirected to the habitat check page or directly to data submission.
 		if ($this->request->is('post'))
 		{
 			if($this->request->data['SubmitData']['protocol'] == 'BR')
@@ -375,6 +399,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//This page is accessible by all. Based on the data range, school and protocol selected, data is retrieved if present for that combination.
 	public function downloadData()
 	{
 		$habitatTypeOptions = array(
@@ -400,6 +425,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//This method does the extraction from the database for the given combination.
 	function retrievedData()
 	{
 		$param = $this->passedArgs;
@@ -422,6 +448,7 @@ class TeachersController extends AppController {
 		$this->Session->write('data',$data);
 	}
 
+	//This method is used to convert the data into a csv file.
 	function export()
 	{
 		$this->set('dateRetrieved', $this->Session->read('data'));
@@ -430,6 +457,7 @@ class TeachersController extends AppController {
 		Configure::write('debug', '0');
 	}
 
+	//If the user forgets the password, then an email is sent to his registered email id. A new random password will be sent to his email account.
 	function forgotPassword()
 	{
 		if ($this->request->is('post'))
@@ -465,6 +493,7 @@ class TeachersController extends AppController {
 		}
 	}
 
+	//This method is just a place holder for links to species data.
 	function modifySpeciesData()
 	{
 		if($this->authorizedUser())

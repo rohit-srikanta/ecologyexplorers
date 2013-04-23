@@ -18,6 +18,8 @@ class HabitatsController extends AppController {
 		$this->set('habitats', $this->paginate());
 	}
 
+	//After the user has selected the protocol, site and class, he/she is then asked to verify the habitat details. If the details remain the same, then user proceeds to the data submission statge.
+	//If not, the user can make the necessary changes in the current page and submit the data before moving on to data submission.
 	public function habitatCheck()
 	{
 		if(!$this->Session->check('User'))
@@ -52,6 +54,7 @@ class HabitatsController extends AppController {
 
 		$this->set('siteOptions', ClassRegistry::init('Site')->getSiteName($param[1]));
 
+		//Abbreveations for storing the protocol in the habitat table.
 		$habitatTypeOptions = array(array('name' => 'Arthropods','value' => 'AR'),array('name' => 'Birds','value' => 'BI'),array('name' => 'Bruchids','value' => 'BR'),array('name' => 'Vegetation','value' => 'VE'));
 		$this->set('habitatTypeOptions', $habitatTypeOptions);
 
@@ -67,6 +70,7 @@ class HabitatsController extends AppController {
 
 			$date = $this->request->data['Habitat']['recording_date']['year'].'-'.$this->request->data['Habitat']['recording_date']['month'].'-'.$this->request->data['Habitat']['recording_date']['day'];
 
+			//A different UI is called based on the users protocol selection.
 			if($habitat['Habitat']['type'] == 'VE')
 			{
 				if($habitat['Habitat']['area'] == $this->request->data['Habitat']['area'] && $habitat['Habitat']['tree_canopy'] == $this->request->data['Habitat']['tree_canopy'] && $habitat['Habitat']['shrubcover'] == $this->request->data['Habitat']['shrubcover'] && $habitat['Habitat']['lawn'] == $this->request->data['Habitat']['lawn'] && $habitat['Habitat']['gravel_soil'] == $this->request->data['Habitat']['gravel_soil'] && $habitat['Habitat']['paved_building'] == $this->request->data['Habitat']['paved_building'] && $habitat['Habitat']['other'] == $this->request->data['Habitat']['other'] && $habitat['Habitat']['water'] == $this->request->data['Habitat']['water'] && $habitat['Habitat']['recording_date'] == $date)

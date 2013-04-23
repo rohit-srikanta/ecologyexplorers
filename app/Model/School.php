@@ -66,6 +66,7 @@ class School extends AppModel {
 		return $school;
 	}
 
+	//Looad all the schools and store it in id and name fashion.
 	public function schoolOptions()
 	{
 		$schools = $this->loadSchools();
@@ -80,6 +81,7 @@ class School extends AppModel {
 		return $schooloptions;
 	}
 
+	//Retrieving only the name of the school in the passed parameters.
 	public function schoolWithID($schoolID)
 	{
 		if($schoolID == null)
@@ -128,6 +130,7 @@ class School extends AppModel {
 
 	}
 
+	//This method is used to retrieve data based on the users school, data range and protocol.
 	public function retrieveData($dataConditions)
 	{
 		$this->recursive = 2;

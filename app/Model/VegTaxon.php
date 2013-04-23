@@ -20,6 +20,7 @@ class VegTaxon extends AppModel {
 			)
 	);
 	
+	//Retrieving the list of taxon names and id
 	public function getOrderList()
 	{
 		$taxon = $this->find('list', array(

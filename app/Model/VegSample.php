@@ -41,7 +41,7 @@ class VegSample extends AppModel {
 			)
 	);
 	
-
+	//Saving the arthro sample data along with veg specimen data.
 	public function savingthedata($fields)
 	{
 		$fields['VegSample']['date_entered'] = date('Y-m-d H:i:s');

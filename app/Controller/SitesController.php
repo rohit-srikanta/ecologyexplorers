@@ -10,6 +10,8 @@ class SitesController extends AppController {
 	public $components = array('RequestHandler');
 	public $helpers = array('Js');
 	
+	//The method is called to create a new site for the users school. The site can be for any of the protocols. During the site creation, we also create the habitat.
+	//The habitat is associated with only the 3 protocols, Arthropods,Vegetation and Birds. Bruchid will only have sites associated with it.
 	public function createSite()
 	{
 		if(!$this->Session->check('User'))

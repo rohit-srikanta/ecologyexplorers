@@ -29,6 +29,7 @@ class ArthroSpecimen extends AppModel {
 					'rule' => 'notEmpty')
 	);
 
+	//Saving the data passed from arthro samples class
 	public function saveFields($fields)
 	{
 		if($this->saveAll($fields))

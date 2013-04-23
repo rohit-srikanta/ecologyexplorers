@@ -42,6 +42,7 @@ class BirdSample extends AppModel {
 					'foreignKey'   => 'cloud_cover_id',
 			)
 	);
+	//Saving the arthro sample data along with bird specimen data.
 	public function savingthedata($fields)
 	{
 		$fields['BirdSample']['date_entered'] = date('Y-m-d H:i:s');
