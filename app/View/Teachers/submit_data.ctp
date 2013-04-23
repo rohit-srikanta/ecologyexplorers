@@ -15,7 +15,7 @@
 	<p>
 		<?php echo $this->Html->link('Create Site',  array('controller' => 'sites', 'action' => 'createSite')); ?>
 		<br> <br>
-		<?php echo $this->Html->link('Create Class',  array('controller' => 'teachersclass', 'action' => 'createClass')); ?>
+		<?php echo $this->Html->link('Create Class',  array('controller' => 'teachersClass', 'action' => 'createClass')); ?>
 
 	</p>
 </body>
