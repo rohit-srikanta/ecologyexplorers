@@ -5,6 +5,17 @@
 <div>
 	<?php echo $this->element('links'); ?>
 </div>
+
+
+	<?php $this->Html->addCrumb('Submit Data', '/teachers/submitData');
+	$this->Html->addCrumb('Bruchid Data', 'bruchidSamples/bruchidData');
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
+
+
 <?php echo $this->Form->create('BruchidSample',array('class'=>'form'));   ?>
 
 <div class="formfield">

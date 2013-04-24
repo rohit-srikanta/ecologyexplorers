@@ -51,15 +51,13 @@
 </script>
 </head>
 
-<br>
-<div class="topright">
-	<?php echo $this->Html->link($this->Session->read('Username'),array('controller' => 'teachers', 'action' => 'home')); ?>
+<div>
+		<?php echo $this->element('links'); ?>
 </div>
-<div class="topleft">
-	<?php 
-	echo $this->Html->link('<< Back','javascript:history.back(1);');?>
-	</div>
-<br>
+
+<?php  $this->Html->addCrumb('Profile', '/teachers/index');
+$this->Html->addCrumb('Create Site', 'createSite');
+echo $this->Html->getCrumbs(' > ', 'Home');?>
 <br>
 <?php echo $this->Form->create('Site',array('class'=>'form','id' => 'createSite'));   ?>
 

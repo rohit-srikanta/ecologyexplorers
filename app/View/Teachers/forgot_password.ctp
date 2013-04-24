@@ -3,6 +3,14 @@
 <div>
 	<?php echo $this->element('links'); ?>
 </div>
+<?php  $this->Html->addCrumb('Forgot Password', 'forgotPassword');
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));?>
+
+
+
 <br><div class="text">
 <p>Please enter the email address that you provided during profile creation. The new password will be sent to this email address.</p>
 <p>If you do not have access to this email, please send an email to Monica.Elser@asu.edu</p>

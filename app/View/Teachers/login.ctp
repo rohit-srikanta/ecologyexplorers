@@ -3,6 +3,13 @@
 <div>
 		<?php echo $this->element('links'); ?>
 </div>
+<?php  $this->Html->addCrumb('Login', 'login');
+
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
 <br><div class="text">
         <?php echo $this->Form->create('Teacher', array('class'=>'form'));      
         echo $this->Form->input('email_address',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 

@@ -5,6 +5,18 @@
 <div>
 	<?php echo $this->element('links'); ?>
 </div>
+
+
+	<?php $this->Html->addCrumb('Submit Data', '/teachers/submitData');
+	$this->Html->addCrumb('Habitat Check', '/habitats/habitatCheck');
+	$this->Html->addCrumb('Birds Data', 'birdSamples/birdData');
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
+
+
 <?php echo $this->Form->create('BirdSample',array('class'=>'form'));   ?>
 
 <div class="formfield">

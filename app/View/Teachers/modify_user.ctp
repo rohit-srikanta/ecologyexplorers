@@ -5,6 +5,14 @@
 		<?php echo $this->element('links'); ?>
 </div>
 
+<?php  $this->Html->addCrumb('Modify User', 'modifyUser');
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
+
+
 <?php if('A' == $this->Session->read('UserType'))
 {
 

@@ -5,6 +5,14 @@
 <div>
 		<?php echo $this->element('links'); ?>
 </div>
+
+
+	<?php  $this->Html->addCrumb('Profile', '/teachers/index'); 
+	$this->Html->addCrumb('Submit Data', '/teachers/submitData');
+	$this->Html->addCrumb('Habitat Check', '/habitats/habitatCheck');
+echo $this->Html->getCrumbs(' > ', 'Home');?>
+
+
 <?php echo $this->Form->create('Habitat',array('class'=>'form'));   ?>
 <legend class="formfield">
 	<b>Habitat Details</b>

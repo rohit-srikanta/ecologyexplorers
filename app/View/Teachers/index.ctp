@@ -3,7 +3,11 @@
 <br>
 <br>
 <body>
-
+<?php 
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));?>
 
 	<p>
 		<?php if(!($this->Session->read('UserType')))
@@ -52,7 +56,7 @@
 			Welcome back <?php echo $this->Session->read('Username')?>!<br> <br>
 			<?php }echo $this->Html->link('Edit Profile', array('action' => 'editProfile'));?>
 			<br> <br>
-			<?php echo $this->Html->link('Create Class',  array('controller' => 'teachersclass', 'action' => 'createClass')); ?>
+			<?php echo $this->Html->link('Create Class',  array('controller' => 'teachersClass', 'action' => 'createClass')); ?>
 			<br> <br>
 			<?php echo $this->Html->link('Create Site',  array('controller' => 'sites', 'action' => 'createSite')); ?>
 			<br> 

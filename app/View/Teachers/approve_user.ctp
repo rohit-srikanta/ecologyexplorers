@@ -3,8 +3,16 @@
 
 <div>
 		<?php echo $this->element('links'); ?>
-</div>
 
+
+<?php  $this->Html->addCrumb('Approve Users', 'approveUser');
+
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
+</div>
 <?php if('A' == $this->Session->read('UserType'))
 {
 
