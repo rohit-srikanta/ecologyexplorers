@@ -71,7 +71,7 @@
 	<?php if($this->Session->check('User'))
 	{?>
 		<div class="seperation"><br><div class="logout">		
-		<?php echo $this->Form->postLink('Logout', array('controller' => 'teachers','action' => 'logout'));
+		<?php echo $this->Form->postLink('Logout', array('controller' => 'teachers','action' => 'logout'));?></div><?php 
 	}
 	?>
 	</div>
