@@ -6,8 +6,7 @@
 	<div>
 		<?php echo $this->element('links'); ?>
 	</div>
-	<?php  $this->Html->addCrumb('Profile', 'index'); 
-	$this->Html->addCrumb('Download Data', 'downloadData');
+	<?php $this->Html->addCrumb('Download Data', 'downloadData');
 	$this->Html->addCrumb('Data Retrieved', 'retrievedData');
 echo $this->Html->getCrumbs(' > ', array(
 		'url' => array('controller' => 'teachers', 'action' => 'index'),
