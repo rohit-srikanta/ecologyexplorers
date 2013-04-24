@@ -3,11 +3,6 @@
 <br>
 <br>
 <body>
-<?php 
-echo $this->Html->getCrumbs(' > ', array(
-		'url' => array('controller' => 'teachers', 'action' => 'index'),
-		'escape' => false
-));?>
 
 	<p>
 		<?php if(!($this->Session->read('UserType')))

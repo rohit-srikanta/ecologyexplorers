@@ -10,6 +10,8 @@ echo $this->Html->getCrumbs(' > ', array(
 		'escape' => false
 ));
 ?>
+
+<br>
 <br><div class="text">
         <?php echo $this->Form->create('Teacher', array('class'=>'form'));      
         echo $this->Form->input('email_address',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 

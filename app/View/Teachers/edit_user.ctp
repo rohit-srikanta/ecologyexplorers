@@ -12,7 +12,8 @@ echo $this->Html->getCrumbs(' > ', array(
 		'escape' => false
 ));?>
 
-
+<br>
+<h2>Edit user</h2><br>
 
 <br>
         <?php echo $this->Form->create('Teacher', array('class'=>'form'));     

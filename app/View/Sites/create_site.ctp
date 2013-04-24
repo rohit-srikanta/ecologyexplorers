@@ -55,16 +55,15 @@
 		<?php echo $this->element('links'); ?>
 </div>
 
-<?php  $this->Html->addCrumb('Profile', '/teachers/index');
+<?php
 $this->Html->addCrumb('Create Site', 'createSite');
-echo $this->Html->getCrumbs(' > ', 'Home');?>
-<br>
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
+<br>	<h2>Site Description</h2>
 <?php echo $this->Form->create('Site',array('class'=>'form','id' => 'createSite'));   ?>
-
-<legend class="formfield">
-	<b>Site Description</b>
-</legend>
-
 <div class="formfield">
 	<?php echo $this->Form->input('school_id',array('div'=>'formfield','options' => $schooloptions));
  echo $this->Form->input('Habitat.type',array('div'=>'formfield','empty' => 'Select','label' => 'Habitat Type','options' => $habitatTypeOptions,'id' => 'habitat_select')); 

@@ -9,7 +9,8 @@ echo $this->Html->getCrumbs(' > ', array(
 		'escape' => false
 ));?>
 
-
+<br>
+<h2>Forgot password</h2><br>
 
 <br><div class="text">
 <p>Please enter the email address that you provided during profile creation. The new password will be sent to this email address.</p>

@@ -41,7 +41,7 @@ class BirdTaxonController extends AppController {
 			$this->BirdTaxon->id = $id;
 			if ($this->BirdTaxon->save($this->request->data)) {
 				$this->Session->setFlash('Bird details has been updated.');
-				$this->redirect(array('controller' => 'birdtaxon', 'action' => 'modifyBirdTaxonData'));
+				$this->redirect(array('controller' => 'BirdTaxon', 'action' => 'modifyBirdTaxonData'));
 			} else {
 				$this->Session->setFlash('Unable to update bird details.');
 			}

@@ -1,5 +1,6 @@
 <html>
-
+<h2>Welcome to the Ecology Explorers Data Center!</h2>
+<br>
 <br>
 <div>
 		<?php echo $this->element('links'); ?>
@@ -12,7 +13,8 @@ echo $this->Html->getCrumbs(' > ', array(
 ));
 ?>
 
-
+<br>
+<h2>Register</h2><br>
 
 <br>
         <?php echo $this->Form->create('Teacher', array('class'=>'form'));    

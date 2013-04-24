@@ -4,6 +4,16 @@
 <div>
 		<?php echo $this->element('links'); ?>
 </div>
+
+<?php $this->Html->addCrumb('Modify Ecology Explorers Data', '/teachers/modifySpeciesData');
+$this->Html->addCrumb('Modify Birds Species Details	', 'modifyBirdTaxonData');
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
+
+<br>
 <p><b>Edit Bird Details</b></p>
 <br>
         <?php echo $this->Form->create('BirdTaxon', array('class'=>'form'));     

@@ -12,6 +12,7 @@ echo $this->Html->getCrumbs(' > ', array(
 ));
 ?>
 <br>
+<h2>Create Class</h2>
         <?php echo $this->Form->create('TeachersClass', array('class'=>'form'));    
          echo $this->Form->input('class_name',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
          echo $this->Form->input('grade',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));  

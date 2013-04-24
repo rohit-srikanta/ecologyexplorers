@@ -10,7 +10,8 @@ echo $this->Html->getCrumbs(' > ', array(
 		'escape' => false
 ));
 ?>
-<br>
+<br>	<br>
+<h2>Create School</h2><br>
 <?php if('A' == $this->Session->read('UserType'))
 	{ ?>
 

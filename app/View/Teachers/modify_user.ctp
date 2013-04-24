@@ -21,6 +21,7 @@ echo $this->Html->getCrumbs(' > ', array(
 	<b>User profiles</b>
 </h2>
 <br>
+<h2>Modify Users</h2><br>
 <br><div class="text">
 <table>
 	<?php echo $this->Form->create('ModifyUser');?>

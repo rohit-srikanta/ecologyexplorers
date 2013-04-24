@@ -1,7 +1,5 @@
 <html>
 
-<h2>Welcome to the Ecology Explorers Data Center!</h2>
-<br>
 <br>
 <body>
 	<div>
@@ -12,7 +10,6 @@ echo $this->Html->getCrumbs(' > ', array(
 		'url' => array('controller' => 'teachers', 'action' => 'index'),
 		'escape' => false
 ));?>
-
 
 	<?php echo $this->Form->create('retrieveData', array('class'=>'form'));    
 	echo $this->Form->input('protocol',array('label'=>'Choose the dataset you would like to work with  :','div'=>'formfield','options' => $habitatTypeOptions));

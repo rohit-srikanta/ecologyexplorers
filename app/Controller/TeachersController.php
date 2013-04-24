@@ -389,7 +389,7 @@ class TeachersController extends AppController {
 			if($this->request->data['SubmitData']['protocol'] == 'BR')
 			{
 				$this->redirect(array(
-						'controller' => 'bruchidsamples','action' => 'bruchidData',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
+						'controller' => 'BruchidSamples','action' => 'bruchidData',$this->request->data['SubmitData']['protocol'],$this->request->data['SubmitData']['site'],$this->request->data['SubmitData']['class']));
 			}
 			else
 			{

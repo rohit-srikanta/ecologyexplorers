@@ -5,6 +5,14 @@
 	<?php echo $this->element('links'); ?>
 </div>
 
+<?php $this->Html->addCrumb('Modify Ecology Explorers Data', '/teachers/modifySpeciesData');
+$this->Html->addCrumb('Modify Vegetation Species Details	', 'modifyVegTaxonData');
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
+
 <?php if('A' == $this->Session->read('UserType'))
 {
 
@@ -14,6 +22,8 @@
 </h2>
 <br>
 <br><div class="text">
+<?php echo $this->Html->link('Add Vegetation Details',array('controller' => 'VegTaxon', 'action' => 'addVeg'));
+?><br><br>
 <table>
 	<?php echo $this->Form->create('VegTaxon');?>
 	<tr>

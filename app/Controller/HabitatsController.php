@@ -94,14 +94,14 @@ class HabitatsController extends AppController {
 			{
 				if($habitat['Habitat']['num_traps'] == $this->request->data['Habitat']['num_traps'] && $habitat['Habitat']['tree_canopy'] == $this->request->data['Habitat']['tree_canopy'] && $habitat['Habitat']['shrubcover'] == $this->request->data['Habitat']['shrubcover'] && $habitat['Habitat']['lawn'] == $this->request->data['Habitat']['lawn'] && $habitat['Habitat']['gravel_soil'] == $this->request->data['Habitat']['gravel_soil'] && $habitat['Habitat']['paved_building'] == $this->request->data['Habitat']['paved_building'] && $habitat['Habitat']['other'] == $this->request->data['Habitat']['other'] && $habitat['Habitat']['water'] == $this->request->data['Habitat']['water'] && $habitat['Habitat']['trap_arrange'] == $this->request->data['Habitat']['trap_arrange'] && $habitat['Habitat']['recording_date'] == $date)
 				{
-					$this->redirect(array('controller'=>'arthroSamples','action' => 'arthropodData',$param[1],$param[2],$habitatId));
+					$this->redirect(array('controller'=>'ArthroSamples','action' => 'arthropodData',$param[1],$param[2],$habitatId));
 				}
 				else
 				{
 					if($this->Habitat->createHabitat($this->request->data['Habitat'],$param[1]))
 					{
 						$this->Session->setFlash('Habitat Details updated.');
-						$this->redirect(array('controller'=>'arthroSamples','action' => 'arthropodData',$param[1],$param[2],$habitatId));
+						$this->redirect(array('controller'=>'ArthroSamples','action' => 'arthropodData',$param[1],$param[2],$habitatId));
 					}
 					else
 					{
@@ -113,14 +113,14 @@ class HabitatsController extends AppController {
 			{
 				if($habitat['Habitat']['percent_observed'] == $this->request->data['Habitat']['percent_observed'] && $habitat['Habitat']['tree_canopy'] == $this->request->data['Habitat']['tree_canopy'] && $habitat['Habitat']['shrubcover'] == $this->request->data['Habitat']['shrubcover'] && $habitat['Habitat']['lawn'] == $this->request->data['Habitat']['lawn'] && $habitat['Habitat']['gravel_soil'] == $this->request->data['Habitat']['gravel_soil'] && $habitat['Habitat']['paved_building'] == $this->request->data['Habitat']['paved_building'] && $habitat['Habitat']['other'] == $this->request->data['Habitat']['other'] && $habitat['Habitat']['water'] == $this->request->data['Habitat']['water'] && $habitat['Habitat']['radius'] == $this->request->data['Habitat']['radius'] && $habitat['Habitat']['recording_date'] == $date)
 				{
-					$this->redirect(array('controller'=>'birdSamples','action' => 'birdData',$param[1],$param[2],$habitatId));
+					$this->redirect(array('controller'=>'BirdSamples','action' => 'birdData',$param[1],$param[2],$habitatId));
 				}
 				else
 				{
 					if($this->Habitat->createHabitat($this->request->data['Habitat'],$param[1]))
 					{
 						$this->Session->setFlash('Habitat Details updated.');
-						$this->redirect(array('controller'=>'birdSamples','action' => 'birdData',$param[1],$param[2],$habitatId));
+						$this->redirect(array('controller'=>'BirdSamples','action' => 'birdData',$param[1],$param[2],$habitatId));
 					}
 					else
 					{

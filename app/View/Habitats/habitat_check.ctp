@@ -7,8 +7,7 @@
 </div>
 
 
-	<?php  $this->Html->addCrumb('Profile', '/teachers/index'); 
-	$this->Html->addCrumb('Submit Data', '/teachers/submitData');
+	<?php $this->Html->addCrumb('Submit Data', '/teachers/submitData');
 	$this->Html->addCrumb('Habitat Check', '/habitats/habitatCheck');
 echo $this->Html->getCrumbs(' > ', 'Home');?>
 

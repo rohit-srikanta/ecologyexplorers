@@ -5,6 +5,15 @@
 	<?php echo $this->element('links'); ?>
 </div>
 
+
+<?php $this->Html->addCrumb('Modify Ecology Explorers Data', '/teachers/modifySpeciesData');
+$this->Html->addCrumb('Modify Birds Species Details	', 'modifyBirdTaxonData');
+echo $this->Html->getCrumbs(' > ', array(
+		'url' => array('controller' => 'teachers', 'action' => 'index'),
+		'escape' => false
+));
+?>
+
 <?php if('A' == $this->Session->read('UserType'))
 {
 
@@ -14,6 +23,9 @@
 </h2>
 <br>
 <br><div class="text">
+
+<?php echo $this->Html->link('Add Bird Details',array('controller' => 'BirdTaxon', 'action' => 'addBird'));
+?><br><br>
 <table>
 	<?php echo $this->Form->create('BirdTaxon');?>
 	<tr>
@@ -40,7 +52,7 @@
 
 <br>
 <?php echo $this->Form->end(); ?>
-<?php } echo $this->Html->link('Add Bird Details',array('controller' => 'birdtaxon', 'action' => 'addBird'));
+<?php } echo $this->Html->link('Add Bird Details',array('controller' => 'BirdTaxon', 'action' => 'addBird'));
 ?>
 </div>
 <br>
