@@ -10,7 +10,8 @@
 BODY {
 	FONT-SIZE: 10pt;
 	FONT-FAMILY: Verdana, Arial, Helvetica;
-	BACKGROUND: #e0ffbb url('../img/background3.png') no-repeat fixed;
+	BACKGROUND: #e0ffbb ;
+	/**BACKGROUND: #e0ffbb url('../img/background3.png') no-repeat fixed;*/
 	background-size: cover;
 	position: relative;
 	height: auto;
