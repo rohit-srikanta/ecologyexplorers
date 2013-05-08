@@ -1,8 +1,3 @@
-<html>
-
-
-<br>
-<body>
 	<div>
 		<?php echo $this->element('links'); ?>
 	</div>
@@ -39,6 +34,3 @@ echo $this->Html->getCrumbs(' > ', array(
 		Save the file on your computer or on a disk.<br> Open up the file in
 		your spreadsheet program (i.e. EXCEL).
 	</p>
-
-</body>
-</html>

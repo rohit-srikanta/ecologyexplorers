@@ -1,7 +1,3 @@
-<html>
-<head>
-</head>
-
 <div>
 		<?php echo $this->element('links'); ?>
 </div>
@@ -76,4 +72,3 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
 </div>
 
 <?php echo $this->Form->end('Update Habitat/Continue Entering data',array('div'=>'submit')); ?>
-</html>

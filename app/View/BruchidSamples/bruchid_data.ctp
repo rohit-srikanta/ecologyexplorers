@@ -1,7 +1,3 @@
-<html>
-<head>
-</head>
-
 <div>
 	<?php echo $this->element('links'); ?>
 </div>
@@ -82,4 +78,3 @@ echo $this->Html->getCrumbs(' > ', array(
 	<b>Please double check your entries before you click Submit.</b>
 </p>
 <?php echo $this->Form->end('Submit Beetle Data',array('div'=>'submit')); ?>
-</html>

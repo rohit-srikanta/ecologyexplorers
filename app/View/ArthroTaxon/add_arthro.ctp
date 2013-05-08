@@ -1,6 +1,3 @@
-
-<html>
-
 <div>
 	<?php echo $this->element('links'); ?>
 </div>
@@ -22,4 +19,3 @@ echo $this->Form->input('taxon',array('type'=>'char','div'=>'formfield','error' 
 echo $this->Form->input('taxon_name', array('size'=>25,'div'=>'formfield'));
 echo $this->Form->end('Add'); ?>
 
-</html>

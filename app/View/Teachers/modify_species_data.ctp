@@ -1,4 +1,3 @@
-<html>
 <br>
 <div>
 	<?php echo $this->element('links'); ?>
@@ -27,4 +26,3 @@ echo $this->Html->getCrumbs(' > ', array(
 	<br>
 	<br>
 </div>
-</html>

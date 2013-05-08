@@ -1,4 +1,3 @@
-<html>
 
 <div>
 		<?php echo $this->element('links'); ?>
@@ -19,4 +18,3 @@ echo $this->Html->getCrumbs(' > ', array(
          echo $this->Form->input('school_id',array('div'=>'formfield','options' => $schooloptions));
          echo $this->Form->end('Create Class'); ?>
    
-</html>

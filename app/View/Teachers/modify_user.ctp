@@ -1,4 +1,3 @@
-<html>
 <br>
 
 <div>
@@ -70,6 +69,3 @@ echo $this->Html->getCrumbs(' > ', array(
 <?php }
 ?>
 
-<br>
-<br>
-</html>

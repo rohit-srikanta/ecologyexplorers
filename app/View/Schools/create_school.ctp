@@ -1,5 +1,3 @@
-<html>
-
 <div>
 		<?php echo $this->element('links'); ?>
 </div>
@@ -24,4 +22,3 @@ echo $this->Html->getCrumbs(' > ', array(
              echo $this->Form->end('Create School'); ?>
  <?php }
 ?>  
-</html>

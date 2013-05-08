@@ -1,6 +1,3 @@
-<html>
-<head>
-</head>
 
 <div>
 		<?php echo $this->element('links'); ?>
@@ -76,4 +73,3 @@ echo $this->Html->getCrumbs(' > ', array(
 
 <p><b>Please double check your entries before you click Submit.</b></p>
 <?php echo $this->Form->end('Submit Arthropod Data',array('div'=>'submit')); ?>
-</html>

@@ -1,5 +1,3 @@
-<html>
-<br>
 
 <div>
 	<?php echo $this->element('links'); ?>
@@ -55,6 +53,3 @@ echo $this->Html->getCrumbs(' > ', array(
 <?php } echo $this->Html->link('Add Bird Details',array('controller' => 'BirdTaxon', 'action' => 'addBird'));
 ?>
 </div>
-<br>
-<br>
-</html>
