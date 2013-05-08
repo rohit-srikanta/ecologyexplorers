@@ -15,7 +15,7 @@ echo $this->Html->getCrumbs(' > ', 'Home');?>
 </legend>
 <div class="formfield">
 	<?php echo $this->Form->input('school_id',array('div'=>'formfield','options' => $schooloptions,'disabled' => 'disabled'));
- echo $this->Form->input('Habitat.type',array('disabled' => 'disabled','div'=>'formfield','empty' => 'Select','label' => 'Habitat Type','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
+ echo $this->Form->input('Habitat.type',array('disabled' => 'disabled','div'=>'formfield','empty' => 'Select','label' => 'Protocol','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
  echo $this->Form->input('site_name',array('disabled' => 'disabled','div'=>'formfield','options' => $siteOptions,'error' => array('wrap' => 'div','class' => 'formerror')));  ?>
  </div>
 <div class="formfield">

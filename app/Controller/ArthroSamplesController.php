@@ -24,8 +24,7 @@ class ArthroSamplesController extends AppController {
 		if(!$this->Session->check('User'))
 		{
 			$this->Session->setFlash('Please login to access this page.');
-			$this->redirect(array(
-					'action' => 'login'));
+			$this->redirect(array('controller' => 'teachers', 'action' => 'login'));
 		}
 		
 		//Data is passed from the habitat check page which will be used to submit the data.
@@ -53,10 +52,13 @@ class ArthroSamplesController extends AppController {
 			if($this->ArthroSample->savingthedata($this->request->data))
 			{
 				$this->Session->setFlash("Arthropod Data has been saved. ");
-				$this->redirect(array('controller' => 'teachers','action' => 'index'));
+				$this->redirect(array('action' => 'successMessage'));
 			}
 		}
 
 	}
+  public function successMessage() {
+
+  }
 
 }

@@ -6,7 +6,7 @@
 	<?php $this->Html->addCrumb('Submit Data', '/teachers/submitData');
 	$this->Html->addCrumb('Habitat Check', '/habitats/habitatCheck');
 	$this->Html->addCrumb('Arthropod Data', '/arthroSamples/arthropodData');
-echo $this->Html->getCrumbs(' > ', array(
+  echo $this->Html->getCrumbs(' > ', array(
 		'url' => array('controller' => 'teachers', 'action' => 'index'),
 		'escape' => false
 ));

@@ -19,8 +19,7 @@ class VegSamplesController extends AppController {
 		if(!$this->Session->check('User'))
 		{
 			$this->Session->setFlash('Please login to access this page.');
-			$this->redirect(array(
-					'action' => 'login'));
+      $this->redirect(array('controller' => 'teachers', 'action' => 'login'));
 		}
 		
 		//Data is passed from the page where we choose site and class, which will be used to submit the data.
