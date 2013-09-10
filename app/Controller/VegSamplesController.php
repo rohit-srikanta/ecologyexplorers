@@ -46,10 +46,18 @@ class VegSamplesController extends AppController {
 			$this->request->data['VegSample']['teachers_class_id'] = $param[1];
 			$this->request->data['VegSample']['habitat_id'] = $param[2];
 			
+			if($this->VegSample->checkNegativeNumbers($this->request->data)){
+				$this->Session->setFlash("Measurment fields cannot be less than zero. Please verify");
+				return;
+			}
+			
 			if($this->VegSample->savingthedata($this->request->data))
 			{
 				$this->Session->setFlash("Vegetation Data has been saved. ");
-				$this->redirect(array('controller' => 'teachers','action' => 'index'));
+				$this->redirect(array('controller' => 'teachers','action' => 'dataSubmissionSuccess'));
+			}
+			else{
+				$this->Session->setFlash("Unable to save the data. Please check the data and try again.");				
 			}
 		}
 	

@@ -56,16 +56,23 @@ class BruchidSamplesController extends AppController {
 				$this->Session->setFlash('Please select the site type');
 				return;
 			}
+			
+			if($this->BruchidSample->checkNegativeNumbers($this->request->data)){
+				$this->Session->setFlash("Measurment fields cannot be less than zero. Please verify");
+				return;
+			}
 				
 			$this->request->data['BruchidSample']['site_id'] = $param[1];
 			$this->request->data['BruchidSample']['teachers_class_id'] = $param[2];
 
 			if($this->BruchidSample->savingthedata($this->request->data))
 			{
-				$this->Session->setFlash("Beetles Data has been saved. ");
-				$this->redirect(array('controller' => 'teachers','action' => 'index'));
+				$this->Session->setFlash("Bruchid Beetles Data has been saved. ");
+				$this->redirect(array('controller' => 'teachers','action' => 'dataSubmissionSuccess'));
 			}
-				
+			else{
+				$this->Session->setFlash("Unable to save the data. Please check the data and try again.");
+			}	
 		}
 
 	}

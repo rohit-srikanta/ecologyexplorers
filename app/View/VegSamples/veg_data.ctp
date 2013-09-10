@@ -23,8 +23,9 @@ echo $this->Html->getCrumbs(' > ', array(
 	<b>Protocol : Vegetation</b>
 </legend>
 <br>
-
-		<i><b>Remember while entering survey data:</b> </i>
+		<p>
+		<i><b>Please fill out the vegetation data sheet prior to entering data. Remember while entering survey data:</b> </i>
+	</p>
 	<p>The survey form cannot be submitted without data being entered</p>
 	<p>There may not be duplicate entries (i.e. two rows with the same trap
 		ID and Order)</p>
@@ -36,7 +37,7 @@ echo $this->Html->getCrumbs(' > ', array(
 	echo $this->Form->input('Teacher',array('value' => $teacherName,'disabled' => 'disabled','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('site_name',array('disabled' => 'disabled','div'=>'formfield','options' => $siteOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('class_name',array('disabled' => 'disabled','div'=>'formfield','options' => $classOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
-	echo $this->Form->input('collection_date',array('div'=>'formfield'));
+	echo $this->Form->input('collection_date',array('label'=> 'Survey Date','div'=>'formfield'));
 	echo $this->Form->input('observer',array('label' =>'Observer\'s Name', 'div'=>'formfield')); 
 	echo $this->Form->input('tree_count',array('div'=>'formfield'));
 	echo $this->Form->input('cactus_count',array('div'=>'formfield'));
@@ -54,7 +55,7 @@ echo $this->Html->getCrumbs(' > ', array(
 			<th>Species Name</th>
 			<th>CBH (m)</th>
 			<th>Height (m) </th>
-			<th>Canopy Size (m2) </th>
+			<th>Canopy Size (m&sup2;) </th>
 			<th>Comments/Location</th>
 		</tr>
 

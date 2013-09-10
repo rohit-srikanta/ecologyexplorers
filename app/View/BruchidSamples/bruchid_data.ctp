@@ -20,11 +20,11 @@ echo $this->Html->getCrumbs(' > ', array(
 
 <div class="formfield">
 	<legend>
-		<b>Protocol : Beetles</b>
+		<b>Protocol : Bruchid Beetles</b>
 	</legend>
 	<br>
 	<p>
-		<i><b>Remember while entering survey data:</b> </i>
+		<i><b>Please fill out the bruchid data sheet prior to entering data. Remember while entering survey data:</b> </i>
 	</p>
 
 	<p>The survey form cannot be submitted without data being entered</p>

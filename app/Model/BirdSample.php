@@ -49,6 +49,7 @@ class BirdSample extends AppModel {
 
 		if($this->save($fields['BirdSample']))
 		{
+			$count = 0;
 			for($i=0;$i<20;$i++)
 			{
 				$str1 = "BirdSpecimen".$i."taxon";
@@ -59,12 +60,30 @@ class BirdSample extends AppModel {
 					$newRow[$i]['species_id'] = $fields['BirdSample'][$str1];
 					$newRow[$i]['frequency'] = $fields['BirdSample'][$str2];
 					$newRow[$i]['bird_sample_id'] = $this->getInsertID();
+					$count ++;
 				}
 			}
 
-			if(ClassRegistry::init('BirdSpecimen')->saveFields($newRow))
+			if(($count > 0)  && (ClassRegistry::init('BirdSpecimen')->saveFields($newRow)))
 			{
 				return true;
+			}
+		}
+		return false;
+	}
+	
+	public function checkNegativeNumbers($fields) {
+	
+		for($i = 0; $i < 20; $i ++) {
+				
+			$str1 = "BirdSpecimen" . $i . "taxon";
+			$str2 = "BirdSpecimen" . $i . "frequency";
+				
+			if (null != $fields ['BirdSample'] [$str1] && null != $fields ['BirdSample'] [$str2]) {
+	
+				if ($fields ['BirdSample'] [$str2] < 0) {
+					return true;
+				}
 			}
 		}
 		return false;

@@ -25,7 +25,7 @@ echo $this->Html->getCrumbs(' > ', array(
 </legend>
 <br>
 	<p>
-		<i><b>Remember while entering survey data:</b> </i>
+		<i><b>Please fill out the bird data sheet prior to entering data. Remember while entering survey data:</b> </i>
 	</p>
 
 	<p>The survey form cannot be submitted without data being entered</p>
@@ -39,7 +39,7 @@ echo $this->Html->getCrumbs(' > ', array(
 	echo $this->Form->input('Teacher',array('value' => $teacherName,'disabled' => 'disabled','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('site_name',array('disabled' => 'disabled','div'=>'formfield','options' => $siteOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('class_name',array('disabled' => 'disabled','div'=>'formfield','options' => $classOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
-	echo $this->Form->input('collection_date',array('label'=> 'Date of Entry','div'=>'formfield'));
+	echo $this->Form->input('collection_date',array('label'=> 'Sampling Date','div'=>'formfield'));
 	echo $this->Form->input('observer',array('label' =>'Observer\'s Name', 'div'=>'formfield'));
 	echo $this->Form->input('comments',array('div'=>'formfield','type'=>'textarea','rows' => 3, 'cols' => 35));  ?>
 
@@ -47,7 +47,7 @@ echo $this->Html->getCrumbs(' > ', array(
 		<b>Weather Report : </b>
 
 		<?php echo $this->Form->input('cloud_cover_id',array('div'=>'formfield','empty' => 'Select','options' => $cloudOptions,'error' => array('wrap' => 'div','class' => 'formerror'))); 
-		echo $this->Form->input('air_temp',array('label'=>'Temperature', 'type' => 'number','interval' => 5,'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
+		echo $this->Form->input('air_temp',array('label'=>'Temperature', 'type' => 'number','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 		echo $this->Form->input('temp_units',array('label'=>'Temperature Unit', 'options' => array('1' =>'Celsius', '2'=>'Farenheit'),'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 		echo $this->Form->input('time_start',array('default' => $this->Time->format('H:i:s', date('H:i:s'), null, 'PDT'),'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 		echo $this->Form->input('time_end',array('default' => $this->Time->format('H:i:s', date('H:i:s'), null, 'PDT'),'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));

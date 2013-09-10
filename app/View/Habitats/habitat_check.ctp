@@ -43,7 +43,7 @@ echo $this->Html->getCrumbs(' > ', 'Home');?>
 <?php if('BI' == $this->request->data['Habitat']['type']){ ?>
 <div class="formfield" id="birds">
 	<?php echo $this->Form->input('Habitat.percent_observed',array('options' => $percentOptions,'div'=>'formfield'));  
-echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div'=>'formfield')); ?>
+echo $this->Form->input('Habitat.radius',array('options' => $radiusOptions,'div'=>'formfield')); ?>
 </div>
 <?php }?>
 
@@ -75,5 +75,5 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
  echo $this->Form->input('Habitat.water',array('label'=> '% Water','options' => $percentOptions,'div'=>'formfield'));  ?>
 </div>
 
-<?php echo $this->Form->end('Update Habitat/Continue Entering data',array('div'=>'submit')); ?>
+<?php echo $this->Form->end('Update Habitat and/or Continue Entering Data',array('div'=>'submit')); ?>
 </html>

@@ -508,5 +508,7 @@ class TeachersController extends AppController {
 		}
 	}
 
-
+	function dataSubmissionSuccess(){
+		
+	}
 }

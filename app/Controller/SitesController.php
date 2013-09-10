@@ -42,7 +42,7 @@ class SitesController extends AppController {
 			}
 			else if($this->Site->validateVegetation($this->request->data['Habitat']))
 			{
-				$this->Session->setFlash('Habitat Vegetation and Non-Vegetation within 0 m - 0.15 m cannot be more than 100 %.');
+				$this->Session->setFlash('Habitat Vegetation and Non-Vegetation within 0 m - 0.15 m should add up to 100 %.');
 			}
 			else if($this->request->data['Habitat']['type'] == '')
 			{

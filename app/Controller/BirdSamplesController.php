@@ -52,15 +52,20 @@ class BirdSamplesController extends AppController {
 			{
 				$this->request->data['BirdSample']['air_temp'] = ($this->request->data['BirdSample']['air_temp'] * 1.8) + 32 ;
 			}
+			
+			if($this->BirdSample->checkNegativeNumbers($this->request->data)){
+				$this->Session->setFlash("Number of birds cannot be less than zero");
+				return;
+			}
 
 			if($this->BirdSample->savingthedata($this->request->data))
 			{
 				$this->Session->setFlash("Bird Data has been saved. ");
-				$this->redirect(array('controller' => 'teachers','action' => 'index'));
+				$this->redirect(array('controller' => 'teachers','action' => 'dataSubmissionSuccess'));
+			}
+			else{
+				$this->Session->setFlash("Unable to save the data. Please check the data and try again.");				
 			}
 		}
-
 	}
-
-
 }

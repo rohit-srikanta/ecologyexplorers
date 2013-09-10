@@ -12,7 +12,7 @@
 			<p class="text">Everybody may download data from all Ecology Explorers research projects</p>
 			<div class="text">
 				<ul>
-					<li><?php echo$this->Html->link('Teacher directions', '/files/myfile.pdf');?>
+					<li><?php echo$this->Html->link('Teacher directions', '/files/TeachersGuide.pdf');?>
 					</li>
 					<li><?php echo$this->Html->link('Student directions', '/files/myfile1.pdf');?>
 					</li>

@@ -49,11 +49,19 @@ class ArthroSamplesController extends AppController {
 			$this->request->data['ArthroSample']['site_id'] = $param[0];
 			$this->request->data['ArthroSample']['teachers_class_id'] = $param[1];
 			$this->request->data['ArthroSample']['habitat_id'] = $param[2];
+			
+			if($this->ArthroSample->checkNegativeNumbers($this->request->data)){
+				$this->Session->setFlash("Tally number cannot be less than zero.");
+				return;
+			}
 
 			if($this->ArthroSample->savingthedata($this->request->data))
 			{
 				$this->Session->setFlash("Arthropod Data has been saved. ");
-				$this->redirect(array('controller' => 'teachers','action' => 'index'));
+				$this->redirect(array('controller' => 'teachers','action' => 'dataSubmissionSuccess'));
+			}
+			else{
+				$this->Session->setFlash("Unable to save the data. Please check the data and try again.");
 			}
 		}
 
