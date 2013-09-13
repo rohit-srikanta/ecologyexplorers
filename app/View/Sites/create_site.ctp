@@ -11,6 +11,7 @@
 				$('#birds_desc').hide();
 				$('#veg_desc').hide();
 				$('#bruchids_desc').hide();
+				$('#water').hide();
 			} else if ($value == 'AR') {
 				$('#arthro').show();
 				$('#birds').hide();
@@ -19,6 +20,7 @@
 				$('#birds_desc').hide();
 				$('#veg_desc').hide();
 				$('#bruchids_desc').hide();
+				$('#water').hide();
 			} else if ($value == 'BI') {
 				$('#arthro').hide();
 				$('#birds').show();
@@ -27,6 +29,7 @@
 				$('#birds_desc').show();
 				$('#veg_desc').hide();
 				$('#bruchids_desc').hide();
+				$('#water').show();
 			} else if ($value == 'VE') {
 				$('#arthro').hide();
 				$('#birds').hide();
@@ -35,6 +38,7 @@
 				$('#birds_desc').hide();
 				$('#veg_desc').show();
 				$('#bruchids_desc').hide();
+				$('#water').show();
 			} else if ($value == 'BR') {
 				$('#arthro').hide();
 				$('#birds').hide();
@@ -43,6 +47,7 @@
 				$('#birds_desc').hide();
 				$('#veg_desc').hide();
 				$('#bruchids_desc').show();
+				$('#water').hide();
 			}
 		}).change();
 	});
@@ -79,35 +84,23 @@ echo $this->Html->getCrumbs(' > ', array(
 </legend>
 
 <div class="formfield" id="arthro_desc">
-	<p class="formtitle">Provide a description of the site (trap line
-		location) you are collecting data at. If you are collecting data at
-		seven pitfall trap lines on your campus, you will enter seven
-		different sites. You will need to provide a description of the habitat
-		structure along your pitfall trap line. The description includes the
-		amount and type of vegetation (or non-vegetation) at different heights
-		in your trap line area.</p>
+	<p class="formtitle">Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_arthro.pdf');?> before entering the data. 
+	The sheet has information on how the data has to be entered</p>
 </div>
 
 <div class="formfield" id="birds_desc">
-	<p class="formtitle">Provide a site and habitat description of
-		your point count location. If you are collecting data at seven
-		locations on your campus, you will enter seven different sites. The
-		description includes the amount and type of vegetation (or
-		non-vegetation) at different heights in your point count circle.</p>
+	<p class="formtitle">Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_bird.pdf');?> before entering the data. 
+	The sheet has information on how the data has to be entered</p>
 </div>
 
 <div class="formfield" id="bruchids_desc">
-	<p class="formtitle">Provide a site description of where you
-		collected Palo Verde pods. If you are collecting data at seven
-		locations, you will enter seven different sites.</p>
+	<p class="formtitle">Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_bruchids.pdf');?> before entering the data. 
+	The sheet has information on how the data has to be entered</p>
 </div>
 
 <div class="formfield" id="veg_desc">
-	<p class="formtitle">Provide a site and habitat description of
-		your research site. If you are collecting data at various locations on
-		your campus, you will need to enter a description for each research
-		site. The description includes the amount and type of vegetation (or
-		non-vegetation) at different heights in your research site.</p>
+	<p class="formtitle">Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_veg.pdf');?> before entering the data. 
+	The sheet has information on how the data has to be entered</p>
 </div>
 
 <div class="formfield">
@@ -121,7 +114,7 @@ echo $this->Html->getCrumbs(' > ', array(
 </div>
 
 <div class="formfield" id="veg">
-	<?php echo $this->Form->input('Habitat.area',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); ?>
+	<?php echo $this->Form->input('Habitat.area (m&sup2;)',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); ?>
 </div>
 
 <div class="formfield" id="birds">
@@ -154,7 +147,11 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
  echo $this->Form->input('Habitat.lawn',array('label'=> '% Lawn','options' => $percentOptions,'div'=>'formfield')); 
  echo $this->Form->input('Habitat.paved_building',array('label'=> '% Paved or Building','options' => $percentOptions,'div'=>'formfield')); 
  echo $this->Form->input('Habitat.other',array('label' => '% Other Vegetation', 'options' => $percentOptions,'div'=>'formfield')); 
- echo $this->Form->input('Habitat.water',array('label'=> '% Water','options' => $percentOptions,'div'=>'formfield'));  ?>
+ ?>
+</div>
+
+<div class="formfield" id="water">
+	<?php echo $this->Form->input('Habitat.water',array('label'=> '% Water','options' => $percentOptions,'div'=>'formfield'));  ?>
 </div>
 
 <?php echo $this->Form->end('Create Site',array('div'=>'submit')); ?>

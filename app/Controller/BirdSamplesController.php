@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Utitlity');
 /**
  * BirdSamples Controller
  *
@@ -50,17 +51,45 @@ class BirdSamplesController extends AppController {
 			//Data holds only the Temperature in fahrenheit. If the user chooses Celcius, then convert it to F before commiting the data
 			if($this->request->data['BirdSample']['temp_units'] == '1')
 			{
-				$this->request->data['BirdSample']['air_temp'] = ($this->request->data['BirdSample']['air_temp'] * 1.8) + 32 ;
+				$this->request->data['BirdSample']['air_temp'] = intval(($this->request->data['BirdSample']['air_temp'] * 1.8) + 32) ;
+			}
+			
+			$result = $this->BirdSample->validateData($this->request->data);
+
+			if($result == "negative"){
+				$this->Session->setFlash("Number of birds cannot be less than zero.");
+				return;
+			}
+				
+			if($result != false){
+				$this->Session->setFlash("Duplicate data present at row ".($result).". Please verify the data entered before submitting.");
+				return;
 			}
 
 			if($this->BirdSample->savingthedata($this->request->data))
 			{
 				$this->Session->setFlash("Bird Data has been saved. ");
-				$this->redirect(array('controller' => 'teachers','action' => 'index'));
+				$this->sendEmailNotification();
+				$this->redirect(array('controller' => 'teachers','action' => 'dataSubmissionSuccess'));
+			}
+			else{
+				$this->Session->setFlash("Unable to save the data. Please check the data and try again.");				
 			}
 		}
-
 	}
-
-
+	
+	public function sendEmailNotification()
+	{
+		$user = $this->Session->read('User');
+		$name = $user['Teacher']['name'];
+		$email =$user['Teacher']['email_address'];
+	
+		$body = '<br>'.$name.' has recently submitted Birds Data in Ecology Explorer\'s Data Center.<br><br>
+							'.$name.' registered email is '.$email;
+		$subject = 'New Birds Data submitted at Ecology Explorers Data Center';
+		$to = 'admin';
+	
+		$this->sendEmail($body,$to,$subject);
+	}
+	
 }

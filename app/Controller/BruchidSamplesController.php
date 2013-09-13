@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Utitlity');
 /**
  * BruchidSamples Controller
  *
@@ -56,18 +57,47 @@ class BruchidSamplesController extends AppController {
 				$this->Session->setFlash('Please select the site type');
 				return;
 			}
+					
+			$result = $this->BruchidSample->validateData($this->request->data);
+			
+			if($result == "negative"){
+				$this->Session->setFlash("Measurment fields cannot be less than zero. Please verify.");
+				return;
+			}
+			
+			if($result != false){
+				$this->Session->setFlash("Duplicate data present at row ".($result).". Please verify the data entered before submitting.");
+				return;
+			}
 				
 			$this->request->data['BruchidSample']['site_id'] = $param[1];
 			$this->request->data['BruchidSample']['teachers_class_id'] = $param[2];
 
 			if($this->BruchidSample->savingthedata($this->request->data))
 			{
-				$this->Session->setFlash("Beetles Data has been saved. ");
-				$this->redirect(array('controller' => 'teachers','action' => 'index'));
+				$this->Session->setFlash("Bruchid Beetles Data has been saved. ");
+				$this->sendEmailNotification();
+				$this->redirect(array('controller' => 'teachers','action' => 'dataSubmissionSuccess'));
 			}
-				
+			else{
+				$this->Session->setFlash("Unable to save the data. Please check the data and try again.");
+			}	
 		}
 
+	}
+	
+	public function sendEmailNotification()
+	{
+		$user = $this->Session->read('User');
+		$name = $user['Teacher']['name'];
+		$email =$user['Teacher']['email_address'];
+	
+		$body = '<br>'.$name.' has recently submitted Bruchid Beetles Data in Ecology Explorer\'s Data Center.<br><br>
+							'.$name.' registered email is '.$email;
+		$subject = 'New Bruchid Beetles Data submitted at Ecology Explorers Data Center';
+		$to = 'admin';
+	
+		$this->sendEmail($body,$to,$subject);
 	}
 
 }

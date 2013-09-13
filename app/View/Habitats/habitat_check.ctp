@@ -1,3 +1,7 @@
+<html>
+<head>
+</head>
+
 <div>
 		<?php echo $this->element('links'); ?>
 </div>
@@ -15,7 +19,7 @@ echo $this->Html->getCrumbs(' > ', 'Home');?>
 </legend>
 <div class="formfield">
 	<?php echo $this->Form->input('school_id',array('div'=>'formfield','options' => $schooloptions,'disabled' => 'disabled'));
- echo $this->Form->input('Habitat.type',array('disabled' => 'disabled','div'=>'formfield','empty' => 'Select','label' => 'Protocol','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
+ echo $this->Form->input('Habitat.type',array('disabled' => 'disabled','div'=>'formfield','empty' => 'Select','label' => 'Habitat Type','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
  echo $this->Form->input('site_name',array('disabled' => 'disabled','div'=>'formfield','options' => $siteOptions,'error' => array('wrap' => 'div','class' => 'formerror')));  ?>
  </div>
 <div class="formfield">
@@ -39,7 +43,7 @@ echo $this->Html->getCrumbs(' > ', 'Home');?>
 <?php if('BI' == $this->request->data['Habitat']['type']){ ?>
 <div class="formfield" id="birds">
 	<?php echo $this->Form->input('Habitat.percent_observed',array('options' => $percentOptions,'div'=>'formfield'));  
-echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div'=>'formfield')); ?>
+echo $this->Form->input('Habitat.radius',array('options' => $radiusOptions,'div'=>'formfield')); ?>
 </div>
 <?php }?>
 
@@ -71,4 +75,5 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
  echo $this->Form->input('Habitat.water',array('label'=> '% Water','options' => $percentOptions,'div'=>'formfield'));  ?>
 </div>
 
-<?php echo $this->Form->end('Update Habitat/Continue Entering data',array('div'=>'submit')); ?>
+<?php echo $this->Form->end('Update Habitat and/or Continue Entering Data',array('div'=>'submit')); ?>
+</html>

@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Utitlity');
 /**
  * VegSamples Controller
  *
@@ -45,12 +46,42 @@ class VegSamplesController extends AppController {
 			$this->request->data['VegSample']['teachers_class_id'] = $param[1];
 			$this->request->data['VegSample']['habitat_id'] = $param[2];
 			
+			$result = $this->VegSample->validateData($this->request->data);
+			
+			if($result == "negative"){
+				$this->Session->setFlash("Measurment fields cannot be less than zero. Please verify.");
+				return;
+			}
+			
+			if($result != false){
+				$this->Session->setFlash("Duplicate data present at row ".($result).". Please verify the data entered before submitting.");
+				return;
+			}
+			
 			if($this->VegSample->savingthedata($this->request->data))
 			{
 				$this->Session->setFlash("Vegetation Data has been saved. ");
-				$this->redirect(array('controller' => 'teachers','action' => 'index'));
+				$this->sendEmailNotification();
+				$this->redirect(array('controller' => 'teachers','action' => 'dataSubmissionSuccess'));
+			}
+			else{
+				$this->Session->setFlash("Unable to save the data. Please check the data and try again.");				
 			}
 		}
 	
+	}
+	
+	public function sendEmailNotification()
+	{
+		$user = $this->Session->read('User');
+		$name = $user['Teacher']['name'];
+		$email =$user['Teacher']['email_address'];
+	
+		$body = '<br>'.$name.' has recently submitted Vegetation Data in Ecology Explorer\'s Data Center.<br><br>
+							'.$name.' registered email is '.$email;
+		$subject = 'New Vegetation Data submitted at Ecology Explorers Data Center';
+		$to = 'admin';
+	
+		$this->sendEmail($body,$to,$subject);
 	}
 }

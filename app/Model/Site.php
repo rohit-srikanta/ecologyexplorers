@@ -66,8 +66,7 @@ class Site extends AppModel {
 	//The sum of all the characteristics of vegetaion should be 100 or less. 
 	public function validateVegetation($fields)
 	{
-		
-		if(100 < ($fields['gravel_soil'] +$fields['lawn']+$fields['paved_building']+$fields['other']+$fields['water']))
+		if(100 != ($fields['gravel_soil'] +$fields['lawn']+$fields['paved_building']+$fields['other']+$fields['water']))
 			return true;
 		else 
 			return false;

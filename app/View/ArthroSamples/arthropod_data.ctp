@@ -21,13 +21,8 @@
 </legend>
 <br>
 
-
-	<p>On this page you will be entering the arthropod data you collected
-		from your trap line. If any of the information on the top of the page
-		is incorrect, go back and change it before entering your arthropod
-		data. Be sure to check all information before submitting the data.</p>
-	<p>
-		<i><b>Remember while entering survey data:</b> </i>
+		<p>
+		<i><b>Please fill out the arthropod data sheet prior to entering data. Remember while entering survey data:</b> </i>
 	</p>
 	<p>The survey form cannot be submitted without data being entered</p>
 	<p>There may not be duplicate entries (i.e. two rows with the same trap
