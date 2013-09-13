@@ -1,4 +1,3 @@
-<html>
 <br>
 
 <div>
@@ -13,6 +12,8 @@ echo $this->Html->getCrumbs(' > ', array(
 ));
 ?>
 </div>
+
+
 <br>
 <h2>Approve Users</h2><br>
 <?php if('A' == $this->Session->read('UserType'))
@@ -63,6 +64,3 @@ echo $this->Html->getCrumbs(' > ', array(
 }
 ?>
 
-<br>
-<br>
-</html>

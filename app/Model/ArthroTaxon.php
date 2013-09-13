@@ -26,7 +26,8 @@ class ArthroTaxon extends AppModel {
 		$taxon = $this->find('list', array(
 				'fields' => array(
 						'ArthroTaxon.id',
-						'ArthroTaxon.taxon_name')));
+            'ArthroTaxon.taxon_name'),
+        'order' => 'ArthroTaxon.taxon_name'));
 		return $taxon;
 	}
 }

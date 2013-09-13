@@ -1,6 +1,3 @@
-<html>
-<br>
-
 <div>
 	<?php echo $this->element('links'); ?>
 </div>
@@ -56,6 +53,3 @@ echo $this->Html->getCrumbs(' > ', array(
 <?php } echo $this->Html->link('Add Vegetation Details',array('controller' => 'VegTaxon', 'action' => 'addVeg'));
 ?>
 </div>
-<br>
-<br>
-</html>

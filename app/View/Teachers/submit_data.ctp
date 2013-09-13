@@ -1,7 +1,3 @@
-<html>
-
-<br>
-<body>
 	<div>
 		<?php echo $this->element('links'); ?>
 	</div>
@@ -23,5 +19,3 @@ echo $this->Html->getCrumbs(' > ', array(
 		<?php echo $this->Html->link('Create Class',  array('controller' => 'teachersClass', 'action' => 'createClass')); ?>
 
 	</p>
-</body>
-</html>

@@ -1,6 +1,3 @@
-<html>
-<head>
-</head>
 
 <div>
 		<?php echo $this->element('links'); ?>
@@ -9,7 +6,7 @@
 	<?php $this->Html->addCrumb('Submit Data', '/teachers/submitData');
 	$this->Html->addCrumb('Habitat Check', '/habitats/habitatCheck');
 	$this->Html->addCrumb('Arthropod Data', '/arthroSamples/arthropodData');
-echo $this->Html->getCrumbs(' > ', array(
+  echo $this->Html->getCrumbs(' > ', array(
 		'url' => array('controller' => 'teachers', 'action' => 'index'),
 		'escape' => false
 ));
@@ -71,4 +68,3 @@ echo $this->Html->getCrumbs(' > ', array(
 
 <p><b>Please double check your entries before you click Submit.</b></p>
 <?php echo $this->Form->end('Submit Arthropod Data',array('div'=>'submit')); ?>
-</html>

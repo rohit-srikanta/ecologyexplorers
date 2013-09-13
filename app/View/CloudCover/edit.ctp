@@ -1,6 +1,3 @@
-
-<html>
-
 <div>
 		<?php echo $this->element('links'); ?>
 </div>
@@ -20,4 +17,3 @@ echo $this->Html->getCrumbs(' > ', array(
         echo $this->Form->input('id', array('type' => 'hidden')); 
         echo $this->Form->end('Save'); ?>
    
-</html>

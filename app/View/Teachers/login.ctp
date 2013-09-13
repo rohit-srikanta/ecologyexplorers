@@ -1,4 +1,3 @@
-<html>
 <br>
 <div>
 		<?php echo $this->element('links'); ?>
@@ -19,4 +18,3 @@ echo $this->Html->getCrumbs(' > ', array(
         echo $this->Form->end('Login'); ?>
         
         <?php echo $this->Html->link('Forgot Password?',array('controller' => 'teachers', 'action' => 'forgotPassword'));?></div>
- </html>

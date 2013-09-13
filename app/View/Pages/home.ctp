@@ -1,4 +1,3 @@
-<html>
 
 <h2>Welcome to the Ecology Explorers Data Center!</h2>
 <br>
@@ -7,7 +6,6 @@
 	<?php echo $this->Html->link($this->Session->read('Username'),array('controller' => 'teachers', 'action' => 'home')); ?>
 
 </div>
-<body>
 	<p class="text">Registered participants can enter data from an Ecology
 		Explorers research project</p>
 	<p class="text">Everybody may download data from all Ecology Explorers
@@ -67,5 +65,3 @@
 	?>
 	</div>
 	<br>
-</body>
-</html>

@@ -1,6 +1,4 @@
 
-<html>
-
 <div>
 	<?php echo $this->element('links'); ?>
 </div>
@@ -21,4 +19,3 @@ echo $this->Html->getCrumbs(' > ', array(
         echo $this->Form->input('cloud_cover_name', array('div'=>'formfield'));
 echo $this->Form->end('Add'); ?>
 
-</html>

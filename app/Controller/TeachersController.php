@@ -345,18 +345,13 @@ class TeachersController extends AppController {
 
 		if(!$this->Session->check('User'))
 		{
-			$this->Session->setFlash('Please login to access this page.');
-			$this->redirect(array(
-					'action' => 'login'));
-		}
-		if(!$this->Session->check('User'))
-		{
 			$this->Session->setFlash('Please login to access the page.');
 			$this->redirect(array('action' => 'index'));
 		}
 
 		$user = $this->Session->read('User');
 
+    # todo: refactor this to just get the existing protocol, site, class configurations to prevent someone from selecting invalid options from the three drop downs
 		$habitatTypeOptions = array(
 				array(
 						'name' => 'Arthropods','value' => 'AR'),array(

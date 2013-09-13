@@ -1,4 +1,3 @@
-<html>
 <br>
 <div>
 	<?php echo $this->element('links'); ?>
@@ -21,4 +20,3 @@ echo $this->Form->input('email_address',array('div'=>'formfield','error' => arra
        <?php  echo $this->Form->end('Reset Password'); ?>
 
 </div>
-</html>
