@@ -64,23 +64,33 @@ class BruchidSample extends AppModel {
 		}
 		return false;
 	}
-	public function checkNegativeNumbers($fields) {
 	
+	public function validateData($fields) {
 		for($i = 0; $i < 20; $i ++) {
-				
-				$str1 = "BruchidSpecimen".$i."tree_no";
-				$str2 = "BruchidSpecimen".$i."pod_no";
-				$str3 = "BruchidSpecimen".$i."hole_count";
-				$str4 = "BruchidSpecimen".$i."seed_count";
-				
+			
+			$str1 = "BruchidSpecimen" . $i . "tree_no";
+			$str2 = "BruchidSpecimen" . $i . "pod_no";
+			$str3 = "BruchidSpecimen" . $i . "hole_count";
+			$str4 = "BruchidSpecimen" . $i . "seed_count";
+			
 			if (null != $fields ['BruchidSample'] [$str1] && null != $fields ['BruchidSample'] [$str2] && null != $fields ['BruchidSample'] [$str3] && null != $fields ['BruchidSample'] [$str4]) {
-	
-				if ($fields ['BruchidSample'] [$str3] < 0 || $fields ['BruchidSample'] [$str4] < 0 ) {
-					return true;
+				
+				if ($fields ['BruchidSample'] [$str3] < 0 || $fields ['BruchidSample'] [$str4] < 0) {
+					return "negative";
+				}
+				
+				for($j = $i + 1; $j < 20; $j ++) {
+					$strj1 = "BruchidSpecimen" . $j . "tree_no";
+					$strj2 = "BruchidSpecimen" . $j . "pod_no";
+					$strj3 = "BruchidSpecimen" . $j . "hole_count";
+					$strj4 = "BruchidSpecimen" . $j . "seed_count";
+					
+					if ($fields ['BruchidSample'] [$str1] == $fields ['BruchidSample'] [$strj1] && $fields ['BruchidSample'] [$str2] == $fields ['BruchidSample'] [$strj2] && $fields ['BruchidSample'] [$str3] == $fields ['BruchidSample'] [$strj3] && $fields ['BruchidSample'] [$str4] == $fields ['BruchidSample'] [$strj4]) {						
+						return ($i + 1) . ' and ' . ($j + 1);
+					}
 				}
 			}
 		}
 		return false;
 	}
-
 }

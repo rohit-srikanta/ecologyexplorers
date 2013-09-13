@@ -15,7 +15,7 @@ echo $this->Html->getCrumbs(' > ', array(
 ));
 ?>
 
-	<p>Congratulations - your query worked!!</p>
+	<p>Congratulations - your query worked !!</p>
 	<br>
 	<p>
 		<?php
@@ -29,18 +29,17 @@ echo $this->Html->getCrumbs(' > ', array(
 	</p>
 
 	<p>
-		<b> If you use a PC</b> Right click on the Save Data Click Here link
-		and choose choose "save link as" .<br> Save the file on your computer
-		or on a disk.<br> Open up the file in your spreadsheet program (i.e.
-		EXCEL).
+		<b> If you use a PC</b> Click on the To Save Data, Click Here link. <br> Or right click on the To Save Data, Click Here link
+		and choose choose "Save Target As" . Save the file on your computer
+		or on a disk.
 	</p>
 	<p>
-		<b>If you use a Mac</b> Right click (or press the Control button while
+		<b>If you use a Mac</b> Click on the To Save Data, Click Here link.<br> Right click (or press the Control button while
 		clicking) on the Save Data. Click here icon and choose "save link as"
-		(in Netscape) or "download link to disk" (in Internet Explorer).<br>
-		Save the file on your computer or on a disk.<br> Open up the file in
-		your spreadsheet program (i.e. EXCEL).
+		(in Netscape) or "Save Target As" (in Internet Explorer). Save the file on your computer or on a disk.
 	</p>
 
+	<p><br> Once the file has been saved, open up the file in your spreadsheet program (i.e.
+		EXCEL).</p>
 </body>
 </html>

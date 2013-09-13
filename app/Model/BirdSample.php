@@ -88,4 +88,31 @@ class BirdSample extends AppModel {
 		}
 		return false;
 	}
+	
+	public function validateData($fields)
+	{
+		for($i = 0; $i < 20; $i ++) {
+				
+			$str1 = "BirdSpecimen" . $i . "taxon";
+			$str2 = "BirdSpecimen" . $i . "frequency";
+				
+			if (null != $fields ['BirdSample'] [$str1] && null != $fields ['BirdSample'] [$str2]) {
+	
+				if ($fields ['BirdSample'] [$str2] < 0 ) {
+					return "negative";
+				}
+	
+				for($j = $i + 1; $j < 20; $j ++) {
+					$strj1 = "BirdSpecimen" . $j . "taxon";
+					$strj2 = "BirdSpecimen" . $j . "frequency";
+					
+					if($fields ['BirdSample'] [$str1] ==  $fields ['BirdSample'] [$strj1] &&  $fields ['BirdSample'] [$str2] ==  $fields ['BirdSample'] [$strj2]){
+	
+						return ($i+1).' and '.($j+1);
+					}
+				}
+			}
+		}
+		return false;
+	}
 }

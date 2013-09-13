@@ -22,6 +22,9 @@
 
 App::uses('Controller', 'Controller');
 
+Configure::write('adminEmailAddress',array('email'=>'rohit.srikanta@asu.edu','name' => 'Ecology Explorers'));
+Configure::write('fromEmailAddress',array('email'=>'rohit.srikanta@asu.edu','name' => 'Ecology Explorers'));
+
 /**
  * Application Controller
  *
@@ -32,4 +35,24 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+	//This method is called to send email to the user or the admin. Users get email when the profile is approved is created and if password has to be reset.
+	//Admin will get an email when a new profile is created and needs to be approved.
+	//Admin will also get an email when new data has been submitted by users in Data Center
+	public function sendEmail($body,$to,$subject)
+	{
+		$fromEmailAddress= array(Configure::read('fromEmailAddress.email') =>  Configure::read('fromEmailAddress.name'));
+		
+		if($to == "admin")
+			$to = array(Configure::read('adminEmailAddress.email') =>  Configure::read('adminEmailAddress.name'));
+		
+		$Email = new CakeEmail();
+		$Email->from($fromEmailAddress)
+		->to($to)
+		->emailFormat('html')
+		->subject($subject)
+		->send($body);
+	}
 }
+
+
