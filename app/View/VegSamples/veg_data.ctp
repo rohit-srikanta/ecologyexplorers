@@ -1,7 +1,3 @@
-<html>
-<head>
-</head>
-
 <div>
 		<?php echo $this->element('links'); ?>
 </div>
@@ -76,4 +72,3 @@ echo $this->Html->getCrumbs(' > ', array(
 </div>
 <p><b>Please double check your entries before you click Submit.</b></p>
 <?php echo $this->Form->end('Submit Vegetation Data',array('div'=>'submit')); ?>
-</html>

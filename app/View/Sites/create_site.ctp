@@ -1,6 +1,4 @@
-<html>
-<head>
-<script>
+<script language="JavaScript">
 	$(document).ready(function() {
 		$('#habitat_select').change(function() {
 			$value = this.value;
@@ -54,7 +52,6 @@
 		}).change();
 	});
 </script>
-</head>
 
 <div>
 		<?php echo $this->element('links'); ?>
@@ -71,7 +68,7 @@ echo $this->Html->getCrumbs(' > ', array(
 <?php echo $this->Form->create('Site',array('class'=>'form','id' => 'createSite'));   ?>
 <div class="formfield">
 	<?php echo $this->Form->input('school_id',array('div'=>'formfield','options' => $schooloptions));
- echo $this->Form->input('Habitat.type',array('div'=>'formfield','empty' => 'Select','label' => 'Habitat Type','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
+ echo $this->Form->input('Habitat.type',array('div'=>'formfield','empty' => 'Select','label' => 'Protocol','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
  echo $this->Form->input('site_id',array('label' => 'Site ID','type'=>'char','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
  echo $this->Form->input('site_name',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));  
  echo $this->Form->input('address',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));  
@@ -159,4 +156,3 @@ echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div
 
 <?php echo $this->Form->end('Create Site',array('div'=>'submit')); ?>
 
-</html>

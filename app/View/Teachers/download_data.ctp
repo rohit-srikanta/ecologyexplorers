@@ -1,7 +1,5 @@
-<html>
 
 <br>
-<body>
 	<div>
 		<?php echo $this->element('links'); ?>
 	</div>
@@ -21,5 +19,3 @@ echo $this->Html->getCrumbs(' > ', array(
 
 	<?php  echo $this->Form->end('Submit'); ?>
 
-</body>
-</html>

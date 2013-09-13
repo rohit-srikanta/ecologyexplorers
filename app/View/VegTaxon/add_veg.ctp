@@ -1,6 +1,3 @@
-
-<html>
-
 <div>
 	<?php echo $this->element('links'); ?>
 </div>
@@ -23,4 +20,3 @@ echo $this->Form->input('type',array('div'=>'formfield','empty' => 'Select','opt
 echo $this->Form->input('common_name', array('size'=>25,'div'=>'formfield'));
 echo $this->Form->end('Add'); ?>
 
-</html>

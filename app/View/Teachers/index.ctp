@@ -1,8 +1,6 @@
-<html>
 <h2>Welcome to the Ecology Explorers Data Center!</h2>
 <br>
 <br>
-<body>
 
 	<p>
 		<?php if(!($this->Session->read('UserType')))
@@ -71,12 +69,10 @@
 	<?php if($this->Session->check('User'))
 	{?>
 		<div class="seperation"><br><div class="logout">		
-		<?php echo $this->Form->postLink('Logout', array('controller' => 'teachers','action' => 'logout'));
+		<?php echo $this->Form->postLink('Logout', array('controller' => 'teachers','action' => 'logout'));?></div><?php 
 	}
 	?>
 	</div>
 
 
 	<br>
-</body>
-</html>

@@ -1,4 +1,3 @@
-<html>
 <h2>Welcome to the Ecology Explorers Data Center!</h2>
 <br>
 <br>
@@ -23,4 +22,3 @@ echo $this->Html->getCrumbs(' > ', array(
         echo $this->Form->input('password',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
         echo $this->Form->input('school_id',array('div'=>'formfield','options' => $schooloptions));
         echo $this->Form->end('Register'); ?>
-</html>

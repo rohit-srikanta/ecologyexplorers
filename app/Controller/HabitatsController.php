@@ -25,8 +25,7 @@ class HabitatsController extends AppController {
 		if(!$this->Session->check('User'))
 		{
 			$this->Session->setFlash('Please login to access this page.');
-			$this->redirect(array(
-					'action' => 'login'));
+      $this->redirect(array('controller' => 'teachers', 'action' => 'login'));
 		}
 		
 		
