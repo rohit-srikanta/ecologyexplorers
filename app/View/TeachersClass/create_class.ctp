@@ -12,6 +12,8 @@ echo $this->Html->getCrumbs(' > ', array(
 ?>
 <br>
 <h2>Create Class</h2>
+
+ <p> Enter the relevant information (grade level and name, i.e. 8th grade biology,)</p>
         <?php echo $this->Form->create('TeachersClass', array('class'=>'form'));    
          echo $this->Form->input('class_name',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
          echo $this->Form->input('grade',array('div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));  

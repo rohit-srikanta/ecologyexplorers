@@ -121,7 +121,7 @@ class Teacher extends AppModel {
 	public function getUsers()
 	{
 		$conditions = array("Teacher.type" => "P");
-		$query = $this->find('all', array('conditions' => $conditions));
+		$query = $this->find('all', array('conditions' => $conditions,'order' => 'Teacher.school_id'));
 		return($this->associateSchoolNames($query));
 	}
 
@@ -130,7 +130,7 @@ class Teacher extends AppModel {
 	{
 		if($user == null)
 			return null;
-		$query = $this->find('all',array('conditions' => array('NOT' => array('Teacher.id' => $user['Teacher']['id']))));
+		$query = $this->find('all',array('conditions' => array('NOT' => array('Teacher.id' => $user['Teacher']['id'])),'order' => 'Teacher.school_id'));
 		return($this->associateSchoolNames($query));
 	}
 
