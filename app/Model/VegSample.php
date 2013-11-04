@@ -135,4 +135,14 @@ class VegSample extends AppModel {
 		}
 		return false;
 	}
+	
+	public function getVegData($startDate,$endDate){
+	
+		$conditionsDate = array('VegSample.collection_date between ? and ?' => array($startDate, $endDate));
+	
+		$data = $this->find('all', array('conditions' => $conditionsDate,'fields' => array('VegSample.id','VegSample.observer','VegSample.cactus_count','VegSample.tree_count','VegSample.shrub_count','VegSample.collection_date'),'order' => array('VegSample.collection_date' => 'DESC')));
+	
+		return $data;
+	
+	}
 }

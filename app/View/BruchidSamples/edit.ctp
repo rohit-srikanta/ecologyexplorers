@@ -14,11 +14,13 @@ echo $this->Html->getCrumbs(' > ', array(
 ?>
 <br><br><br>
 
-<p><b>Edit Arthropod Data</b></p>
+<p><b>Edit Bruchid Data</b></p>
 <br>
-        <?php echo $this->Form->create('ArthroSample', array('class'=>'form'));     
-        echo $this->Form->input('comments',array('type'=>'char','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
+        <?php echo $this->Form->create('BruchidSample', array('class'=>'form'));     
         echo $this->Form->input('observer', array('size'=>25,'div'=>'formfield'));
+        echo $this->Form->input('tree_type', array('div'=>'formfield','options' => $treeOptions));
+        echo $this->Form->input('site_type', array('div'=>'formfield','options' => $habOptions));
+        echo $this->Form->input('location', array('size'=>50,'div'=>'formfield'));
         echo $this->Form->input('id', array('type' => 'hidden')); 
         echo $this->Form->end('Save'); ?>
    

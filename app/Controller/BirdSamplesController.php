@@ -92,4 +92,49 @@ class BirdSamplesController extends AppController {
 		$this->sendEmail($body,$to,$subject);
 	}
 	
+	public function modifyBirdData()
+	{
+		//Checking if the user logged in is an admin.
+		if('A' != $this->Session->read('UserType'))
+		{
+			$this->Session->setFlash(__('You do not have permissions to access this page !'));
+		}
+		else
+		{
+			$this->BirdSample->recursive = 0;
+			$startDate = $this->request->params['pass']['0'];
+			$endDate = $this->request->params['pass']['1'];
+			$this->set('BirdSample', $this->BirdSample->getBirdData($startDate,$endDate));
+			$this->set('startDate', $startDate);
+			$this->set('endDate',$endDate);
+		}
+	}
+	
+	public function edit($id = null,$startDate,$endDate) {
+		if (!$id) {
+			throw new NotFoundException(__('Invalid Arthropod Data ID'));
+		}
+	
+		$this->BirdSample->recursive = 0;
+		$BirdData = $this->BirdSample->findById($id);
+		if (!$BirdData) {
+			throw new NotFoundException(__('Invalid Arthropod Sample ID'));
+		}
+	
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->BirdSample->id = $id;
+			if ($this->BirdSample->save($this->request->data)) {
+				$this->Session->setFlash('Bird Data has been updated.');
+				$this->redirect(array('controller' => 'BirdSamples', 'action' => 'modifyBirdData',$startDate,$endDate));
+			} else {
+				$this->Session->setFlash('Unable to update Bird details.');
+			}
+		}
+	
+		if (!$this->request->data) {
+			$this->request->data = $BirdData;
+		}
+	}
+	
+	
 }

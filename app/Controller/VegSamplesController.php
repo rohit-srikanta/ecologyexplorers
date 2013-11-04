@@ -84,4 +84,48 @@ class VegSamplesController extends AppController {
 	
 		$this->sendEmail($body,$to,$subject);
 	}
+	
+	public function modifyVegData()
+	{
+		//Checking if the user logged in is an admin.
+		if('A' != $this->Session->read('UserType'))
+		{
+			$this->Session->setFlash(__('You do not have permissions to access this page !'));
+		}
+		else
+		{
+			$this->VegSample->recursive = 0;
+			$startDate = $this->request->params['pass']['0'];
+			$endDate = $this->request->params['pass']['1'];
+			$this->set('VegSample', $this->VegSample->getVegData($startDate,$endDate));
+			$this->set('startDate', $startDate);
+			$this->set('endDate',$endDate);
+		}
+	}
+	
+	public function edit($id = null,$startDate,$endDate) {
+		if (!$id) {
+			throw new NotFoundException(__('Invalid Arthropod Data ID'));
+		}
+	
+		$this->VegSample->recursive = 0;
+		$vegData = $this->VegSample->findById($id);
+		if (!$vegData) {
+			throw new NotFoundException(__('Invalid Vegetaion Sample ID'));
+		}
+	
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->VegSample->id = $id;
+			if ($this->VegSample->save($this->request->data)) {
+				$this->Session->setFlash('Vegetation Data has been updated.');
+				$this->redirect(array('controller' => 'VegSamples', 'action' => 'modifyVegData',$startDate,$endDate));
+			} else {
+				$this->Session->setFlash('Unable to update Vegetation details.');
+			}
+		}
+	
+		if (!$this->request->data) {
+			$this->request->data = $vegData;
+		}
+	}
 }

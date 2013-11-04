@@ -159,10 +159,18 @@ class ArthroSamplesController extends AppController {
 			
 			if ($this->request->is('post') || $this->request->is('put'))
 			{
-				$start_date = $this->request->data['ArthroSample']['start_date']['year'].'-'.$this->request->data['ArthroSample']['start_date']['month'].'-'.$this->request->data['ArthroSample']['start_date']['day'];
-				$end_date = $this->request->data['ArthroSample']['end_date']['year'].'-'.$this->request->data['ArthroSample']['end_date']['month'].'-'.$this->request->data['ArthroSample']['end_date']['day'];
-			
-				$this->redirect(array('controller' => 'ArthroSamples','action' => 'modifyArthropodData',$start_date,$end_date));
+				$start_date = $this->request->data['DataSampleDate']['start_date']['year'].'-'.$this->request->data['DataSampleDate']['start_date']['month'].'-'.$this->request->data['DataSampleDate']['start_date']['day'];
+				$end_date = $this->request->data['DataSampleDate']['end_date']['year'].'-'.$this->request->data['DataSampleDate']['end_date']['month'].'-'.$this->request->data['DataSampleDate']['end_date']['day'];
+				$protocol = $this->request->data['DataSampleDate']['protocol'];
+				
+				if($protocol === 'AR')
+					$this->redirect(array('controller' => 'ArthroSamples','action' => 'modifyArthropodData',$start_date,$end_date));
+				if($protocol === 'BI')
+					$this->redirect(array('controller' => 'BirdSamples','action' => 'modifyBirdData',$start_date,$end_date));
+				if($protocol === 'VE')
+					$this->redirect(array('controller' => 'VegSamples','action' => 'modifyVegData',$start_date,$end_date));
+				if($protocol === 'BR')
+					$this->redirect(array('controller' => 'BruchidSamples','action' => 'modifyBruchidData',$start_date,$end_date));
 			}
 		}
 		

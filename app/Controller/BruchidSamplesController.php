@@ -99,5 +99,57 @@ class BruchidSamplesController extends AppController {
 	
 		$this->sendEmail($body,$to,$subject);
 	}
+	
+	public function modifyBruchidData()
+	{
+		//Checking if the user logged in is an admin.
+		if('A' != $this->Session->read('UserType'))
+		{
+			$this->Session->setFlash(__('You do not have permissions to access this page !'));
+		}
+		else
+		{
+			$this->BruchidSample->recursive = 0;
+			$startDate = $this->request->params['pass']['0'];
+			$endDate = $this->request->params['pass']['1'];
+			$this->set('BruchidSample', $this->BruchidSample->getBruchidData($startDate,$endDate));
+			$this->set('startDate', $startDate);
+			$this->set('endDate',$endDate);
+		}
+	}
+	
+	public function edit($id = null,$startDate,$endDate) {
+		if (!$id) {
+			throw new NotFoundException(__('Invalid Arthropod Data ID'));
+		}
+	
+		$this->BruchidSample->recursive = 0;
+		$BruchidData = $this->BruchidSample->findById($id);
+		if (!$BruchidData) {
+			throw new NotFoundException(__('Invalid Arthropod Sample ID'));
+		}
+		
+		$habOptions = array(array('name' => 'Urban','value' => 'Urban'),array('name' => 'Desert','value' => 'Desert'));
+		$treeOptions = array(array('name' => 'Blue Palo Verde','value' => 'B'),array('name' => 'Foothills Palo Verde','value' => 'F'));
+		
+		$this->set('habOptions', $habOptions);
+		
+		$this->set('treeOptions', $treeOptions);
+	
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->BruchidSample->id = $id;
+			if ($this->BruchidSample->save($this->request->data)) {
+				$this->Session->setFlash('Bruchid Data has been updated.');
+				$this->redirect(array('controller' => 'BruchidSamples', 'action' => 'modifyBruchidData',$startDate,$endDate));
+			} else {
+				$this->Session->setFlash('Unable to update Bruchid details.');
+			}
+		}
+	
+		if (!$this->request->data) {
+			$this->request->data = $BruchidData;
+		}
+	}
+	
 
 }

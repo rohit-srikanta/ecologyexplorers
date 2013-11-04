@@ -9,8 +9,8 @@ echo $this->Html->getCrumbs(' > ', array(
 		'escape' => false
 ));?>
 
-	<?php echo $this->Form->create('ArthroSample', array('class'=>'form'));    
-	echo $this->Form->input('Protocol Data to be modified',array('div'=>'formfield','options' => $habitatTypeOptions));
+	<?php echo $this->Form->create('DataSampleDate', array('class'=>'form'));    
+	echo $this->Form->input('protocol',array('label' => 'Protocol Data to be modified','div'=>'formfield','options' => $habitatTypeOptions));
 	echo $this->Form->input('start_date',array('type'=>'date','orderYear' => 'asc','selected' => '2013-01-01 00:00:00','div'=>'formfield','dateFormat' => 'DMY','minYear' => date('Y') - 0,'maxYear' => date('Y') - 25 ));
 	echo $this->Form->input('end_date',array('type'=>'date','div'=>'formfield','dateFormat' => 'DMY', 'minYear' => date('Y') - 0,'maxYear' => date('Y') - 25 ));
 	?>

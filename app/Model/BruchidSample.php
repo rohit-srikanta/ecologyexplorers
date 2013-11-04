@@ -93,4 +93,14 @@ class BruchidSample extends AppModel {
 		}
 		return false;
 	}
+	
+	public function getBruchidData($startDate,$endDate){
+	
+		$conditionsDate = array('BruchidSample.collection_date between ? and ?' => array($startDate, $endDate));
+	
+		$data = $this->find('all', array('conditions' => $conditionsDate,'fields' => array('BruchidSample.id','BruchidSample.observer','BruchidSample.site_type','BruchidSample.collection_date','BruchidSample.tree_type','BruchidSample.location'),'order' => array('BruchidSample.collection_date' => 'DESC')));
+	
+		return $data;
+	
+	}
 }

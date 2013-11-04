@@ -115,4 +115,14 @@ class BirdSample extends AppModel {
 		}
 		return false;
 	}
+	
+	public function getBirdData($startDate,$endDate){
+	
+		$conditionsDate = array('BirdSample.date_entered between ? and ?' => array($startDate, $endDate));
+	
+		$data = $this->find('all', array('conditions' => $conditionsDate,'fields' => array('BirdSample.id','BirdSample.observer','BirdSample.comments','BirdSample.date_entered','BirdSample.time_start','BirdSample.time_end'),'order' => array('BirdSample.date_entered' => 'DESC')));
+	
+		return $data;
+	
+	}
 }
