@@ -25,4 +25,5 @@ echo $this->Html->getCrumbs(' > ', array(
 	<?php echo $this->Html->link('Modify Cloud Cover Details', array('controller' => 'CloudCover', 'action' => 'modifyCloudCover'));?>
 	<br>
 	<br>
+	<?php echo $this->Html->link('Modify Submitted Data', array('controller' => 'ArthroSamples', 'action' => 'modifyDataPickDate'));?>
 </div>

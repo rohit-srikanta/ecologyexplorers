@@ -98,4 +98,14 @@ class ArthroSample extends AppModel {
 		}
 		return false;
 	}
+	
+	public function getArthropodData($startDate,$endDate){
+		
+		$conditionsDate = array('ArthroSample.collection_date between ? and ?' => array($startDate, $endDate));
+		
+		$data = $this->find('all', array('conditions' => $conditionsDate,'fields' => array('ArthroSample.id','ArthroSample.observer','ArthroSample.comments','ArthroSample.collection_date'),'order' => array('ArthroSample.collection_date' => 'DESC')));
+		
+		return $data;
+		
+	}
 }

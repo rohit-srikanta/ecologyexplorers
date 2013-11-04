@@ -78,6 +78,7 @@ class ArthroSamplesController extends AppController {
 		}
 	}
 	
+	
 	public function sendEmailNotification()
 	{
 		$user = $this->Session->read('User');
@@ -90,6 +91,81 @@ class ArthroSamplesController extends AppController {
 		$to = 'admin';
 		
 		$this->sendEmail($body,$to,$subject);
+	}
+	
+	public function modifyArthropodData()
+	{
+		//Checking if the user logged in is an admin.
+		if('A' != $this->Session->read('UserType'))
+		{
+			$this->Session->setFlash(__('You do not have permissions to access this page !'));
+		}
+		else
+		{
+			$this->ArthroSample->recursive = 0;
+			$startDate = $this->request->params['pass']['0'];
+			$endDate = $this->request->params['pass']['1'];
+			$this->set('ArthroSample', $this->ArthroSample->getArthropodData($startDate,$endDate));
+			$this->set('startDate', $startDate);
+			$this->set('endDate',$endDate);
+		}
+	}
+	
+	public function edit($id = null,$startDate,$endDate) {
+		if (!$id) {
+			throw new NotFoundException(__('Invalid Arthropod Data ID'));
+		}
+	
+		$this->ArthroSample->recursive = 0;
+		$ArthroData = $this->ArthroSample->findById($id);
+		if (!$ArthroData) {
+			throw new NotFoundException(__('Invalid Arthropod Sample ID'));
+		}
+	
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->ArthroSample->id = $id;
+			if ($this->ArthroSample->save($this->request->data)) {
+				$this->Session->setFlash('Arthropod Data has been updated.');
+				$this->redirect(array('controller' => 'ArthroSamples', 'action' => 'modifyArthropodData',$startDate,$endDate));
+			} else {
+				$this->Session->setFlash('Unable to update Arthropod details.');
+			}
+		}
+	
+		if (!$this->request->data) {
+			$this->request->data = $ArthroData;
+		}
+	}
+	
+	public function modifyDataPickDate(){
+		
+		//Checking if the user logged in is an admin.
+		if('A' != $this->Session->read('UserType'))
+		{
+			$this->Session->setFlash(__('You do not have permissions to access this page !'));
+		}
+		else
+		{
+			$this->ArthroSample->recursive = 0;
+			
+			$habitatTypeOptions = array(
+					array(
+							'name' => 'Arthropods','value' => 'AR'),array(
+									'name' => 'Birds','value' => 'BI'),array(
+											'name' => 'Bruchids','value' => 'BR'),array(
+													'name' => 'Vegetation','value' => 'VE'));
+			
+			$this->set('habitatTypeOptions', $habitatTypeOptions);
+			
+			if ($this->request->is('post') || $this->request->is('put'))
+			{
+				$start_date = $this->request->data['ArthroSample']['start_date']['year'].'-'.$this->request->data['ArthroSample']['start_date']['month'].'-'.$this->request->data['ArthroSample']['start_date']['day'];
+				$end_date = $this->request->data['ArthroSample']['end_date']['year'].'-'.$this->request->data['ArthroSample']['end_date']['month'].'-'.$this->request->data['ArthroSample']['end_date']['day'];
+			
+				$this->redirect(array('controller' => 'ArthroSamples','action' => 'modifyArthropodData',$start_date,$end_date));
+			}
+		}
+		
 	}
 
 }
