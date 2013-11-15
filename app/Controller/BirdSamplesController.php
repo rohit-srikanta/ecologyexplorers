@@ -115,7 +115,9 @@ class BirdSamplesController extends AppController {
 			throw new NotFoundException(__('Invalid Arthropod Data ID'));
 		}
 	
-		$this->BirdSample->recursive = 0;
+		$this->BirdSample->recursive = 1;
+		$this->set('birdOptions',  ClassRegistry::init('BirdTaxon')->getBirdList());
+		
 		$BirdData = $this->BirdSample->findById($id);
 		if (!$BirdData) {
 			throw new NotFoundException(__('Invalid Arthropod Sample ID'));
@@ -123,7 +125,7 @@ class BirdSamplesController extends AppController {
 	
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->BirdSample->id = $id;
-			if ($this->BirdSample->save($this->request->data)) {
+			if ($this->BirdSample->saveAll($this->request->data)) {
 				$this->Session->setFlash('Bird Data has been updated.');
 				$this->redirect(array('controller' => 'BirdSamples', 'action' => 'modifyBirdData',$startDate,$endDate));
 			} else {

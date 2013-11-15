@@ -116,15 +116,18 @@ class ArthroSamplesController extends AppController {
 			throw new NotFoundException(__('Invalid Arthropod Data ID'));
 		}
 	
-		$this->ArthroSample->recursive = 0;
+		$this->ArthroSample->recursive = 1;
+		
+		$this->set('orderOptions',  ClassRegistry::init('ArthroTaxon')->getOrderList());
 		$ArthroData = $this->ArthroSample->findById($id);
+		
 		if (!$ArthroData) {
 			throw new NotFoundException(__('Invalid Arthropod Sample ID'));
 		}
 	
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->ArthroSample->id = $id;
-			if ($this->ArthroSample->save($this->request->data)) {
+			if ($this->ArthroSample->saveAll($this->request->data)) {
 				$this->Session->setFlash('Arthropod Data has been updated.');
 				$this->redirect(array('controller' => 'ArthroSamples', 'action' => 'modifyArthropodData',$startDate,$endDate));
 			} else {
@@ -133,7 +136,7 @@ class ArthroSamplesController extends AppController {
 		}
 	
 		if (!$this->request->data) {
-			$this->request->data = $ArthroData;
+			$this->request->data = $ArthroData;	
 		}
 	}
 	

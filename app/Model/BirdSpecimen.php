@@ -31,5 +31,4 @@ class BirdSpecimen extends AppModel {
 			return true;
 		}
 	}
-
 }

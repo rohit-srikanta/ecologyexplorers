@@ -108,7 +108,9 @@ class VegSamplesController extends AppController {
 			throw new NotFoundException(__('Invalid Arthropod Data ID'));
 		}
 	
-		$this->VegSample->recursive = 0;
+		$this->VegSample->recursive = 1;
+		$this->set('vegOptions',  ClassRegistry::init('VegTaxon')->getOrderList());
+		
 		$vegData = $this->VegSample->findById($id);
 		if (!$vegData) {
 			throw new NotFoundException(__('Invalid Vegetaion Sample ID'));
@@ -116,7 +118,7 @@ class VegSamplesController extends AppController {
 	
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->VegSample->id = $id;
-			if ($this->VegSample->save($this->request->data)) {
+			if ($this->VegSample->saveAll($this->request->data)) {
 				$this->Session->setFlash('Vegetation Data has been updated.');
 				$this->redirect(array('controller' => 'VegSamples', 'action' => 'modifyVegData',$startDate,$endDate));
 			} else {

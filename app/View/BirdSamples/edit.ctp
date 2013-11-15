@@ -21,7 +21,28 @@ echo $this->Html->getCrumbs(' > ', array(
         echo $this->Form->input('observer', array('size'=>25,'div'=>'formfield'));
         echo $this->Form->input('time_start', array('div'=>'formfield'));
         echo $this->Form->input('time_end', array('div'=>'formfield'));
-        echo $this->Form->input('id', array('type' => 'hidden')); 
-        echo $this->Form->end('Save'); ?>
+        echo $this->Form->input('id', array('type' => 'hidden')); ?>
+        
+        <table>
+        <tr>
+        <th>Species Name</th>
+        <th>Number of Birds</th>
+        </tr>
+        
+        		<?php for($i=0;$i<count($this->request->data['BirdSpecimen']);$i++) { ?>
+        
+        		<tr>
+        			<td><?php echo $this->Form->input('BirdSpecimen.'.$i.'.species_id',array('label' => '','empty' => 'Select','options' => $birdOptions))?>
+        			</td>
+        			<td><?php echo $this->Form->input('BirdSpecimen.'.$i.'.frequency',array('type' =>'number','label' => ''))?>
+        			</td>
+        			<td><?php echo $this->Form->input('BirdSpecimen.'.$i.'.id',array('type' => 'hidden'))?>
+        			</td>        			
+        		</tr>
+        
+        		<?php }?>
+        	</table>
+        	
+        <?php echo $this->Form->end('Save'); ?>
    
 </html>

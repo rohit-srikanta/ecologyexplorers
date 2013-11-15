@@ -123,8 +123,10 @@ class BruchidSamplesController extends AppController {
 			throw new NotFoundException(__('Invalid Arthropod Data ID'));
 		}
 	
-		$this->BruchidSample->recursive = 0;
+		$this->BruchidSample->recursive = 1;
 		$BruchidData = $this->BruchidSample->findById($id);
+		
+		
 		if (!$BruchidData) {
 			throw new NotFoundException(__('Invalid Arthropod Sample ID'));
 		}
@@ -138,7 +140,7 @@ class BruchidSamplesController extends AppController {
 	
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->BruchidSample->id = $id;
-			if ($this->BruchidSample->save($this->request->data)) {
+			if ($this->BruchidSample->saveAll($this->request->data)) {
 				$this->Session->setFlash('Bruchid Data has been updated.');
 				$this->redirect(array('controller' => 'BruchidSamples', 'action' => 'modifyBruchidData',$startDate,$endDate));
 			} else {
