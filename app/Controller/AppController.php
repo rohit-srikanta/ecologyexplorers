@@ -46,7 +46,7 @@ class AppController extends Controller {
 		if($to == "admin")
 			$to = array(Configure::read('adminEmailAddress.email') =>  Configure::read('adminEmailAddress.name'));
 		
-		$Email = new CakeEmail('gmail');
+		$Email = new CakeEmail();
 		$Email->from($fromEmailAddress)
 		->to($to)
 		->emailFormat('html')
