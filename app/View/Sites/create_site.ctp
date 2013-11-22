@@ -94,7 +94,7 @@ echo $this->Html->getCrumbs(' > ', array(
 </div>
 
 <div class="formfield" id="bruchids_desc">
-	<p class="formtitle">Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_bruchids.pdf');?> before entering the data. 
+	<p class="formtitle">You will need to provide this information for every site where you collect Palo Verde pods. Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_bruchids.pdf');?> before entering the data. 
 	The sheet has information on how the data has to be entered</p>
 </div>
 
@@ -119,7 +119,7 @@ echo $this->Html->getCrumbs(' > ', array(
 
 <div class="formfield" id="birds">
 	<?php echo $this->Form->input('Habitat.percent_observed',array('options' => $percentOptions,'div'=>'formfield'));  
-echo $this->Form->input('Habitat.radius',array('options' => $percentOptions,'div'=>'formfield')); ?>
+echo $this->Form->input('Habitat.radius',array('options' => $radiusOptions,'div'=>'formfield')); ?>
 </div>
 
 <legend class="formfield">

@@ -61,7 +61,7 @@ class BruchidSamplesController extends AppController {
 			$result = $this->BruchidSample->validateData($this->request->data);
 			
 			if($result == "negative"){
-				$this->Session->setFlash("Measurment fields cannot be less than zero. Please verify.");
+				$this->Session->setFlash("Number of holes or seeds cannot be a negative number. Please verify.");
 				return;
 			}
 			

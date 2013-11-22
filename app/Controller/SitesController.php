@@ -33,6 +33,10 @@ class SitesController extends AppController {
 		$percentOptions = array(array('name' => '0','value' => '0'),array('name' => '10','value' => '10'),array('name' => '20','value' => '20'),array('name' => '30','value' => '30'),array('name' => '40','value' => '40'),array('name' => '50','value' => '50'),array('name' => '60','value' => '60'),array('name' => '70','value' => '70'),array('name' => '80','value' => '80'),array('name' => '90','value' => '90'),array('name' => '100','value' => '100'));
 		$this->set('percentOptions', $percentOptions);
 		
+		$radiusOptions = array(array('name' => '10','value' => '10'),array('name' => '15','value' => '15'),array('name' => '20','value' => '20'));
+		$this->set('radiusOptions', $radiusOptions);
+		
+		
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
 
