@@ -61,9 +61,9 @@ echo $this->Html->getCrumbs(' > ', array(
 			<td><?php echo $this->Form->input('VegSpecimen'.$i.'veg_no',array('label' => '','size' => '10'))?></td>
 			<td><?php echo $this->Form->input('VegSpecimen'.$i.'plant_type',array('label' => '','empty' => 'Select','options' => array('Tree' =>'Tree', 'Cactus'=>'Cactus', 'Shrub'=>'Shrub'),))?></td>
 			<td><?php echo $this->Form->input('VegSpecimen'.$i.'species_id',array('label' => '','empty' => 'Select','options' => $vegOptions))?></td>
-			<td><?php echo $this->Form->input('VegSpecimen'.$i.'circumference',array('type' =>'number','label' => ''))?></td>
-			<td><?php echo $this->Form->input('VegSpecimen'.$i.'height',array('label' => '','type' =>'number'))?></td>
-			<td><?php echo $this->Form->input('VegSpecimen'.$i.'canopy',array('label' => '','type' =>'number'))?></td>
+			<td><?php echo $this->Form->input('VegSpecimen'.$i.'circumference',array('type' =>'select','label' => '', 'options' => range(0, 100)))?></td>
+			<td><?php echo $this->Form->input('VegSpecimen'.$i.'height',array('label' => '','type' =>'select','options' => range(0, 100)))?></td>
+			<td><?php echo $this->Form->input('VegSpecimen'.$i.'canopy',array('label' => '','type' =>'select','options' => range(0, 100)))?></td>
 			<td><?php echo $this->Form->input('VegSpecimen'.$i.'comments',array('label' => '','type'=>'textarea','rows' => 2, 'cols' => 35))?></td>
 		</tr>
 

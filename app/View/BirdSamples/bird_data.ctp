@@ -67,7 +67,7 @@ echo $this->Html->getCrumbs(' > ', array(
 		<tr>
 			<td><?php echo $this->Form->input('BirdSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $birdOptions))?>
 			</td>
-			<td><?php echo $this->Form->input('BirdSpecimen'.$i.'frequency',array('type' => 'number','label' => ''))?>
+			<td><?php echo $this->Form->input('BirdSpecimen'.$i.'frequency',array('type' => 'select','label' => '', 'options' => range(0, 100)))?>
 			</td>
 			
 		</tr>

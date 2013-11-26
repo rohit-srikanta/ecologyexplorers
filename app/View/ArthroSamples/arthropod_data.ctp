@@ -58,7 +58,8 @@
 			</td>
 			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $orderOptions))?>
 			</td>
-			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'frequency',array('type' =>'number','label' => ''))?>
+			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'frequency',array('type' =>'select','label' => '', 'options' => range(0, 100)))?>
+			
 			</td>
 		</tr>
 

@@ -62,9 +62,9 @@ echo $this->Html->getCrumbs(' > ', array(
 			</td>
 			<td><?php echo $this->Form->input('BruchidSpecimen'.$i.'pod_no',array('label' => '','size' => '10'))?>
 			</td>
-			<td><?php echo $this->Form->input('BruchidSpecimen'.$i.'hole_count',array('type' => 'number','label' => ''))?>
+			<td><?php echo $this->Form->input('BruchidSpecimen'.$i.'hole_count',array('type' => 'select','label' => '', 'options' => range(0, 100)))?>
 			</td>
-			<td><?php echo $this->Form->input('BruchidSpecimen'.$i.'seed_count',array('type' => 'number','label' => ''))?>
+			<td><?php echo $this->Form->input('BruchidSpecimen'.$i.'seed_count',array('type' => 'select','label' => '', 'options' => range(0, 100)))?>
 			</td>
 
 		</tr>

@@ -110,7 +110,7 @@ echo $this->Html->getCrumbs(' > ', array(
 </div>
 
 <div class="formfield" id="arthro">
-	<?php  echo $this->Form->input('Habitat.num_traps',array('options' => $percentOptions,'div'=>'formfield'));  
+	<?php  echo $this->Form->input('Habitat.num_traps',array('options' => $radiusOptions,'div'=>'formfield'));  
   echo $this->Form->input('Habitat.trap_arrange',array('default'=> 'Line', 'div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));?>
 </div>
 
