@@ -20,7 +20,7 @@ echo $this->Html->getCrumbs(' > ', array(
 	</legend>
 	<br>
 	<p>
-		<i><b>Please fill out the bruchid data sheet prior to entering data. Remember while entering survey data:</b> </i>
+		<i><b>Please fill out the bruchid beetle data sheet prior to entering data. Remember while entering survey data:</b> </i>
 	</p>
 
 	<p>The survey form cannot be submitted without data being entered</p>
@@ -34,7 +34,6 @@ echo $this->Html->getCrumbs(' > ', array(
 	echo $this->Form->input('Teacher',array('value' => $teacherName,'disabled' => 'disabled','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('site_name',array('disabled' => 'disabled','div'=>'formfield','options' => $siteOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('class_name',array('disabled' => 'disabled','div'=>'formfield','options' => $classOptions,'error' => array('wrap' => 'div','class' => 'formerror')));
-	echo $this->Form->input('location',array('label'=> 'Sampling Location / Address ','div'=>'formfield','type'=>'textarea','rows' => 3, 'cols' => 35,'error' => array('wrap' => 'div','class' => 'formerror')));
 	echo $this->Form->input('collection_date',array('label'=> 'Collection Date','div'=>'formfield'));
 	echo $this->Form->input('observer',array('label' =>'Observer\'s Name', 'div'=>'formfield'));
 	echo $this->Form->input('tree_type',array('div'=>'formfield','empty' => 'Select','options' => $treeOptions));

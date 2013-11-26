@@ -54,6 +54,13 @@ class BirdSamplesController extends AppController {
 				$this->request->data['BirdSample']['air_temp'] = intval(($this->request->data['BirdSample']['air_temp'] * 1.8) + 32) ;
 			}
 			
+			$startTime = $this->request->data['BirdSample']['time_start'];
+			$endTime = $this->request->data['BirdSample']['time_end'];
+			
+			if($startTime['hour'] == $endTime['hour'] && $startTime['min'] == $endTime['min'] && $startTime['meridian'] == $endTime['meridian']){
+				$this->Session->setFlash("Start time and end time are the same. Please check this information again.");
+				return;				
+			}
 			$result = $this->BirdSample->validateData($this->request->data);
 
 			if($result == "negative"){

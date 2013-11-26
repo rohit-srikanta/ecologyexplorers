@@ -67,6 +67,7 @@ echo $this->Html->getCrumbs(' > ', array(
 <br>	<h2>Site Description</h2>
 <?php echo $this->Form->create('Site',array('class'=>'form','id' => 'createSite'));   ?>
 <div class="formfield">
+<p>Please select the Protocol for more information on how to create a new site description</p>
 	<?php echo $this->Form->input('school_id',array('div'=>'formfield','options' => $schooloptions));
  echo $this->Form->input('Habitat.type',array('div'=>'formfield','empty' => 'Select','label' => 'Protocol','options' => $habitatTypeOptions,'id' => 'habitat_select')); 
  echo $this->Form->input('site_id',array('label' => 'Site ID','type'=>'char','div'=>'formfield','error' => array('wrap' => 'div','class' => 'formerror'))); 
@@ -84,28 +85,28 @@ echo $this->Html->getCrumbs(' > ', array(
 </legend>
 
 <div class="formfield" id="arthro_desc">
-	<p class="formtitle">Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_arthro.pdf');?> before entering the data. 
+	<p class="formtitle">Please fill out the <?php  echo $this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_arthro.pdf', array('target' => '_blank'));?> before entering the data. 
 	The sheet has information on how the data has to be entered</p>
 </div>
 
 <div class="formfield" id="birds_desc">
-	<p class="formtitle">Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_bird.pdf');?> before entering the data. 
+	<p class="formtitle">Please fill out the <?php  echo $this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_bird.pdf', array('target' => '_blank'));?> before entering the data. 
 	The sheet has information on how the data has to be entered</p>
 </div>
 
 <div class="formfield" id="bruchids_desc">
-	<p class="formtitle">You will need to provide this information for every site where you collect Palo Verde pods. Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_bruchids.pdf');?> before entering the data. 
+	<p class="formtitle">You will need to provide this information for every site where you collect Palo Verde pods. Please fill out the <?php  echo $this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_bruchids.pdf', array('target' => '_blank'));?> before entering the data. 
 	The sheet has information on how the data has to be entered</p>
 </div>
 
 <div class="formfield" id="veg_desc">
-	<p class="formtitle">Please fill out the <?php  echo$this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_veg.pdf');?> before entering the data. 
+	<p class="formtitle">Please fill out the <?php  echo $this->Html->link('Site and Habitat Description sheet', '/files/site_habitat_veg.pdf', array('target' => '_blank'));?> before entering the data. 
 	The sheet has information on how the data has to be entered</p>
 </div>
 
 <div class="formfield">
 	<?php   
- echo $this->Form->input('Habitat.recording_date',array('div'=>'formfield'));  ?>
+ echo $this->Form->input('Habitat.recording_date',array('label' => 'Data Collection Date','div'=>'formfield'));  ?>
 </div>
 
 <div class="formfield" id="arthro">
